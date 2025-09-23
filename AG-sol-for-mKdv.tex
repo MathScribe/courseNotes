@@ -72,7 +72,13 @@
 % \email{linglm@scut.edu.cn}
 \author{Zixuan Deng}
 \address{School of Mathematics, South China University of Technology, Guangzhou}
-\email{2627441954@qq.com}
+
+\begin{abstract}
+These notes are based on the course \emph{Introduction to Integrable Systems}, delivered by Professor Liming Ling during the Fall semester of 2025--2026. 
+% They aim to provide a clear and structured exposition of the fundamental concepts, methods, and examples in the theory of integrable systems, serving both as a record of the lectures and as a reference for further study.
+\end{abstract}
+
+
 \date{\today}
 
 \maketitle
@@ -115,7 +121,7 @@ where $U$ and $V$ are $2 \times 2$ matrices depending on $u$ and its derivatives
 \quad \Longleftrightarrow \quad
 U_t - V_x + [U,V] = 0,
 \end{equation*}
-with $[U,V] = UV - VU$, is the zero-curvature equation.
+with $[U,V] = UV - VU$, is equivalent to the zero-curvature equation.
 
 Following the AKNS formalism, the spatial part of the Lax pair is taken as
 \begin{equation}\label{eq:AKNS-x}
@@ -136,7 +142,7 @@ We introduce the transformation
 \qquad 
 m(x;\lambda) \to \mathbb{I} \quad \text{as } \lambda \to \infty.
 \end{equation}
-Substituting into the Lax equation gives
+Substituting into the spectral problem \eqref{eq:AKNS-x} gives
 \begin{equation}\label{eq:lax}
 \Phi_x \Phi^{-1} 
 = m_x m^{-1} - \mathrm{i}\lambda m\sigma_3 m^{-1}
@@ -348,11 +354,7 @@ V_2 &= -\mathrm{i}\big(\lambda^2 \Psi_0 + \lambda \Psi_1 + \Psi_2\big), \\
 V_3 &= -\mathrm{i}\big(\lambda^3 \Psi_0 + \lambda^2 \Psi_1 + \lambda \Psi_2 + \Psi_3\big).
 \end{align*}
 
-The zero-curvature condition
-\begin{equation*}
-U_t - V_x + [U,V] = 0,
-\end{equation*}
-with $V_{\mathrm{mKdV}} = 4 V_3$, yields at order $O(1)$
+The zero-curvature condition \(U_t - V_x + [U,V] = 0\) with $V_{\mathrm{mKdV}} = 4 V_3$, yields at order $O(1)$
 \begin{equation*}
 Q_t + 4\mathrm{i} \Psi_{3,x} + [Q,-4\mathrm{i}\Psi_3] = 0.
 \end{equation*}
@@ -376,20 +378,20 @@ u_t + u_{xxx} + 2(u^3)_x = 0,
 \end{equation*}
 which is precisely the mKdV equation \eqref{eq:mkdv}.
 
-Using the definitions \eqref{eq:Phi-gauge} and  \eqref{eq:Psi-def} we have
-\begin{equation}\label{eq:Psi-def-new}
-\Psi = \Phi \sigma_3 \Phi^{-1}.
-\end{equation}
-Differentiating $\Psi$ with respect to $t_n$ and using \eqref{eq:AKNS-hierarchy} gives
-\begin{align*}
-\Psi_{t_n}
-&= \Phi_{t_n}\sigma_3 \Phi^{-1} - \Phi\sigma_3 \Phi^{-1} \Phi_{t_n} \Phi^{-1} \\
-&= [\Phi_{t_n} \Phi^{-1},\, \Psi] = [V_n,\Psi].
-\end{align*}
-Thus
-\begin{equation}\label{eq:Psi-t-comm}
-\Psi_{t_n} = [V_n,\Psi].
-\end{equation}
+% Using the definitions \eqref{eq:Phi-gauge} and  \eqref{eq:Psi-def} we have
+% \begin{equation}\label{eq:Psi-def-new}
+% \Psi = \Phi \sigma_3 \Phi^{-1}.
+% \end{equation}
+% Differentiating $\Psi$ with respect to $t_n$ and using \eqref{eq:AKNS-hierarchy} gives
+% \begin{align*}
+% \Psi_{t_n}
+% &= \Phi_{t_n}\sigma_3 \Phi^{-1} - \Phi\sigma_3 \Phi^{-1} \Phi_{t_n} \Phi^{-1} \\
+% &= [\Phi_{t_n} \Phi^{-1},\, \Psi] = [V_n,\Psi].
+% \end{align*}
+% Thus
+% \begin{equation}\label{eq:Psi-t-comm}
+% \Psi_{t_n} = [V_n,\Psi].
+% \end{equation}
 
 Next we simplify the zero-curvature condition for the pair $(U,V_n)$.
 The zero-curvature equation is
