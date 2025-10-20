@@ -366,14 +366,11 @@ V_2 &= -\mathrm{i}\big(\lambda^2 \Psi_0 + \lambda \Psi_1 + \Psi_2\big), \\
 V_3 &= -\mathrm{i}\big(\lambda^3 \Psi_0 + \lambda^2 \Psi_1 + \lambda \Psi_2 + \Psi_3\big).
 \end{align*}
 
-The zero-curvature equation \(U_t - V_x + [U,V] = 0\) with $V_{\mathrm{mKdV}} = 4 V_3$, yields at order $O(1)$
+The zero-curvature equation \(U_t - V_x + [U,V] = 0\) with \(V_{\mathrm{mKdV}} = 4V_3\) gives, by collecting the constant terms in \(\lambda\) (i.e., at order \(O(1)\)),
 \begin{equation*}
 Q_t + 4\mathrm{i} \Psi_{3,x} + [Q,-4\mathrm{i}\Psi_3] = 0.
 \end{equation*}
-Taking the off-diagonal part gives
-\begin{equation*}
-Q_t + 4\mathrm{i}\Psi_{3,x}^{\mathrm{off}} = 0,
-\end{equation*}
+Taking the off-diagonal part gives \(Q_t + 4\mathrm{i}\Psi_{3,x}^{\mathrm{off}} = 0\), 
 that is,
 \begin{align}\label{eq:matrix-mkdv}    
 Q_t + 4\mathrm{i}\Big(-\tfrac{\mathrm{i}}{4}Q_{xx}+\tfrac{\mathrm{i}}{2}Q^3\Big)_x
@@ -669,7 +666,7 @@ By the symmetry relations \eqref{eq:sym-L} each root \(\hat\lambda_j\) forces \(
 \big(\lambda+\lambda_1\big)\big(\lambda+\lambda_1^*\big)
 \big(\lambda-\lambda_2\big)\big(\lambda+\lambda_2\big),
 \]
-with \(\lambda_1\in\mathbb{C}\setminus\big(\mathbb{R}\cup \mathrm{i}\mathbb{R}\big)\) and \(\lambda_2\in\mathrm{i}\mathbb{R}\).
+with \(\lambda_1\in\mathbb{C}\setminus\big(\mathbb{R}\cup \mathrm{i}\mathbb{R}\big)\) and \(\lambda_2\in\mathrm{i}\mathbb{R}\) (or set \(\lambda_3=-\lambda_1^*\)).
 \end{enumerate}
 
 The matrix elements of \(L\) take the explict form
@@ -724,7 +721,7 @@ A short calculation shows that \(\pm \mathrm{i}y\) are eigenvalues of \(L(0,0;\l
 \]
 where \(L_{ij}\) denotes the \((i,j)\)-entry of \(L(0,0;\lambda)\).
 
-Hence there exists an invertible matrix \(M\) such that
+Hence there exists an invertible matrix \(M\), independent of \(x\) and \(t\), such that
 \begin{equation}\label{eq:L0-diag}
 L(0,0;\lambda)=
 M
@@ -787,28 +784,26 @@ r_{1,2}=\frac{\pm \mathrm{i}y-L_{11}}{L_{12}}
 =\frac{L_{21}}{L_{11}\pm \mathrm{i}y}.
 \end{equation}
 
-% Thus the pair \((\lambda,y)\) lies on the hyperelliptic curve
-% \begin{equation}\label{eq:hyperelliptic-curve}
-% y^2=\prod_{j=1}^{3}(\lambda^2-\lambda_j^2),
-% \end{equation}
-% which is a compact Riemann surface of genus \(g=2\).
-
+The point \(P = (\lambda,y)\) lies on the hyperelliptic curve \eqref{eq:det-L0}, which is a compact Riemann surface of genus \(g=2\) with punctures \(\infty^{\pm}\). Here \(P\to \infty^\pm \;\Leftrightarrow\; \lambda\to\infty,\; y\to\pm\lambda^3\). 
 Denote
 \[
-\mu=\{\mu_1,\mu_2\},\qquad \mu^*=\{\mu_1^*,\mu_2^*\}.
+\mu=\{\hat{\mu}_1,\hat{\mu}_2\},\qquad \hat{\mu}_j = (\mu_j, \mathrm{i} L_{11}(\mu_j)), \qquad j=1,2 ,
+\]
+\[
+\mu^*=\{\hat{\mu}_1^*,\hat{\mu}_2^*\},\qquad \hat{\mu}_j^* = (\mu_j^*, -\mathrm{i} L_{11}(\mu_j^*)), \qquad j=1,2.
 \]
 The divisor of \(r_1\) is then given by
 \[
-\operatorname{Div}\big(r_1(x,t;\lambda)\big)
+\operatorname{Div}\big(r_1(x,t;P)\big)
 = D_{\infty^-,\mu^*}(\lambda)-D_{\infty^+,\mu}(\lambda).
 \]
-That is, \(r_1(x,t;\lambda)\) vanishes at the points of \(\mu^*\), has poles at the points of \(\mu\), and has additional normalization determined by the points at infinity \(\infty^\pm\). This description of the divisor is central in constructing Baker--Akhiezer functions on the hyperelliptic Riemann surface defined by
+That is, \(r_1(x,t;P)\) has zeros at the points of \(\mu^*\) and \(\infty^-\), and poles at the points of \(\mu\) and \(\infty^+\). This description of the divisor is central in constructing Baker--Akhiezer functions on the hyperelliptic Riemann surface defined by
 \[
 y^2=\prod_{j=1}^3(\lambda^2-\lambda_j^2).
 \]
 
 \begin{definition}[Riemann--Theta function]
-Let \(\mathcal{R}\) be a compact Riemann surface of genus \(g\). Fix a canonical homology basis and let \(B\) denote the associated Riemann period matrix, which is symmetric with negative definite real part. The \emph{Riemann--Theta function} is the entire function
+Let \(R_g\) be a compact Riemann surface of genus \(g\). Fix a canonical homology basis and let \(B\) denote the associated Riemann period matrix, which is symmetric with negative definite real part. The \emph{Riemann--Theta function} is the entire function
 \[
 \Theta(B;z)=\sum_{n\in\mathbb{Z}^g}
 \exp\!\left\{\tfrac{1}{2}\,n^\top B\,n+n^\top z\right\},
@@ -880,6 +875,82 @@ Therefore,
 \]
 \end{proof}
 
+\extra
+
+Since
+\[
+U(\lambda;Q)=-\mathrm{i}\lambda\sigma_3+Q
+=
+\begin{pmatrix}
+-\mathrm{i}\lambda & u\\[4pt]
+-u & \mathrm{i}\lambda
+\end{pmatrix},
+\qquad
+Q=\begin{pmatrix}0 & u\\[4pt]-u & 0\end{pmatrix},
+\]
+we have
+\[
+Q^2=-u^2\mathbb{I}, \qquad Q^3=-u^2 Q.
+\]
+
+Compute each term in
+\[
+V(\lambda;Q)=4\lambda^2 U
++2\mathrm{i}\lambda\sigma_3(Q_x-Q^2)
+-\big(Q_{xx}-2Q^3\big).
+\]
+
+First,
+\[
+4\lambda^2 U=
+\begin{pmatrix}
+-4\mathrm{i}\lambda^3 & 4\lambda^2 u\\[4pt]
+-4\lambda^2 u & 4\mathrm{i}\lambda^3
+\end{pmatrix},
+\qquad
+Q_x-Q^2=
+\begin{pmatrix}
+u^2 & u_x\\[4pt]
+-\,u_x & u^2
+\end{pmatrix}.
+\]
+Hence
+\[
+2\mathrm{i}\lambda\sigma_3(Q_x-Q^2)=
+\begin{pmatrix}
+2\mathrm{i}\lambda u^2 & 2\mathrm{i}\lambda u_x\\[4pt]
+2\mathrm{i}\lambda u_x & -2\mathrm{i}\lambda u^2
+\end{pmatrix}.
+\]
+Since \(Q_{xx}-2Q^3=Q_{xx}+2u^2 Q\),
+\[
+-\big(Q_{xx}-2Q^3\big)=
+\begin{pmatrix}
+0 & -(u_{xx}+2u^3)\\[4pt]
+u_{xx}+2u^3 & 0
+\end{pmatrix}.
+\]
+
+Adding all contributions gives
+\[
+V(\lambda;Q)=
+\begin{pmatrix}
+V_{11} & V_{12}\\[4pt]
+V_{21} & V_{22}
+\end{pmatrix},
+\]
+where
+\begin{align}
+V_{11}&=-4\mathrm{i}\lambda^3+2\mathrm{i}\lambda u^2,
+\qquad
+V_{22}=-V_{11},\label{eq:V11}\\[4pt]
+V_{12}&=4\lambda^2 u+2\mathrm{i}\lambda u_x-(u_{xx}+2u^3),\label{eq:V12}\\[4pt]
+V_{21}&=-4\lambda^2 u+2\mathrm{i}\lambda u_x+(u_{xx}+2u^3).\label{eq:V21}
+\end{align}
+
+
+
+
 
 \Week{Algebro-Geometric Solutions for the mKdV Equation (3)}{2025-09-28}
 
@@ -887,23 +958,23 @@ Therefore,
 \obj{Construct algebro–geometric mKdV solutions on a genus-two curve by expressing $r_1$ and u in Riemann theta functions and matching their asymptotics at \(\infty^\pm\), poles and zeroes.}
 
 The Riemann–Roch theorem provides a fundamental relation between the divisor of a meromorphic function and the corresponding Abel map data on a Riemann surface.  
-In the present setting, for the meromorphic function \(r_1(x,t;\lambda)\) we have
+In the present setting, for the meromorphic function \(r_1(x,t;P)\) we have
 \begin{equation}\label{div-r1}
-\operatorname{Div}\bigl(r_1(x,t;\lambda)\bigr)
+\operatorname{Div}\bigl(r_1(x,t;P)\bigr)
 = D_{\infty^-,\mu^*}(\lambda)-D_{\infty^+,\mu}(\lambda),
 \end{equation}
-which identifies the divisor of \(r_1\) as the difference between two effective divisors supported at the points \(P_{\infty^{\pm}}\) and at the divisor of spectral data \(\mu,\mu^*\).
+which identifies the divisor of \(r_1\) as the difference between two effective divisors supported at the points \(\infty^{\pm}\) and at the divisor of spectral data \(\mu,\mu^*\).
 
 A concrete representation of the function \(r_1\) is given in terms of Riemann theta functions:
 \begin{equation}\label{def-r1}
-r_1(x,t;\lambda)
+r_1(x,t;P)
 =\hat{r}_1(x,t)\,
-\frac{\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(P)-\alpha_{P_0}(D_{\mu^*})\right)}
-     {\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(P)-\alpha_{P_0}(D_\mu)\right)}
+\frac{\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(P)-\alpha_{P_0}(D_{\mu^*})\right)}
+     {\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(P)-\alpha_{P_0}(D_\mu)\right)}
 \, \exp\!\bigl(\Omega_1(P)-\ln(\omega_1)\bigr),
 \quad P=(\lambda,y).
 \end{equation}
-Here \(\Theta\) denotes the Riemann theta function, \(\mathcal{K}\) is the vector of Riemann constants, \(\mathcal{A}_{P_0}\) is the Abel map based at \(P_0\), and \(\alpha_{P_0}\) is its linear extension to divisors.  
+Here \(\Theta\) denotes the Riemann theta function, \(\mathcal{C}\) is the vector of Riemann constants, \(\mathcal{A}_{P_0}\) is the Abel map based at \(P_0\), and \(\alpha_{P_0}\) is its linear extension to divisors.  
 The exponential factor is determined by an Abelian integral \(\Omega_1\), while \(\hat{r}_1(x,t)\) is a normalizing prefactor independent of \(\lambda\).
 
 The underlying algebraic curve \(R_2\) associated with this construction is the genus-two hyperelliptic Riemann surface
@@ -950,29 +1021,32 @@ J(R_2)=\mathbb{C}^2/L_2.
 For a base point \(P_0\in R_2\), the Abel map sends a point \(P\in R_2\) to
 \begin{align}
 \mathcal{A}_{P_0}: R_2 &\to J(R_2), \\
-P &\mapsto \mathcal{A}_{P_0}(P)=\bigl(\mathcal{A}_{P_0,1}(P),\mathcal{A}_{P_0,2}(P)\bigr)
-=\Bigl(\int_{P_0}^P w_1\,d\lambda, \int_{P_0}^P w_2\,d\lambda\Bigr).
+P &\mapsto \mathcal{A}_{P_0}(P)
+=\bigl(\mathcal{A}_{P_0,1}(P),\mathcal{A}_{P_0,2}(P)\bigr)
+=\Bigl(\int_{P_0}^P w_1\,d\lambda,\; \int_{P_0}^P w_2\,d\lambda\Bigr).
 \end{align}
-This extends linearly to divisors: for \(D=\sum_{P\in R_2} D(P)\cdot P\),
+This definition extends linearly to divisors.  
+A divisor \(D=\sum_{P\in R_2} D(P)\cdot P\) is a finite formal sum of points \(P\) on \(R_2\) with integer coefficients \(D(P)\in\mathbb{Z}\), and we set
 \begin{equation}
 \alpha_{P_0}(D)=\sum_{P\in R_2} D(P)\,\mathcal{A}_{P_0}(P).
 \end{equation}
 
-Finally, we introduce the Abelian integral of the second kind,
+
+Finally, we introduce the Abelian integral
 \begin{equation}
 \Omega_1(P)=\int_{P_0}^P d\Omega_1,\qquad
 \oint_{a_i} d\Omega_1=0,
 \end{equation}
 with the prescribed asymptotics at the points at infinity,
 \begin{equation}
-\Omega_1(P)=\pm\Bigl(\ln(\lambda)+\ln(\omega_1)+O(1)\Bigr),\quad P\to \infty^\pm.
+\Omega_1(P)=\pm\Bigl(\ln(\lambda)+\ln(\omega_1)+o(1)\Bigr),\quad P\to \infty^\pm.
 \end{equation}
 This integral provides the exponential term appearing in \eqref{def-r1} and ensures the correct divisor structure of \(r_1\).
 
 
-Recall that the function \(r_1(x,t;\lambda)\) admits the representation
+Recall that the function \(r_1(x,t;P)\) admits the representation
 \begin{equation}
-r_1(x,t;\lambda) = \frac{L_{21}}{\mathrm{i}y + L_{11}},
+r_1(x,t;P) = \frac{L_{21}}{\mathrm{i}y + L_{11}},
 \end{equation}
 where
 \begin{equation}
@@ -995,38 +1069,38 @@ L_{11}+\mathrm{i}y=-2 \mathrm{i} \lambda^3 - \mathrm{i}\lambda\left(\alpha_1-\tf
 \end{equation}
 so that
 \begin{equation}
-r_1(x,t;\lambda)=\frac{L_{21}}{\mathrm{i}y+L_{11}}
+r_1(x,t;P)=\frac{L_{21}}{\mathrm{i}y+L_{11}}
 =-\frac{\mathrm{i}u}{2\lambda}+O(\lambda^{-2}), \qquad P\to \infty^-.
 \end{equation}
 Similarly, near \(\infty^+\) one obtains
 \begin{equation}
-r_1(x,t;\lambda)=\frac{\mathrm{i}y-L_{11}}{L_{12}}
+r_1(x,t;P)=\frac{\mathrm{i}y-L_{11}}{L_{12}}
 =\frac{2\mathrm{i}}{u}\lambda+O(1),\qquad P\to \infty^+.
 \end{equation}
 
 On the other hand, from the Riemann theta function representation \eqref{def-r1}, the asymptotics at the two points at infinity are
-\begin{equation}
-r_1(x,t;\lambda)=
+\begin{equation}\label{eq:r1-asym}
+r_1(x,t;P)=
 \begin{cases}
 \hat{r}_1(x,t)\,
-\dfrac{\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu^*})\right)}
-      {\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu})\right)}\,\lambda
+\dfrac{\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu^*})\right)}
+      {\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu})\right)}\,\lambda
 +O(1), & P\to \infty^+, \\[2ex]
 \hat{r}_1(x,t)\,
-\dfrac{\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu^*})\right)}
-      {w_1^2\,\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_\mu)\right)}\,\lambda^{-1}
+\dfrac{\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu^*})\right)}
+      {\omega_1^2\,\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_\mu)\right)}\,\lambda^{-1}
 +O(\lambda^{-2}), & P\to \infty^-.
 \end{cases}
 \end{equation}
 
 By comparing these expansions with the direct computation, one obtains the following theta-function formula for the potential \(u(x,t)\):
-\begin{equation}
-u=2\,\mathrm{i}\,
-\frac{\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_\mu)\right)}
-     {\hat{r}_1(x,t)\,\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu^*})\right)}
+\begin{equation}\label{eq:u-by-hatR1-theta}
+u(x,t) =2\,\mathrm{i}\,
+\frac{\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_\mu)\right)}
+     {\hat{r}_1(x,t)\,\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu^*})\right)}
 =2\,\mathrm{i}\,\hat{r}_1(x,t)\,
-\frac{\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu^*})\right)}
-     {w_1^2\,\Theta\!\left(\mathcal{K}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_\mu)\right)}.
+\frac{\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu^*})\right)}
+     {\omega_1^2\,\Theta\!\left(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_\mu)\right)}.
 \end{equation}
 This identity expresses the potential \(u\) in terms of theta functions associated with the Jacobian of the spectral curve, thereby linking the algebro–geometric spectral data with the physical field variable.
 
@@ -1060,50 +1134,59 @@ Hence the scalar component \(\Phi_{11}\) satisfies
 \Phi_{11,t}=\bigl(V_{11}+V_{12}r_1\bigr)\Phi_{11}.
 \end{equation}
 
-Integrating the differential \(1\)-form in \eqref{eq:phi_firstorder} from a base point \((x_0,t_0)\) to \((x,t)\) yields
+Integrating the differential \(1\)-form in \eqref{eq:phi_firstorder} from the base point \((x_0,t_0)\) to \((x,t)\) yields
 \begin{equation}\label{eq:phi_integral}
 \Phi_{11}(x,t;\lambda)
 =\Phi_{11}(x_0,t_0;\lambda)\,
-\exp\!\left(
-\int_{(x_0,t_0)}^{(x,t)}\bigl(-\mathrm{i}\lambda+u\,r_1\bigr)\,dx
-+\bigl(V_{11}+V_{12}r_1\bigr)\,dt
-\right).
+\exp\!\Bigg(\int_{(x_0,t_0)}^{(x,t)}
+\Big[(-\mathrm{i}\lambda+u\,r_1)\,dx+(V_{11}+V_{12}r_1)\,dt\Big]\Bigg).
 \end{equation}
-Thus \(\Phi_{11}\in\mathcal{M}\bigl(R_2\setminus\{\infty^\pm\}\bigr)\), the space of meromorphic functions on \(R_2\) away from the points \(\infty^\pm\), and \eqref{eq:phi_integral} shows that \(\Phi_{11}\) has an essential singularity at \(\infty^\pm\).
+Hence \(\Phi_{11}\in\mathcal{M}\bigl(R_2\setminus\{\infty^\pm\}\bigr)\), the space of functions meromorphic on \(R_2\) away from \(\infty^\pm\). The representation \eqref{eq:phi_integral} also shows that \(\Phi_{11}\) has an essential singularity at each of \(\infty^\pm\). For convenience, we set the initial point as $(x_0,t_0)=(0,0)$. 
 
-For large \(\lambda\), the asymptotic behavior depends on the sheet. As \(\lambda\to\infty\) with \(P\to \infty^-\),
+The large-\(\lambda\) asymptotics differ on the two sheets. On the sheet with \(P\to\infty^-\) we fix the normalization
+\[
+\Phi_{1,0}^- := \lim_{P\to\infty^-}\Phi_{11}(x_0,t_0;\lambda)=1,
+\]
+and obtain
 \begin{align}
-\Phi_{11}(x,t;\lambda)&=\exp\bigl(-\mathrm{i}\lambda(x+4\lambda^2 t)\bigr)+O(1),\label{eq:phi_asym_minus}\\
-\Phi_{21}(x,t;\lambda)=r_1\Phi_{11}&=\bigl(0+O(\lambda^{-1})\bigr)\exp\bigl(-\mathrm{i}\lambda(x+4\lambda^2 t)\bigr).\notag
+\Phi_{11}(x,t;\lambda)&=\exp\bigl(-\mathrm{i}\lambda(x+4\lambda^2 t)\bigr)+O(1),
+\qquad P\to\infty^-,\label{eq:phi_asym_minus}\\
+\Phi_{21}(x,t;\lambda)=r_1\Phi_{11}&=O(\lambda^{-1})\exp\bigl(-\mathrm{i}\lambda(x+4\lambda^2 t)\bigr),
+\qquad P\to\infty^-.
+\notag
 \end{align}
 
-On the other sheet, the expansion of \(r_1\) near \(\infty^+\) is
+On the other sheet, \(P\to\infty^+\), the expansion of \(r_1\) is
 \begin{equation}\label{eq:r1_expansion}
-r_1(x,t;\lambda)=\frac{\mathrm{i}y-L_{11}}{L_{12}}
+r_1(x,t;P)=\frac{\mathrm{i}y-L_{11}}{L_{12}}
 =\frac{2\,\mathrm{i}}{u}\,\lambda+\frac{u_x}{u^2}+O(\lambda^{-1}),
-\qquad P\to \infty^+.
+\qquad P\to\infty^+.
 \end{equation}
-Consequently,
+Consequently
 \begin{equation}\label{eq:coeff_expansion}
 -\mathrm{i}\lambda+u\,r_1=\mathrm{i}\lambda+(\ln u)_x+O(\lambda^{-1}),
-\qquad P\to \infty^+.
+\qquad P\to\infty^+.
 \end{equation}
-Substitution into \eqref{eq:phi_integral} gives the asymptotics
-\begin{align}
-\Phi_{11}(x,t;\lambda)&\to u(x,t)\,\exp\!\bigl(\mathrm{i}\lambda(x+4\lambda^2 t)\bigr),\label{eq:phi_asym_plus}\\
-\Phi_{21}(x,t;\lambda)=r_1\Phi_{11}&\to 2\,\mathrm{i}\lambda\,\exp\!\bigl(\mathrm{i}\lambda(x+4\lambda^2 t)\bigr).\notag
-\end{align}
-Hence, as \(P\to \infty^+\),
-\begin{equation}\label{eq:phi_vector_plus}
-\begin{pmatrix}\Phi_{11}\\[4pt]\Phi_{21}\end{pmatrix}
-=\Phi_{1,0}^+(x_0,t_0) 
-\left(\begin{pmatrix}0\\[4pt] 2\,\mathrm{i} \lambda\end{pmatrix}+O(1)\right)
-\exp\!\bigl(\mathrm{i}\lambda(x+4\lambda^2 t)\bigr),
-\end{equation}
-where the normalization constant is
+Substituting \eqref{eq:coeff_expansion} into \eqref{eq:phi_integral} gives, with the normalization constant
 \begin{equation}\label{eq:phi_normalisation}
-\Phi_{1,0}^+=\lim_{P\to \infty^+}\Phi_{11}(x_0,t_0;\lambda).
+\Phi_{1,0}^+:=\lim_{P\to\infty^+}\Phi_{11}(x_0,t_0;\lambda),
 \end{equation}
+the asymptotic formulas
+\begin{align}
+\Phi_{11}(x,t;\lambda)&=\Phi_{1,0}^+\,u(x,t)\,\exp\!\bigl(\mathrm{i}\lambda(x+4\lambda^2 t)\bigr)\bigl(1+O(\lambda^{-1})\bigr),
+\qquad P\to\infty^+,\label{eq:phi_asym_plus}\\
+\Phi_{21}(x,t;\lambda)=r_1\Phi_{11}&=2\,\mathrm{i}\lambda\,\Phi_{1,0}^+\,\exp\!\bigl(\mathrm{i}\lambda(x+4\lambda^2 t)\bigr)\bigl(1+O(\lambda^{-1})\bigr),
+\qquad P\to\infty^+.
+\notag
+\end{align}
+% Equivalently, as \(P\to\infty^+\),
+% \begin{equation}\label{eq:phi_vector_plus}
+% \begin{pmatrix}\Phi_{11}\\[4pt]\Phi_{21}\end{pmatrix}
+% =\Phi_{1,0}^+(x_0,t_0)\,
+% \Bigg(\begin{pmatrix}0\\[4pt]2\,\mathrm{i}\lambda\end{pmatrix}+O(1)\Bigg)
+% \exp\!\bigl(\mathrm{i}\lambda(x+4\lambda^2 t)\bigr).
+% \end{equation}
+
 
 
 
@@ -1129,7 +1212,7 @@ U(\lambda)=
 -u & \mathrm{i}\lambda
 \end{pmatrix},
 \]
-and recall the stationary zero–curvature relation
+and recall the stationary zero-curvature equation
 \begin{equation}\label{L-comm}
 L_x=[U,L].
 \end{equation}
@@ -1194,14 +1277,13 @@ Next, the determinant relation \(y^2=\det L=-L_{11}^2-L_{12}L_{21}\) at \(\lambd
 \begin{equation}\label{y-squared}
 y(\mu_1)^2=-L_{11}(\mu_1)^2,
 \end{equation}
-since \(L_{12}(\mu_1)=0\). Hence
-\begin{equation}\label{y-L11-relation}
--\mathrm{i}\,y(\mu_1)=\pm L_{11}(\mu_1).
-\end{equation}
-We adopt the choice
+since \(L_{12}(\mu_1)=0\). Hence \(-\mathrm{i}\,y(\mu_1)=\pm L_{11}(\mu_1)\).
+We fix the sign by setting
 \begin{equation}\label{choice-sign}
--\mathrm{i}\,y(\mu_1)=L_{11}(\mu_1).
+-\mathrm{i}\,y(\mu_1)=L_{11}(\mu_1),
 \end{equation}
+so that \(P=(\mu_1,\mathrm{i}L_{11}(\mu_1))\) represents a pole of the meromorphic function \(r_1(P)=r_1(\lambda)\) on the Riemann surface \(R_2\).  
+% This convention determines the branch of \(y(\mu_1)\) and is chosen because zeros and poles of \(\Phi_{11}\) will be identified through the local behaviour of \(r_1\).
 
 Consider now the principal part of \(u\,r_1\) near \(\lambda=\mu_1\). From \eqref{r1-def-L12} and \eqref{L12-factor},
 \begin{equation}\label{ur1-pole}
@@ -1238,14 +1320,6 @@ Equating these expressions yields
 \mu_{2,x}=\frac{2L_{11}(\mu_2)}{\mu_2-\mu_1}.
 \end{equation}
 
-The determinant identity \(y^2=\det L=-L_{11}^2-L_{12}L_{21}\) at \(\lambda=\mu_2\) gives, since \(L_{12}(\mu_2)=0\),
-\begin{equation}\label{y2-squared}
-y(\mu_2)^2=-L_{11}(\mu_2)^2,
-\end{equation}
-and therefore
-\begin{equation}\label{y2-L11-relation}
--\mathrm{i}\,y(\mu_2)=\pm L_{11}(\mu_2).
-\end{equation}
 Adopting the same sheet convention as for \(\mu_1\) we take
 \begin{equation}\label{choice-sign-2}
 -\mathrm{i}\,y(\mu_2)=L_{11}(\mu_2).
@@ -1316,6 +1390,303 @@ Therefore, by \eqref{eq:phi_integral} and \eqref{ur1-final-mu2}, \(\lambda=\mu_2
 % r_1(\lambda)=\frac{L_{21}(\lambda)}{\mathrm{i}y(\lambda)+L_{11}(\lambda)}.
 % \end{equation}
 % Near \(\lambda=\mu_1^*\) both numerator and denominator vanish. 
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (4)}{2025-10-14}
+
+% \obj{} 
+\obj{Continue to construct algebro–geometric mKdV solutions on a genus-two curve by expressing $r_1$ and u in Riemann theta functions and matching their asymptotics at \(\infty^\pm\), poles and zeroes.}
+
+Recall \(P=(\lambda,y)\).  The genus-two hyperelliptic curve and its points at infinity are
+\begin{equation}\label{eq:R2}
+R_2 \;=\; \{(\lambda,y)\mid y^2=\prod_{j=1}^3(\lambda^2-\lambda_j^2)\},
+\qquad
+P\to \infty^\pm \iff \lambda\to\infty,\; y\to\pm\lambda^3.
+\end{equation}
+
+Define the points
+\begin{equation}\label{eq:mu-def}
+\mu=\{\hat\mu_1,\hat\mu_2\},\quad \hat\mu_j=(\mu_j,\mathrm{i}L_{11}(\mu_j)),
+\qquad
+\mu^*=\{\hat\mu_1^*,\hat\mu_2^*\},\quad \hat\mu_j^*=(\mu_j^*,-\mathrm{i}L_{11}(\mu_j^*)),
+\end{equation}
+so that \(\mu^*\) are the zeros and \(\mu\) the poles of \(r_1\).
+
+At a pole \(\hat\mu_1=(\mu_1,\mathrm{i}L_{11}(\mu_1))\) the meromorphic function \(r_1(\lambda)\) has the local expansion
+\begin{equation}\label{eq:r1-pole}
+r_1(\lambda)
+=\frac{\mathrm{i}\,y(\lambda)-L_{11}(\lambda)}{L_{12}(\lambda)}
+=\frac{\mathrm{i}\,y-L_{11}}{u(\lambda-\mu_1)(\lambda-\mu_2)}
+=\frac{-2\,L_{11}(\mu_1)}{u(\mu_1-\mu_2)}\cdot\frac{1}{\lambda-\mu_1}+O(1),
+\qquad \lambda\to\mu_1.
+\end{equation}
+
+Recall that \(r_1(x,t;P)\) is defined in \eqref{def-r1} and that \(\Phi_{11}(x,t;P)=\Phi_{11}(x,t;\lambda)\) is given by the integral representation \eqref{eq:phi_integral}.  Choosing a continuous path from \((x_0,t_0)\) to \((x,t)\) we have
+\begin{equation}\label{eq:Phi11-integral}
+\begin{aligned}
+\Phi_{11}(x,t;\lambda)
+&=\Phi_{11}(x_0,t_0;\lambda)\,
+\exp\!\Biggl(
+\int_{(x_0,t_0)}^{(x,t)}\bigl(-\mathrm{i}\lambda+u\,r_1\bigr)\,dx_1
++\bigl(V_{11}+V_{12}r_1\bigr)\,dt_1
+\Biggr)\\
+&=\Phi_{11}(x_0,t_0;\lambda)\,
+\exp\!\Biggl(
+\int_{x_0}^{x}\bigl(-\mathrm{i}\lambda+u\,r_1\bigr)(x_1,t_0)\,dx_1
++ \int_{t_0}^{t}\bigl(V_{11}+V_{12}r_1\bigr)(x,t_1)\,dt_1
+\Biggr).
+\end{aligned}
+\end{equation}
+
+The singularity structure of \(\Phi_{11}\) follows from the pole structure of \(r_1\).  From \eqref{eq:r1-pole} and the explicit expressions for \(u\,r_1\) and \(V_{12}r_1\) (see \eqref{ur1-final} and \eqref{ur1-final-mu2}) one obtains, as \(\lambda\to\mu_j\),
+\begin{equation}\label{eq:ur1-log}
+u\,r_1(x_1,t_0;\lambda)=\partial_{x_1}\!\bigl(\ln(\lambda-\mu_j(x_1,t_0))\bigr)+O(1),
+\end{equation}
+and
+\begin{equation}\label{eq:V12r1-log}
+V_{12}\,r_1(x,t_1;\lambda)=\partial_{t_1}\!\bigl(\ln(\lambda-\mu_j(x,t_1))\bigr)+O(1).
+\end{equation}
+Therefore each moving point \(\hat\mu_j(x,t)=(\mu_j(x,t),\mathrm{i}L_{11}(\mu_j(x,t)))\) is a zero of \(\Phi_{11}(x,t;P)\), while the initial points \(\mu_0:=\mu(x_0,t_0)\) give the poles of \(\Phi_{11}\).
+
+Matching the asymptotic forms \eqref{eq:phi_asym_minus} and \eqref{eq:phi_asym_plus} of \(\Phi_{11}\) as \(P\to\infty^\pm\) gives the theta-function representation
+\begin{equation}\label{eq:Phi11-theta}
+\Phi_{11}(x,t;P)
+=\frac{
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(P)-\alpha_{P_0}(D_{\mu})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu_0})\bigr)}
+{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(P)-\alpha_{P_0}(D_{\mu_0})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu})\bigr)}
+\,\mathrm{e}^{\mathrm{i}(\omega_2+\Omega_2(P))x+\mathrm{i}(\omega_3+\Omega_3(P))t}.
+\end{equation}
+Here \(P_0=(\lambda_3,0)\), and the Abelian integrals \(\Omega_2,\Omega_3\) are defined by
+\begin{equation}\label{eq:Omega2-def}
+\Omega_2(P):=\int_{P_0}^{P}\!\dd\Omega_2,\qquad
+\oint_{a_i}\!\dd\Omega_2=0,\qquad
+\Omega_2(P)=\pm\bigl(\lambda+\omega_2+o(1)\bigr),\quad P\to\infty^\pm,
+\end{equation}
+\begin{equation}\label{eq:Omega3-def}
+\Omega_3(P):=\int_{P_0}^{P}\!\dd\Omega_3,\qquad
+\oint_{a_i}\!\dd\Omega_3=0,\qquad
+\Omega_3(P)=\pm\bigl(4\lambda^3+\omega_3+o(1)\bigr),\quad P\to\infty^\pm,
+\end{equation}
+where \(\omega_2,\omega_3\) are constants independent of \(\lambda\).
+As \(P\to\infty^-\),  \eqref{eq:Phi11-theta} is consistent with  \eqref{eq:phi_asym_minus}.
+
+As \(P\to\infty^+\), comparing \eqref{eq:phi_asym_plus} with \eqref{eq:Phi11-theta} yields
+\begin{equation}\label{eq:u-by-phi10+-theta-mu}
+u(x,t)
+=\frac{
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu_0})\bigr)}
+{\Phi_{1,0}^+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^+)-\alpha_{P_0}(D_{\mu_0})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^-)-\alpha_{P_0}(D_{\mu})\bigr)}
+\,\mathrm{e}^{2\mathrm{i}\omega_2 x+2\mathrm{i}\omega_3 t}.
+\end{equation}
+
+Combining \eqref{eq:u-by-hatR1-theta} and \eqref{eq:u-by-phi10+-theta-mu}, we start from the first expression in \eqref{eq:u-by-hatR1-theta}:
+\[
+u(x,t)
+=2\,\mathrm{i}\,
+\frac{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu})\bigr)}
+     {\hat r_1(x,t)\,
+      \Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu^*})\bigr)}.
+\]
+Equating this with \eqref{eq:u-by-phi10+-theta-mu} gives
+\[
+2\,\mathrm{i}\,
+\frac{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu})\bigr)}
+     {\hat r_1(x,t)\,
+      \Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu^*})\bigr)}
+=
+\frac{
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu_0})\bigr)}
+{\Phi_{1,0}^+\,
+ \Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu_0})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu})\bigr)}
+\,\mathrm{e}^{2\mathrm{i}\omega_2 x+2\mathrm{i}\omega_3 t}.
+\]
+Cancel the common factor
+\(\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu})\bigr)\)
+and solve for \(\hat r_1(x,t)\):
+\begin{equation}\label{eq:hat-r1-expression}
+\hat r_1(x,t)
+=
+\frac{2\,\mathrm{i}\,\Phi_{1,0}^{+}\,
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu_0})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu})\bigr)}
+{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu^*})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu_0})\bigr)}
+\,\mathrm{e}^{-2\mathrm{i}\omega_2 x-2\mathrm{i}\omega_3 t}.
+\end{equation}
+
+Substitute \eqref{eq:hat-r1-expression} into the second form of \eqref{eq:u-by-hatR1-theta},
+\[
+u(x,t)
+=2\,\mathrm{i}\,\hat r_1(x,t)\,
+\frac{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu^*})\bigr)}
+     {\omega_1^2\,
+      \Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu})\bigr)}.
+\]
+Then
+\[
+\begin{aligned}
+u(x,t)
+&=
+2\,\mathrm{i}\,
+\frac{2\,\mathrm{i}\,\Phi_{1,0}^{+}\,
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu_0})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu})\bigr)}
+{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu^*})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu_0})\bigr)}
+\,\mathrm{e}^{-2\mathrm{i}\omega_2 x-2\mathrm{i}\omega_3 t}
+\\[4pt]
+&\quad\times
+\frac{\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu^*})\bigr)}
+{\omega_1^2\,
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu})\bigr)}.
+\end{aligned}
+\]
+After cancelling
+\(\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu})\bigr)\),
+we obtain
+\begin{equation}\label{eq:u-by-phi10+-theta-mu*}
+u(x,t)
+=
+\frac{(2\mathrm{i})^2\,\Phi_{1,0}^{+}\,
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu_0})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu^*})\bigr)}
+{\omega_1^2\,
+\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{+})-\alpha_{P_0}(D_{\mu^*})\bigr)
+\,\Theta\!\bigl(\mathcal{C}+\mathcal{A}_{P_0}(\infty^{-})-\alpha_{P_0}(D_{\mu_0})\bigr)}
+\,\mathrm{e}^{-2\mathrm{i}\omega_2 x-2\mathrm{i}\omega_3 t}.
+\end{equation}
+
+We need to determine these the parameters:
+\[
+\alpha_{P_0}\!\big(D_\mu\big),\qquad
+\alpha_{P_0}\!\big(D_{\mu^*}\big),\qquad
+B,\qquad w_1,w_2, \qquad \omega_1,\omega_2,\omega_3,\qquad \Phi_{1,0}^+ .
+\]
+
+The Riemann-Roch theorem gives
+\begin{equation}\label{eq:RiemannRoch}
+r(-D)=\operatorname{deg}(D)+i(D)-g+1,
+\end{equation}
+where
+\[
+\mathcal{L}(D)=\big\{f\in\mathcal{M}(R_g)\mid (f)\ge D\big\},\qquad
+r(D)=\operatorname{dim}\big(\mathcal{L}(D)\big),
+\]
+and
+\[
+\mathcal{L}'(D)=\big\{\omega\in\mathcal{M}'(R_g)\mid (\omega)\ge D\big\},\qquad
+i(D)=\operatorname{dim}\big(\mathcal{L}'(D)\big),
+\]
+with $\mathcal{M}(R_g)$ the field of meromorphic functions on the genus $g$ curve $R_g$
+and $\mathcal{M}'(R_g)$ the space of meromorphic differentials.
+
+Recall that
+\begin{equation}
+\operatorname{Div}\bigl(r_1(x,t;P)\bigr)
+= D_{\infty^-,\mu^*}(\lambda)-D_{\infty^+,\mu}(\lambda).
+\end{equation}
+
+% Choice of divisor and Riemann--Roch computation
+Take the (non special) divisor $D=D_{\infty^+,\mu}$. Assume $i(D)=0$ and that
+$(r_1)\ge -D_{\infty^+,\mu}$. Then by \eqref{eq:RiemannRoch} (with $g=2$ and
+$\operatorname{deg}(D)=3$ in the present setup)
+\begin{equation}\label{eq:RR-eval}
+r\big(-D_{\infty^+,\mu}\big)=\operatorname{deg}(D)-g+1=3-2+1=2.
+\end{equation}
+Since $r_1$ and $\tilde r_1$ have the same zeros they span a two dimensional
+space and hence $r_1$ is proportional to $\tilde r_1$, i.e.
+\[
+r_1 = c \tilde{r}_1 + d \Rightarrow
+r_1 = c\,\tilde r_1 \quad (c, d\in\mathbb{C}).
+\]
+
+% Abel map for the divisor D_mu
+Recall the Abel map for the degree two divisor \(D_\mu=\hat\mu_1+\hat\mu_2\) based at \(P_0\):
+\begin{equation}\label{eq:alpha-def}
+\alpha_{P_0}\bigl(D_\mu\bigr)
+= \mathcal{A}_{P_0}(\hat\mu_1)+\mathcal{A}_{P_0}(\hat\mu_2)
+=
+\Bigg(
+\int_{P_0}^{\hat\mu_1} w_1\,d\lambda + \int_{P_0}^{\hat\mu_2} w_1\,d\lambda \;,\;
+\int_{P_0}^{\hat\mu_1} w_2\,d\lambda + \int_{P_0}^{\hat\mu_2} w_2\,d\lambda
+\Bigg).
+\end{equation}
+
+Let \(\{w_1\,d\lambda,w_2\,d\lambda\}\) be a basis of holomorphic differentials normalized by
+\begin{equation}\label{eq:periods}
+\oint_{a_j} w_i\,d\lambda = 2\pi \mathrm{i}\,\delta_{ij},\qquad
+\oint_{b_j} w_i\,d\lambda = B_{ij},\qquad i,j=1,2.
+\end{equation}
+On the affine chart write each differential as a rational function of \(\lambda\) divided by \(y(\lambda)\):
+\begin{equation}\label{eq:omega-polynomial}
+w_i(\lambda) = \bigl(d_{i0}+d_{i1}\lambda\bigr)\frac{1}{y(\lambda)},\qquad
+d_{ik}\in\mathbb{C},\; i=1,2,\; k=0,1.
+\end{equation}
+Thus
+\[
+w_1(\lambda)=\frac{d_{10}+d_{11}\lambda}{y(\lambda)},\qquad
+w_2(\lambda)=\frac{d_{20}+d_{21}\lambda}{y(\lambda)}.
+\]
+
+Differentiate the components of \(\alpha_{P_0}(D_\mu)\) with respect to \(x\). By the chain rule, for \(j=1,2\) and \(i=1,2\),
+\begin{equation}\label{eq:dxdA-component}
+\frac{d}{dx}\int_{P_0}^{\hat\mu_j} w_i\,d\lambda
+= w_i\bigl(\hat\mu_j\bigr)\,\mu_{j,x}
+= \frac{d_{i0}+d_{i1}\mu_j}{y(\mu_j)}\,\mu_{j,x}.
+\end{equation}
+
+We compute the \(w_1\)-component of \(\alpha_{P_0}(D_\mu)\). Using \eqref{eq:dxdA-component} and the expressions \eqref{mu1-x} and \eqref{mu2-x} for \(\mu_{j,x}\) in terms of the Lax matrix entries (so that \(\mu_{j,x}=\dfrac{2L_{11}(\mu_j)}{\mu_j-\mu_{k}}\) with \(k\neq j\) and \(y(\mu_j)=\mathrm{i}L_{11}(\mu_j)\)), one obtains
+\begin{align}
+\frac{d}{dx}\Bigg(&\int_{P_0}^{\hat\mu_1}\bigl(d_{10}+d_{11}\lambda\bigr)\frac{1}{y}\,d\lambda
++\int_{P_0}^{\hat\mu_2}\bigl(d_{10}+d_{11}\lambda\bigr)\frac{1}{y}\,d\lambda\Bigg)\nonumber
+= \frac{d_{10}+d_{11}\mu_1}{y(\mu_1)}\,\mu_{1,x}
++ \frac{d_{10}+d_{11}\mu_2}{y(\mu_2)}\,\mu_{2,x}\nonumber\\[4pt]
+&= d_{10}\!\left(\frac{\mu_{1,x}}{y(\mu_1)}+\frac{\mu_{2,x}}{y(\mu_2)}\right)
++ d_{11}\!\left(\frac{\mu_1\mu_{1,x}}{y(\mu_1)}+\frac{\mu_2\mu_{2,x}}{y(\mu_2)}\right)\nonumber\\[6pt]
+&= d_{10}\!\left(\frac{2L_{11}(\mu_1)}{\mu_1-\mu_2}\frac{1}{\mathrm{i}L_{11}(\mu_1)}
++\frac{2L_{11}(\mu_2)}{\mu_2-\mu_1}\frac{1}{\mathrm{i}L_{11}(\mu_2)}\right)\nonumber
+ + d_{11}\!\left(\frac{2\mu_1}{\mathrm{i}(\mu_1-\mu_2)}+\frac{2\mu_2}{\mathrm{i}(\mu_2-\mu_1)}\right)\nonumber\\[6pt]
+&= \frac{2}{\mathrm{i}}\,d_{10}\!\left(\frac{1}{\mu_1-\mu_2}+\frac{1}{\mu_2-\mu_1}\right)
++ \frac{2}{\mathrm{i}}\,d_{11}\!\left(\frac{\mu_1}{\mu_1-\mu_2}+\frac{\mu_2}{\mu_2-\mu_1}\right)\nonumber\\[6pt]
+&= \frac{2}{\mathrm{i}}\,d_{11}
+= -2\mathrm{i}\,d_{11}.\label{eq:dxdA-firstcomp}
+\end{align}
+
+The \(w_2\)-component is analogous. Repeating the same substitutions gives
+\begin{equation}\label{eq:dxdA-secondcomp}
+\frac{d}{dx}\Bigg(
+\int_{P_0}^{\hat\mu_1}\bigl(d_{20}+d_{21}\lambda\bigr)\frac{1}{y}\,d\lambda
++\int_{P_0}^{\hat\mu_2}\bigl(d_{20}+d_{21}\lambda\bigr)\frac{1}{y}\,d\lambda
+\Bigg)
+= -2\mathrm{i}\,d_{21}.
+\end{equation}
+
+Combining \eqref{eq:dxdA-firstcomp} and \eqref{eq:dxdA-secondcomp} we obtain
+\begin{equation}\label{eq:dxdAlpha}
+\frac{d}{dx}\bigl(\alpha_{P_0}(D_\mu)\bigr)
+= -2\mathrm{i}\,(d_{11},d_{21}) = -\mathrm{i}\,\widehat{U},
+\end{equation}
+where \(\widehat{U}=(U_1,U_2)\) and \(U_i=\oint_{b_i}d\Omega_2\).
+
+For the time evolution induced by the higher flow one finds similarly
+\begin{equation}\label{eq:dtdAlpha}
+\frac{d}{dt}\bigl(\alpha_{P_0}(D_\mu)\bigr)
+= -\mathrm{i}\,\widehat{V}
+= -\mathrm{i}\,v\,\widehat{U}
+= -2\mathrm{i}\,v\,(d_{11},d_{21}),
+\end{equation}
+with
+\[
+v=2(\lambda_1^2+\lambda_2^2+\lambda_3^2),\qquad
+\widehat{V}=(V_1,V_2),\quad V_i=\oint_{b_i}d\Omega_3.
+\]
 
 
 

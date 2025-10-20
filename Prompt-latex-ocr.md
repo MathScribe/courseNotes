@@ -10,6 +10,7 @@ Instructions:
      - `-1 \lambda x` → `- \mathrm{i} \lambda x`
      - `I I` → `\mathbb{I}`
      - `\phi_{22, \pm}^p` → `\phi_{22, \pm}^\dagger`
+     - `\alpha_p` → `\alpha_P`
 
 2. Standardize Formatting:
    - Replace `$$$$` with `\begin{equation} ... \end{equation}` and add suitable labels.
@@ -31,6 +32,3 @@ Output Rule:
 - Respond only with corrected and improved raw LaTeX code.
 - Do not include explanations, commentary, or Markdown.
 - Always wrap the output in a raw LaTeX code block.
-
-
-
