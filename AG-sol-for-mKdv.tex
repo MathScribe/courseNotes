@@ -1,5 +1,5 @@
 \documentclass{amsart}
-\usepackage{fullpage,graphicx,subfigure,mathpazo,color}
+\usepackage{fullpage,graphicx,mathpazo,color}
 \usepackage{amsmath,amscd,tikz,mathrsfs}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
@@ -32,8 +32,13 @@
 \newtheorem{example}{Example}
 
 \usepackage{graphicx}      % insert graphic
-%\usepackage{subcaption}
+% \usepackage{subcaption}
 \usepackage{titlesec}
+% \usepackage{graphicx}   % for \includegraphics
+\usepackage{subcaption} % provides subfigure environment
+\usepackage{caption}  
+% optional: tell LaTeX where your figures live
+\graphicspath{{figs/}}
 
 \newcounter{week}
 \setcounter{week}{0}
@@ -650,24 +655,61 @@ Therefore the determinant of \(L\) is constant in \(x\) and \(t\). Write its fac
 By the symmetry relations \eqref{eq:sym-L} each root \(\hat\lambda_j\) forces \(\hat\lambda_j^*\) and \(-\hat\lambda_j\) to be roots as well. Two possible root structures follow.
 
 \begin{enumerate}
-  \item Three purely imaginary pairs:
-\[
-\det L(\lambda)=
-\big(\lambda^2-\lambda_1^2\big)
-\big(\lambda^2-\lambda_2^2\big)
-\big(\lambda^2-\lambda_3^2\big),
-\qquad \lambda_j\in\mathrm{i}\mathbb{R}.
-\]
+  \item[\textbf{Case 1.}] Three purely imaginary pairs:
+  \begin{equation}\label{eq:det-case1}
+    \det L(\lambda)=
+    \bigl(\lambda^{2}-\lambda_{1}^{2}\bigr)
+    \bigl(\lambda^{2}-\lambda_{2}^{2}\bigr)
+    \bigl(\lambda^{2}-\lambda_{3}^{2}\bigr),
+    \qquad \lambda_{j}\in\mathrm{i}\mathbb{R}.
+  \end{equation}
 
-\item Nonreal quadruple plus imaginary pair:
-\[
-\det L(\lambda)=
-\big(\lambda-\lambda_1\big)\big(\lambda-\lambda_1^*\big)
-\big(\lambda+\lambda_1\big)\big(\lambda+\lambda_1^*\big)
-\big(\lambda-\lambda_2\big)\big(\lambda+\lambda_2\big),
-\]
-with \(\lambda_1\in\mathbb{C}\setminus\big(\mathbb{R}\cup \mathrm{i}\mathbb{R}\big)\) and \(\lambda_2\in\mathrm{i}\mathbb{R}\) (or set \(\lambda_3=-\lambda_1^*\)).
+  \item[\textbf{Case 2.}] One nonreal quadruple together with one purely imaginary pair:
+  \begin{equation}\label{eq:det-case2}
+    \det L(\lambda)=
+    (\lambda-\lambda_{1})(\lambda-\lambda_{1}^{*})
+    (\lambda+\lambda_{1})(\lambda+\lambda_{1}^{*})
+    (\lambda-\lambda_{2})(\lambda+\lambda_{2}),
+  \end{equation}
+  with \(\lambda_{1}\in\mathbb{C}\setminus(\mathbb{R}\cup\mathrm{i}\mathbb{R})\) and 
+  \(\lambda_{2}\in\mathrm{i}\mathbb{R}\).
 \end{enumerate}
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig-case1-00.pdf}
+    % \subcaption{ }} % optional subcaption for (a)
+    \label{fig:case1}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig-case2-00.pdf}
+    % \subcaption{} % optional subcaption for (b)
+    \label{fig:case2}
+  \end{subfigure}
+  \caption{The homology basis for the curve $y^2=\prod_{i=1}^{3}\left(\lambda^2-\lambda_i^2\right)$.}
+  \label{fig:homology-basis}
+\end{figure}
+
+
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=0.6\textwidth]{fig-case1-00.pdf}
+%   \caption{(a) The homology basis for the curve $y^2=\prod_{i=1}^{3}\left(\lambda^2-\lambda_i^2\right)$.}
+%   \label{fig:case1}
+% \end{figure}
+
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=0.6\textwidth]{fig-case2-00.pdf}
+%   \caption{(b) The homology basis for the curve $y^2=\prod_{i=1}^{3}\left(\lambda^2-\lambda_i^2\right)$.}
+%   \label{fig:case2}
+% \end{figure}
+
+
+
 
 The matrix elements of \(L\) take the explict form
 \begin{equation}\label{eq:L-elements}
@@ -1033,12 +1075,12 @@ A divisor \(D=\sum_{P\in R_2} D(P)\cdot P\) is a finite formal sum of points \(P
 
 
 Finally, we introduce the Abelian integral
-\begin{equation}
+\begin{equation}\label{def-Omega1}
 \Omega_1(P)=\int_{P_0}^P d\Omega_1,\qquad
 \oint_{a_i} d\Omega_1=0,
 \end{equation}
 with the prescribed asymptotics at the points at infinity,
-\begin{equation}
+\begin{equation}\label{Omega1-asymp}
 \Omega_1(P)=\pm\Bigl(\ln(\lambda)+\ln(\omega_1)+o(1)\Bigr),\quad P\to \infty^\pm.
 \end{equation}
 This integral provides the exponential term appearing in \eqref{def-r1} and ensures the correct divisor structure of \(r_1\).
@@ -1857,11 +1899,1925 @@ On the other hand \eqref{eq:det-L0} gives
 \det L=\prod_{j=1}^3(\lambda^2-\lambda_j^2)
 =\lambda^6-\Big(\sum_{j=1}^3\lambda_j^2\Big)\lambda^4+\mathcal{O}(\lambda^2).
 \]
+Equating the \(\lambda^4\)-coefficients yields \(\alpha_1=-\tfrac12\sum_{j=1}^3\lambda_j^2\).
 
-Equating the \(\lambda^4\)-coefficients yields
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (5)}{2025-10-21}
+
+\obj{Express \(\omega_2\), \(\omega_3\), and \(\hat{U}\) via the Riemann bilinear relations, and obtain the identities relating \(\alpha_{P_0}(D_{\mu^*})\) and \(\alpha_{P_0}(D_{\mu})\) from Abel’s theorem.}
+
+
+\textbf{Riemann bilinear relation.}
+
+\textbf{(i)} Let $\hat{\Omega}$ and $\tilde{\Omega}$ be (multi-valued) Abelian integrals on the Riemann surface $R_2$, and write their corresponding differentials as $\dd\hat{\Omega}$ and $\dd\tilde{\Omega}$. For the standard canonical homology basis $\{a_i,b_i\}_{i=1}^2$ the following identities hold by elementary contour rearrangements:
+\begin{align}
+\oint_{a_i}\hat{\Omega}\,\dd\tilde{\Omega}+\oint_{a_i^{-1}}\hat{\Omega}\,\dd\tilde{\Omega}
+&=
+\oint_{a_i}\Bigl(\int_{z_0}^{z}\dd\hat{\Omega}\Bigr)\,\dd\tilde{\Omega}+\oint_{a_i^{-1}}\Bigl(\int_{z_0}^{z'}\dd\hat{\Omega}\Bigr)\,\dd\tilde{\Omega} \\
+&=
+-\oint_{a_i}\Bigl(\int_{z}^{z'}\dd\hat{\Omega}\Bigr)\dd\tilde{\Omega}
+=
+-\Bigl(\oint_{a_i}\dd\tilde{\Omega}\Bigr)\Bigl(\oint_{b_i}\dd\hat{\Omega}\Bigr),
+\end{align}
+% and
+\begin{equation}
+  \oint_{b_i}\hat{\Omega}\,\dd\tilde{\Omega}+\oint_{b_i^{-1}}\hat{\Omega}\,\dd\tilde{\Omega}
+=
+\oint_{b_i}\Bigl(\int_{z'}^{z}\dd\hat{\Omega}\Bigr)\dd\tilde{\Omega}
+=
+\Bigl(\oint_{a_i}\dd\hat{\Omega}\Bigr)\Bigl(\oint_{b_i}\dd\tilde{\Omega}\Bigr).
+\end{equation}
+Applying Stokes' theorem to the boundary of the canonical polygon for $R_2$ gives
+\begin{equation}
+0=\int_{R_2}\dd\bigl(\hat{\Omega}\,\dd\tilde{\Omega}\bigr)
+=\int_{\partial R_2}\hat{\Omega}\,\dd\tilde{\Omega}
+=\sum_{i=1}^2\Bigl(
+\oint_{a_i}+\oint_{b_i}+\oint_{a_i^{-1}}+\oint_{b_i^{-1}}
+\Bigr)\hat{\Omega}\,\dd\tilde{\Omega},
+\end{equation}
+and hence the usual bilinear identity
+\begin{equation}\label{eq:bilinear-holomorphic}
+\sum_{i=1}^2\Bigl(
+\oint_{a_i}\dd\hat{\Omega}\,\oint_{b_i}\dd\tilde{\Omega}
+-
+\oint_{b_i}\dd\hat{\Omega}\,\oint_{a_i}\dd\tilde{\Omega}
+\Bigr)=0.
+\end{equation}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{fig-Fg-bilinear-relation.pdf}
+  \caption{To the proof of the Riemann bilinear relations.}
+  \label{fig:Fg-bilinear-relation}
+\end{figure}
+
+
+\textbf{(ii)} If the product $\hat{\Omega}\,\dd\tilde{\Omega}$ has poles (only) at the points $\infty^{\pm}$, then performing the same computation on $R_2\setminus\{\infty^\pm\}$ introduces the boundary integral around small loops encircling the poles. One obtains
+\begin{equation}\label{eq:bilinear-poles}
+\sum_{i=1}^2\Bigl(
+\oint_{a_i}\dd\hat{\Omega}\,\oint_{b_i}\dd\tilde{\Omega}
+-
+\oint_{b_i}\dd\hat{\Omega}\,\oint_{a_i}\dd\tilde{\Omega}
+\Bigr)
++\oint_{l+\boldsymbol{\pi}(l)}\hat{\Omega}\,\dd\tilde{\Omega}
+=0,
+\end{equation}
+where $l+\boldsymbol{\pi}(l)$ denotes the small contours around the poles at $\infty^\pm$ with the orientation induced by the boundary of $R_2\setminus\{\infty^\pm\}$.
+
+\textbf{Applications.}
+Recall the Abelian integrals $\Omega_2,\Omega_3$ from \eqref{eq:Omega2-def}--\eqref{eq:Omega3-def}.  
+Define
 \[
-\alpha_1=-\tfrac12\sum_{j=1}^3\lambda_j^2.
+\widehat{U}=(U_1,U_2),\qquad U_i=\oint_{b_i}\dd\Omega_2,
+\qquad
+\widehat{V}=(V_1,V_2),\qquad V_i=\oint_{b_i}\dd\Omega_3.
 \]
+
+\paragraph{(1) The constants $\omega_2,\omega_3$.}
+Choose
+\[
+\hat{\Omega}=\Omega_2,\qquad 
+\dd\tilde{\Omega}=\frac{\lambda^2}{y}\,\dd\lambda.
+\]
+Since $\oint_{a_i}\dd\Omega_2=0$ and $\oint_{b_i}\dd\Omega_2=U_i$, the bilinear identity \eqref{eq:bilinear-poles} becomes
+\begin{equation}\label{eq:omega2-temp}
+-\sum_{i=1}^{2}U_i\oint_{a_i}\frac{\lambda^2}{y}\,\dd\lambda
++
+\oint_{l+\boldsymbol{\pi}(l)}
+\Omega_2\,\frac{\lambda^2}{y}\,\dd\lambda
+=0.
+\end{equation}
+The boundary integral is the sum of residues at $\infty^\pm$:
+\begin{equation}\label{eq:omega2-boundary}
+\oint_{l+\boldsymbol{\pi}(l)}
+\Omega_2\,\frac{\lambda^2}{y}\,\dd\lambda
+=
+2\pi\mathrm{i}\Bigl(
+\operatorname{Res}_{\lambda=\infty^+}
+\Omega_2\,\frac{\lambda^2}{y}\,\dd\lambda
++
+\operatorname{Res}_{\lambda=\infty^-}
+\Omega_2\,\frac{\lambda^2}{y}\,\dd\lambda
+\Bigr).
+\end{equation}
+
+Using \eqref{eq:Omega2-def} and the large–$\lambda$ expansion of $y$, one obtains
+\begin{equation}\label{eq:omega2-expansion}
+\Omega_2\,\frac{\lambda^2}{y}
+=
+\bigl(\lambda+\omega_2+o(1)\bigr)\lambda^{-1}
+\Bigl(1+\tfrac12(\lambda_1^2+\lambda_2^2+\lambda_3^2)\lambda^{-2}+O(\lambda^{-4})\Bigr)
+=
+1+\frac{\omega_2}{\lambda}+\cdots
+\end{equation}
+as $P\to\infty^\pm$. Thus the residue at each of $\infty^\pm$ equals $\omega_2$.
+
+Substitution of \eqref{eq:omega2-boundary} and \eqref{eq:omega2-expansion} into \eqref{eq:omega2-temp} yields
+\begin{equation}\label{eq:omega2-final}
+\omega_2
+=
+-\frac{\mathrm{i}}{4\pi}
+\sum_{j=1}^{2}
+U_j
+\oint_{a_j}\frac{\lambda^2}{y}\,\dd\lambda.
+\end{equation}
+
+Repeating the computation with $\hat{\Omega}=\Omega_3$ gives
+\begin{equation}\label{eq:omega3-final}
+\omega_3
+=
+-\frac{\mathrm{i}}{4\pi}
+\sum_{j=1}^{2}
+V_j
+\oint_{a_j}\frac{\lambda^2}{y}\,\dd\lambda.
+\end{equation}
+
+\paragraph{(2) The vector $\widehat{U}$.}
+We now verify that
+\[
+\widehat{U}=(U_1,U_2)=(2d_{11},2d_{21}),
+\qquad U_1=2d_{11}.
+\]
+
+Choose $\hat{\Omega}=\Omega_2$ and
+\[
+\tilde{\Omega}=w_1\,\dd\lambda
+=(d_{10}+d_{11}\lambda)\,y^{-1}\dd\lambda,
+\qquad
+\oint_{a_j}w_i\,\dd\lambda=2\pi\mathrm{i}\,\delta_{ij}.
+\]
+Applying the bilinear identity gives
+\[
+\sum_{i=1}^{2}
+\left(
+\oint_{a_i}\dd\Omega_2
+\oint_{b_i}w_1\,\dd\lambda
+-
+\oint_{b_i}\dd\Omega_2
+\oint_{a_i}w_1\,\dd\lambda
+\right)
++
+2\pi\mathrm{i}
+\bigl(
+\operatorname{Res}_{\infty^+}\Omega_2 w_1\,\dd\lambda
++
+\operatorname{Res}_{\infty^-}\Omega_2 w_1\,\dd\lambda
+\bigr)
+=0.
+\]
+
+To determine the residues, use the large–$\lambda$ expansions of $\Omega_2$ and $y$:
+\[
+\Omega_2 w_1
+=
+(\lambda+\omega_2+o(1))
+(d_{10}+d_{11}\lambda)\lambda^{-3}
+\Bigl(1+\tfrac12(\lambda_1^2+\lambda_2^2+\lambda_3^2)\lambda^{-2}
++O(\lambda^{-4})\Bigr)
+=
+\frac{d_{11}}{\lambda}+\cdots
+\]
+as $P\to\infty^\pm$. Hence each of the points $\infty^\pm$ contributes a residue $d_{11}$, and the total equals $2d_{11}$. Since
+\[
+\oint_{a_i}\dd\Omega_2=0, \qquad
+\oint_{b_i}\dd\Omega_2=U_i,
+\qquad
+\oint_{a_i}w_1\,\dd\lambda=2\pi\mathrm{i}\,\delta_{1i},
+\]
+the bilinear identity reduces to
+\[
+-\,2\pi\mathrm{i}\,U_1
++
+2\pi\mathrm{i}(2d_{11})
+=0,
+\qquad\text{so}\qquad
+U_1=2d_{11}.
+\]
+The same computation with $w_2$ gives $U_2=2d_{21}$.
+
+\textbf{Abel’s theorem.}
+Let $M(R_2)$ denote the meromorphic functions on $R_2$, and $M'(R_2)$ the meromorphic $1$-forms.  
+For $f\in M(R_2)\setminus\{0\}$ and $P\in R_2$, the order $\operatorname{ord}_P(f)$ is the integer $k$ such that, in a local coordinate $z$ with $z(P)=0$,
+\[
+f(z)=z^{\,k}g(z),\qquad g(0)\neq0.
+\]
+The divisor of $f$ is
+\[
+(f)=\sum_{P\in R_2}\operatorname{ord}_P(f)\,P,
+\]
+which is a finite sum because $f$ has only finitely many zeros and poles.  
+The divisor $(w)$ of a meromorphic $1$-form $w\in M'(R_2)\setminus\{0\}$ is defined analogously by using its local expression $w(z)=z^{\,k}h(z)\,\dd z$ with $h(0)\neq0$.
+
+A meromorphic function is holomorphic if and only if $(f)\ge0$.  
+A meromorphic $1$-form is holomorphic (of the first kind) if and only if $(w)\ge0$.  
+A divisor of the form $(f)$ is called principal; a divisor of the form $(w)$ is canonical.
+
+\begin{thm}[Abel’s theorem]
+A divisor $D$ is principal if and only if $\deg D=0$ and $\alpha_{P_0}(D)=0$.
+\end{thm}
+
+As an example,
+\[
+\operatorname{Div}\bigl(r_1(x,t;P)\bigr)
+=
+D_{\infty^-,\mu^*}-D_{\infty^+,\mu},
+\]
+which has degree zero.  Abel’s theorem then gives
+\[
+\alpha_{P_0}(D_{\mu^*})
++
+A_{P_0}(\infty^-)
+=
+\alpha_{P_0}(D_{\infty^-,\mu^*})
+=
+\alpha_{P_0}(D_{\infty^+,\mu})
+=
+\alpha_{P_0}(D_\mu)
++
+A_{P_0}(\infty^+),
+\]
+hence
+\[
+\alpha_{P_0}(D_{\mu^*})
+=
+\alpha_{P_0}(D_\mu)
++
+A_{\infty^-}(\infty^+),
+\]
+where
+\[
+A_{P_0}(P)
+=
+\left(
+\int_{P_0}^{P} w_1\,\dd\lambda,
+\;\;
+\int_{P_0}^{P} w_2\,\dd\lambda
+\right).
+\]
+
+
+% Finally,
+% \begin{equation}
+% \oint_{a_1} w_1\,\dd\lambda
+% =
+% 2\int_{-\lambda_3}^{\lambda_3}
+% w_1\,\dd\lambda.
+% \end{equation}
+
+
+ 
+\Week{Algebro-Geometric Solutions for the mKdV Equation (6)}{2025-10-28}
+\obj{Focus on Case~2. Determine the homology basis under the involution \(\tau\), and compute the conjugate quantities \(\overline{\ln(\omega_1)}\), \(\overline{\omega_2}\), \(\overline{\omega_3}\), and \(\overline{B_{ij}}\).}
+
+
+
+Recall the definition \eqref{def-R2}:
+\begin{equation}\label{eq:R2-case2}
+R_2 := \left\{ (\lambda, y) \mid y^2 = (\lambda^2 - \lambda_1^2)(\lambda^2 - \lambda_2^2)(\lambda^2 - \lambda_3^2) \right\},
+\qquad P = (\lambda, y) .
+\end{equation}
+
+
+We work in \textbf{Case 2} (one nonreal quadruple and one purely imaginary pair).  
+Introduce the involutions
+\begin{equation}\label{eq:involutions}
+\tau_1:(\lambda,y)\longmapsto(\lambda,-y), \qquad 
+\tau:(\lambda,y)\longmapsto(\overline{\lambda},\overline{y}),
+\end{equation}
+where \(\tau_1\) is the hyperelliptic (sheet--exchange) involution and \(\tau\) is the anti\-holomorphic involution; both satisfy
+\[
+\tau_1^2=\tau^2=\mathbb{I}.
+\]
+
+Fix a canonical homology basis \(\{a_1,a_2;b_1,b_2\}\) on \(R_2\) with the intersection properties
+\begin{equation}\label{eq:homology-again}
+a_i\circ a_j=0,\quad b_i\circ b_j=0,\quad a_i\circ b_j=\delta_{ij},\qquad i,j=1,2.
+\end{equation}
+
+The anti\-holomorphic involution \(\tau\) acts by sign change on the \(a\)-cycles and acts on the \(b\)-cycles by a combination of \(a\)- and \(b\)-cycles.  Write
+\begin{equation}\label{eq:tau-general}
+\tau(a_i)=-a_i,\qquad 
+\tau(b_j)=\sum_{k=1}^2 \alpha_{jk}\,a_k+\sum_{k=1}^2 \beta_{jk}\,b_k,\qquad j=1,2,
+\end{equation}
+for some integers \(\alpha_{jk},\beta_{jk}\).  Using the intersection pairing \eqref{eq:homology-again} we determine these coefficients as follows.
+
+Compute the intersections with \(a_1,a_2\):
+\[
+a_1\circ \tau(b_1)=\beta_{11}(a_1\circ b_1)=\beta_{11},\qquad
+a_2\circ \tau(b_1)=\beta_{12}(a_2\circ b_2)=\beta_{12}.
+\]
+But the geometry of the anti\-holomorphic involution in this configuration yields
+\[
+a_1\circ \tau(b_1)=1,\qquad a_2\circ \tau(b_1)=0,
+\]
+hence
+\begin{equation}\label{eq:beta-values}
+\beta_{11}=1,\qquad \beta_{12}=0.
+\end{equation}
+Similarly, intersecting \(\tau(b_1)\) with the \(b\)-cycles gives
+\[
+\tau(b_1)\circ b_1=\alpha_{11}=0,\qquad \tau(b_1)\circ b_2=\alpha_{12}=1,
+\]
+so that \(\alpha_{11}=0,\ \alpha_{12}=1\).  Collecting these values yields
+\begin{equation}\label{eq:tau-b1}
+\tau(b_1)=b_1+a_2.
+\end{equation}
+By the same type of computation one obtains
+\begin{equation}\label{eq:tau-b2}
+\tau(b_2)=b_2+a_1.
+\end{equation}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig-case2-involution-0.pdf}
+  \caption{To the computations of \(\tau(b_1), \tau(b_2)\) for Case 2.}
+  \label{fig:Fg-case2-involution}
+\end{figure}
+
+Denote by \(P_{\pm}\) the two points above the same \(\lambda\)-value on the two sheets of \(R_2\).  Let \(C_P\) be the oriented path which starts at \(P_-\) (on the second sheet), crosses the cut joining the branch points \(\lambda_3,\lambda_3^*\) through their midpoint, then continues on the first sheet and winds counterclockwise along the cut until it reaches \(P_+\).  (This is the path used below to connect \(\infty^-\) to \(\infty^+\) in the indicated way.)
+
+The path \(C_P\) is transformed by \(\tau\) as
+\begin{equation}\label{eq:tau-Cp}
+\tau(C_P)=C_P+a_3,
+\end{equation}
+since \(\tau(C_P)-C_P = a_3\).
+Computing the intersections \(a_3\circ b_j\) from the geometry one finds
+\[
+a_3\circ b_1=-1,\qquad a_3\circ b_2=-1,
+\]
+and therefore
+\begin{equation}\label{eq:a3-expression}
+a_3=-a_1-a_2.
+\end{equation}
+In fact one must include the small loop around \(\infty^+\).  Thus the correct homology relation is
+\begin{equation}\label{eq:a3-with-loop}
+a_3=-a_1-a_2+\ell,
+\end{equation}
+where \(\ell\) denotes a small positively oriented loop encircling \(\infty^+\).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig-case2-Cp-path-0.pdf}
+  \caption{To the computation of \(\tau(C_P)\) for Case 2.}
+  \label{fig:Fg-case2-Cp-path}
+\end{figure}
+
+
+Let \(d\Omega_1\) be the normalized (third-kind) Abelian differential whose \(a\)-periods vanish:
+\begin{equation}\label{eq:Omega1-norm}
+\oint_{a_i} d\Omega_1=0,\qquad i=1,2,
+\end{equation}
+and which has the prescribed logarithmic behaviour at the points at infinity:
+\begin{equation}\label{eq:Omega1-asymptotics}
+\Omega_1(P)=\int_{P_0}^P d\Omega_1
+=\pm\Bigl(\ln\lambda+\ln\omega_1+o(1)\Bigr),\qquad P\to\infty^\pm,
+\end{equation}
+where \(\omega_1\) is the (nonzero) constant appearing in the local expansion and \(w_i\) will denote holomorphic differentials as before.
+
+Since \(d\Omega_1\) is normalized by \(\displaystyle\oint_{a_i}d\Omega_1=0\) and has residue \(1\) at \(\infty^+\), we obtain
+\begin{equation}\label{eq:residue-loop}
+\oint_{\ell} d\Omega_1 = 2\pi\mathrm{i}.
+\end{equation}
+Therefore
+\begin{equation}\label{eq:oint-a3}
+\oint_{a_3} d\Omega_1
+= \oint_{-a_1-a_2+\ell} d\Omega_1
+= -\sum_{i=1}^2\oint_{a_i} d\Omega_1 + \oint_{\ell} d\Omega_1
+= 0 + 2\pi\mathrm{i}= 2\pi\mathrm{i}.
+\end{equation}
+
+Using the path \(C_P\) joining \(\infty^-\) to \(\infty^+\) and the relation \(\tau(C_P)=C_P+a_3\), the asymptotics \eqref{eq:Omega1-asymptotics} imply that
+\begin{equation}\label{eq:Omega1-limit}
+\lim_{P\to\infty^+}\!\left(\int_{\infty^-}^{\infty^+} d\Omega_1 - 2\ln\lambda\right)
+= \lim_{P\to\infty^+}\!\left(\int_{C_P} d\Omega_1 - 2\ln\lambda\right)
+= 2\ln\omega_1.
+\end{equation}
+We compute the conjugate quantity
+\begin{equation}\label{eq:conjugate-omega1}
+\begin{aligned}
+2\,\overline{\ln(\omega_1)}
+&= \lim_{P\to\infty^+}\!\left(\int_{C_P}\overline{d\Omega_1(P)} - 2\ln\lambda\right)
+ = \lim_{P\to\infty^+}\!\left(\int_{\tau(C_P)} d\Omega_1 - 2\ln\lambda\right)\\[2mm]
+&= \lim_{P\to\infty^+}\!\left(\int_{C_P+a_3} d\Omega_1 - 2\ln\lambda\right)
+ = \lim_{P\to\infty^+}\!\left(\int_{C_P} d\Omega_1 - 2\ln\lambda\right)
+   + \oint_{a_3} d\Omega_1\\[2mm]
+&= 2\ln(\omega_1) + 2\pi\mathrm{i},
+\end{aligned}
+\end{equation}
+where in the second equality we used $\overline{d\Omega_1(P)}=\tau^* d\Omega_1$ and $\tau(C_P)=C_P+a_3$, and in the last step we used \eqref{eq:oint-a3}.  From \eqref{eq:conjugate-omega1} we obtain
+\begin{equation}\label{eq:ln-omega1-conj}
+\overline{\ln(\omega_1)}=\ln(\omega_1)+\pi\mathrm{i},
+\qquad\Rightarrow\qquad
+\Im\bigl(\ln(\omega_1)\bigr)=-\frac{\pi}{2}.
+\end{equation}
+
+Hence, writing $\omega_1$ in modulus–argument form gives
+\begin{equation}\label{eq:omega1-squared}
+\ln(\omega_1)=\ln\bigl|\omega_1\bigr|- \mathrm{i}\beta,\qquad \beta>0,
+\end{equation}
+(and in our normalization one finds $\beta=\frac{\pi}{2}$).
+
+The other normalized Abelian integrals have the asymptotics
+\begin{equation}\label{eq:Omega23-asymp}
+\Omega_2(P)=\pm\bigl(\lambda+\omega_2+o(1)\bigr),\qquad
+\Omega_3(P)=\pm\bigl(4\lambda^3+\omega_3+o(1)\bigr),
+\qquad P\to\infty^\pm,
+\end{equation}
+so that, using the same connecting path $C_P$,
+\begin{equation}\label{eq:omega23-def}
+2\omega_2=\lim_{P\to\infty^+}\Biggl(\int_{C_P} d\Omega_2 - 2\lambda\Biggr),\qquad
+2\omega_3=\lim_{P\to\infty^+}\Biggl(\int_{C_P} d\Omega_3 - 8\lambda^3\Biggr).
+\end{equation}
+Taking complex conjugates and using the action of $\tau$ on $C_P$ one deduces
+\begin{equation}\label{eq:omega23-real}
+2\overline{\omega_2}=2\omega_2,\qquad 2\overline{\omega_3}=2\omega_3,
+\qquad\Rightarrow\qquad \omega_2,\ \omega_3\in\mathbb{R}.
+\end{equation}
+
+Recall the period matrix entries are defined by
+\begin{equation}\label{eq:B-def}
+B_{ij}=\oint_{b_j} \, w_i\,d\lambda,
+\end{equation}
+where $\{w_1,w_2\}$ denote the normalized holomorphic differentials with
+\[
+\oint_{a_k}w_i\,d\lambda = 2\pi\mathrm{i}\,\delta_{ik},\qquad i,k=1,2.
+\]
+Using the anti\-holomorphic involution $\tau$ and the relations
+\(\tau(b_1)=b_1+a_2,\ \tau(b_2)=b_2+a_1\) we get
+\begin{equation}\label{eq:B-conjugation}
+\begin{aligned}
+\overline{B_{ij}}
+&= \oint_{b_j} \overline{w_i\,d\lambda}
+= \oint_{\tau(b_j)} w_i\,d\lambda
+= \oint_{b_j} w_i\,d\lambda + \sum_{l\neq j}\oint_{a_l}w_i\,d\lambda\\
+&= B_{ij} + 2\pi\mathrm{i}\sum_{l\neq j}\delta_{il}.
+\end{aligned}
+\end{equation}
+Therefore, in matrix form,
+\begin{equation}\label{eq:B-matrix-conj}
+\overline{B}=B+2\pi\mathrm{i}\begin{pmatrix}0&1\\[4pt]1&0\end{pmatrix}.
+\end{equation}
+
+The Riemann theta function is defined by
+\begin{equation}\label{eq:theta-def}
+\Theta(z\mid B)=\sum_{n\in\mathbb{Z}^2}\exp\!\Bigl(\tfrac{1}{2}n^{\top}Bn+n^{\top}z\Bigr).
+\end{equation}
+Using \eqref{eq:B-matrix-conj} one checks the conjugation property
+\begin{equation}\label{eq:theta-conj}
+\overline{\Theta(z\mid B)}=\Theta(\overline{z}\mid \overline{B})
+=\sum_{n\in\mathbb{Z}^2}\exp\!\Bigl(\tfrac{1}{2}n^{\top}Bn+n^{\top}\overline{z}
++2\pi\mathrm{i}\,n_1n_2\Bigr)
+=\Theta(\overline{z}\mid B),
+\end{equation}
+since $\exp(2\pi\mathrm{i}n_1n_2)=1$ for integers $n_1,n_2$.
+
+\textbf{Notational conventions and auxiliary differentials.}
+For later calculations we introduce the following integrals and differentials:
+\begin{align}
+\mathcal{Y}_{a_i}^{[j]}&=\oint_{a_i}\frac{\lambda^{j}}{y}\dd \lambda, \qquad \mathcal{Y}_{b_i}^{[j]}=\oint_{b_i}\frac{\lambda^{j}}{y}\dd \lambda,
+\qquad i=1,2,\quad  j\ge 0,\label{eq:cycle-integrals}\\[4pt]
+\Omega_j(P)&=\int_{(\lambda_3,0)}^{P} \dd \Omega_j,\label{eq:Omega_j-def} \qquad
+d\Omega_2^{(1)}=\sum_{i=0}^3 \frac{c_{2i}\,\lambda^i}{y(\lambda)}\,d\lambda,
+\qquad
+d\Omega_3^{(1)}=\sum_{i=1}^5 \frac{c_{3i}\,\lambda^i}{y(\lambda)}\,d\lambda,
+\end{align}
+where \(P=(\lambda,y)\in R_2\), the base point \((\lambda_3,0)\) is fixed, and the constants \(c_{2i},c_{3i}\) (as well as the coefficients \(d_{ik}\) appearing in the holomorphic differentials) will be determined later on.
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (7)}{2025-11-04}
+\obj{Focus on Case~1. Introduce two transformations used in the computation of 
+\(\mathcal{Y}_{a_i}^{[j]}\) and \(\mathcal{Y}_{b_i}^{[j]}\); carry out the evaluation of 
+\(\mathcal{Y}_{a_i}^{[0]}\), \(\mathcal{Y}_{a_i}^{[1]}\), and determine the coefficients \(d_{ij}\).}
+
+
+% Algebro-geometric solutions for the mKdV equation — (VII) Review
+Recall that
+\[
+w_i(\lambda)=\frac{d_{i0}+d_{i1}\lambda}{y(\lambda)},\qquad
+y(\lambda)=\sqrt{(\lambda^2-\lambda_1^2)(\lambda^2-\lambda_2^2)(\lambda^2-\lambda_3^2)} .
+\]
+and
+\begin{equation}\label{eq:ai-normalisation}
+\oint_{a_j} w_i(\lambda)\,d\lambda = 2\pi \mathrm{i}\,\delta_{ij},\qquad i,j=1,2.
+\end{equation}
+
+Hence, writing the period integrals in matrix form, the normalization \eqref{eq:ai-normalisation} is equivalent to
+\begin{equation}\label{eq:matrix-normalisation}
+2\pi \mathrm{i}\,\mathbb{I}_2 \;=\; \begin{pmatrix} d_{10} & d_{11}\\[4pt] d_{20} & d_{21}\end{pmatrix}\,\begin{pmatrix}
+\displaystyle\oint_{a_1}\frac{d\lambda}{y} & \displaystyle\oint_{a_2}\frac{d\lambda}{y}\\[8pt]
+\displaystyle\oint_{a_1}\frac{\lambda\,d\lambda}{y} & \displaystyle\oint_{a_2}\frac{\lambda\,d\lambda}{y}
+\end{pmatrix} .
+\end{equation}
+In particular,
+\begin{equation}\label{eq:D-via-Ainv}
+\begin{pmatrix} d_{10} & d_{11}\\[4pt] d_{20} & d_{21}\end{pmatrix} \;=\; 2\pi \mathrm{i}\,\begin{pmatrix}
+\displaystyle\oint_{a_1}\frac{d\lambda}{y} & \displaystyle\oint_{a_2}\frac{d\lambda}{y}\\[8pt]
+\displaystyle\oint_{a_1}\frac{\lambda\,d\lambda}{y} & \displaystyle\oint_{a_2}\frac{\lambda\,d\lambda}{y}
+\end{pmatrix}^{-1}.
+\end{equation}
+
+Recall the intersection and period conventions for the canonical homology basis $\{a_i,b_i\}_{i=1}^2$:
+\begin{gather}
+a_i\circ a_j = b_i\circ b_j = 0,\qquad a_i\circ b_j=\delta_{ij},\\
+\label{eq:b-periods}
+\oint_{b_j} w_i(\lambda)\,d\lambda = B_{ij}.
+\end{gather}
+
+\medskip
+
+\textbf{Case 1.} \(\lambda_1,\lambda_2,\lambda_3\in \mathrm{i}\mathbb{R}\).
+
+Let \(\tau\) denote complex conjugation on the curve,
+\[
+\tau\!:\;(\lambda,y)\mapsto(\lambda^*,y^*).
+\]
+The action of \(\tau\) on the homology basis may be chosen (up to orientation) as
+\begin{equation}\label{eq:tau-action}
+\tau(a_1)=-a_2,\qquad \tau(a_2)=-a_1,\qquad
+\tau(b_1)=b_2,\qquad \tau(b_2)=b_1.
+\end{equation}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig-case1-involution-0.pdf}
+  \caption{To the computations of \(\tau(b_1), \tau(b_2)\) for Case 1.}
+  \label{fig:Fg-case1-involution}
+\end{figure}
+
+
+
+With the choice of cycles described above, the \(a\)-periods reduce to integrals along paths on the first sheet:
+\begin{equation}\label{eq:a1-periods}
+\oint_{a_1}\frac{d\lambda}{y}
+=2\int_{\lambda_2}^{\lambda_1}\frac{d\lambda}{y},\qquad
+\oint_{a_1}\frac{\lambda\,d\lambda}{y}
+=2\int_{\lambda_2}^{\lambda_1}\frac{\lambda\,d\lambda}{y},
+\end{equation}
+and
+\begin{equation}\label{eq:a2-periods}
+\oint_{a_2}\frac{d\lambda}{y}
+=2\int_{\lambda_1^*}^{\lambda_2^*}\frac{d\lambda}{y},\qquad
+\oint_{a_2}\frac{\lambda\,d\lambda}{y}
+=2\int_{\lambda_1^*}^{\lambda_2^*}\frac{\lambda\,d\lambda}{y}.
+\end{equation}
+
+Recall the definition
+\begin{equation}\label{eq:Lambda-subst}
+y(\lambda)=\sqrt{(\lambda^2-\lambda_1^2)(\lambda^2-\lambda_2^2)(\lambda^2-\lambda_3^2)},
+\qquad \Lambda=\lambda^2,\qquad d\Lambda=2\lambda\,d\lambda.
+\end{equation}
+Applying the substitution \(\Lambda=\lambda^2\) transforms the basic integral into a rational function of \(\Lambda\):
+\begin{equation}\label{eq:basic-int-lambda}
+\int \frac{d\lambda}{y(\lambda)}
+= \int \frac{d\lambda}{\sqrt{\prod_{i=1}^3(\lambda^2-\lambda_i^2)}}
+= \int \frac{d\Lambda}{2\sqrt{\Lambda\prod_{i=1}^3(\Lambda-\lambda_i^2)}}.
+\end{equation}
+Thus the problem reduces to integrals of the general form
+\begin{equation}\label{eq:general-elliptic}
+\int \frac{d\Lambda}{\sqrt{\prod_{i=1}^4(\Lambda-\beta_i)}},
+\qquad \beta_1<\beta_2<\beta_3<\beta_4.
+\end{equation}
+
+To reduce \eqref{eq:general-elliptic} to the Legendre normal form we use the change of variable
+\begin{equation}\label{eq:z-change}
+z^2 \;=\; \frac{\beta_3-\beta_1}{\beta_4-\beta_1}\,\frac{\Lambda-\beta_4}{\Lambda-\beta_3}.
+\end{equation}
+A direct computation yields the standard reduction
+\begin{equation}\label{eq:elliptic-reduction}
+\int \frac{d\Lambda}{\sqrt{\prod_{i=1}^4(\Lambda-\beta_i)}}
+\;=\;
+\frac{2}{\sqrt{(\beta_3-\beta_1)(\beta_4-\beta_2)}}
+\int \frac{dz}{\sqrt{(1-z^2)(1-k^2 z^2)}},
+\end{equation}
+with the elliptic modulus given by
+\begin{equation}\label{eq:k-general}
+k^2 \;=\; \frac{(\beta_3-\beta_2)(\beta_4-\beta_1)}{(\beta_3-\beta_1)(\beta_4-\beta_2)}.
+\end{equation}
+
+For reference, the incomplete elliptic integrals in Jacobi form are
+\[
+F(z,k)=\int_0^z\frac{dt}{\sqrt{(1-t^2)(1-k^2 t^2)}},\qquad
+E(z,k)=\int_0^z\sqrt{\frac{1-k^2 t^2}{1-t^2}}\,dt,\qquad 0<k<1,
+\]
+and the elliptic integral of the third kind is
+\[
+\Pi(z,\alpha^2,k)=\int_0^z\frac{dt}{(1-\alpha^2 t^2)\sqrt{(1-t^2)(1-k^2 t^2)}}.
+\]
+These standard forms allow the evaluation of the \(a\)-period integrals \eqref{eq:a1-periods}--\eqref{eq:a2-periods} once the correspondence between the branch points \(\{\beta_i\}\) and the original \(\lambda\)-branch points is fixed.
+
+\medskip
+
+Applying \eqref{eq:elliptic-reduction}--\eqref{eq:k-general} to our concrete problem:
+we may take
+\[
+\beta_1=\lambda_3^2,\qquad \beta_2=\lambda_2^2,\qquad \beta_3=\lambda_1^2,\qquad \beta_4=0,
+\]
+and (using \eqref{eq:z-change}) obtain
+\begin{equation}\label{eq:z-explicit}
+z^2 \;=\; \frac{\lambda_1^2-\lambda_3^2}{-\lambda_3^2}\,\frac{\Lambda}{\Lambda-\lambda_1^2}
+\;=\; \frac{(\lambda_1^2-\lambda_3^2)\,\lambda^2}{\lambda_3^2(\lambda_1^2-\lambda^2)}.
+\end{equation}
+For these choices the modulus becomes
+\begin{equation}\label{eq:k-specific}
+k_1^{(1)\,2}
+\;=\;
+\frac{(\lambda_1^2-\lambda_2^2)(0-\lambda_3^2)}{(\lambda_1^2-\lambda_3^2)(0-\lambda_2^2)}
+\;=\;
+\frac{\lambda_3^2}{\lambda_2^2}\,\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2},
+\end{equation}
+so that
+\begin{equation}\label{eq:int-lambda-to-F}
+\int \frac{d\lambda}{y(\lambda)}
+\;=\;
+\frac{1}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}
+\int \frac{dz}{\sqrt{(1-z^2)(1-k_1^{(1)\,2} z^2)}} ,
+\qquad k_1^{(1)} \;=\; \frac{\lambda_3}{\lambda_2}\, \sqrt{\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2}}
+\end{equation}
+
+Defining the incomplete elliptic integral
+\begin{equation}\label{eq:nu-def}
+\nu \;=\; F\bigl(z,k_1^{(1)}\bigr)
+\;=\; \int_0^z \frac{dt}{\sqrt{(1-t^2)(1-k_1^{(1)\,2}t^2)}},
+\qquad z=\operatorname{sn}\bigl(\nu,k_1^{(1)}\bigr),
+\end{equation}
+we obtain the standard elliptic parametrisation of \(\lambda\) via \eqref{eq:z-explicit} and \eqref{eq:nu-def}.
+
+\medskip
+
+Recall the relations:
+\[
+\mathrm{sn}^2(u,k)+\mathrm{cn}^2(u,k)=1,\qquad
+\mathrm{dn}^2(u,k)+k^2\mathrm{sn}^2(u,k)=1,
+\]
+and the complete elliptic integrals
+\[
+K(k)=F(1,k),\qquad K'(k)=F(1,k'),\qquad k'^2=1-k^2.
+\]
+
+\medskip
+
+From \eqref{eq:z-explicit} one checks the mapping of special \(\Lambda\)-values to \(z\)-values:
+\[
+\Lambda=\lambda^2=0\; \leftrightarrow\;  z=0 \; \leftrightarrow\;  \nu=0,\qquad
+\Lambda=\lambda_1^2\; \leftrightarrow\;  z^2\to\infty \; \leftrightarrow\;  \nu=\pm \mathrm{i}K_1^{(1)\prime} \,
+\]
+and
+\[
+\Lambda=\lambda^2=\lambda_2^2\; \leftrightarrow\;  z^2 = \frac{\lambda_2^2}{\lambda_3^2}\,\frac{\lambda_1^2-\lambda_3^2}{\lambda_1^2-\lambda_2^2} = \frac{1}{k_1^{(1)\,2}} \; \leftrightarrow\; \nu = \pm (K_1^{(1)}+ \mathrm{i}K_1^{(1)\prime} ) .
+\]
+
+\medskip
+
+
+With this choice, the \(a_1\)-period can be expressed in the \(\nu\)-variable as an integral between two points in the complex \(\nu\)-plane. In particular, we have
+\begin{equation}\label{eq:a1-period-dlambda_over_y}
+2\int_{\lambda_2}^{\lambda_1} \frac{d\lambda}{y(\lambda)}
+\;=\;
+\frac{2}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}
+\int_{K_1^{(1)} + \mathrm{i}K_1^{(1)\prime}}^{\mathrm{i}K_1^{(1)\prime}} \dd \nu
+\;=\;
+\frac{-2\,K_1^{(1)}}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}
+\;=\;
+\frac{-2\mathrm{i}\,K_1^{(1)}}{\lambda_2 \sqrt{\lambda_1^2-\lambda_3^2}} \in \mathbb{R}^- .
+\end{equation}
+
+The symmetry under complex conjugation, \(\tau:(\lambda,y)\mapsto (\lambda^*,y^*)\), implies the relations
+\begin{equation}\label{eq:a2-conj-rel}
+\left(\oint_{a_2} \frac{d\lambda}{y}\right)^* = \oint_{a_2} \tau^* \frac{d\lambda}{y}
+= \oint_{\tau(a_2)} \frac{d\lambda}{y} = \oint_{-a_1} \frac{d\lambda}{y} 
+= -\oint_{a_1} \frac{d\lambda}{y} \in \mathbb{R}^+.
+\end{equation}
+
+Similarly, one finds
+\begin{equation}\label{eq:a2-lambda-dlambda}
+\oint_{a_2} \frac{\lambda\,d\lambda}{y} = \oint_{a_1} \frac{\lambda\,d\lambda}{y}.
+\end{equation}
+
+Using the substitution \(\Lambda = \lambda^2\), one rewrites
+\begin{equation}\label{eq:lambda-dlambda-to-Lambda}
+\int \frac{\lambda\,d\lambda}{y(\lambda)} = \int \frac{d\Lambda}{2\sqrt{\prod_{i=1}^3 (\Lambda - \lambda_i^2)}}.
+\end{equation}
+Introducing the change of variables
+\begin{equation}\label{eq:z-change-2}
+z^2 = \frac{\beta_1 - \beta_3}{\Lambda - \beta_3},
+\end{equation}
+the integral becomes
+\begin{equation}\label{eq:int-lambda-dlambda-y-to-F}
+\int \frac{\lambda\,d\lambda}{y(\lambda)} 
+= \frac{1}{-\mathrm{i}\, \sqrt{\lambda_1^2 - \lambda_3^2}}
+\int \frac{dz}{\sqrt{(1-z^2)(1-k_2^{(1)2} z^2)}}, 
+\qquad k_2^{(1)} = \sqrt{\frac{\lambda_1^2 - \lambda_2^2}{\lambda_1^2 - \lambda_3^2}}.
+\end{equation}
+Hence,
+\begin{equation}\label{eq:a1-period-lambda_over_y-result}
+\oint_{a_1} \frac{\lambda\,d\lambda}{y} = \frac{-2\mathrm{i}\,K_2^{(1)}}{\sqrt{\lambda_1^2 - \lambda_3^2}} 
+= \oint_{a_2} \frac{\lambda\,d\lambda}{y}.
+\end{equation}
+
+Since
+\begin{equation}
+\begin{pmatrix}
+\displaystyle \oint_{a_1} \frac{d\lambda}{y} & \displaystyle \oint_{a_2} \frac{d\lambda}{y} \\[2ex]
+\displaystyle \oint_{a_1} \frac{\lambda\,d\lambda}{y} & \displaystyle \oint_{a_2} \frac{\lambda\,d\lambda}{y}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\displaystyle \oint_{a_1} \frac{d\lambda}{y} & 0 \\[2ex]
+0 & \displaystyle \oint_{a_1} \frac{\lambda\,d\lambda}{y}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\ 
+1 & 1
+\end{pmatrix},
+\end{equation}
+the relation \eqref{eq:D-via-Ainv} becomes
+\begin{equation*}
+\begin{pmatrix} d_{10} & d_{11} \\[2pt] d_{20} & d_{21} \end{pmatrix} 
+= \pi \mathrm{i} \,
+\begin{pmatrix}
+1 & 1 \\ 
+-1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+\displaystyle \oint_{a_1} \frac{d\lambda}{y} & 0 \\[2pt]
+0 & \displaystyle \oint_{a_1} \frac{\lambda\,d\lambda}{y}
+\end{pmatrix}^{-1}.
+\end{equation*}
+This yields the coefficients
+\begin{equation}\label{eq:d-coeffs-final}
+\begin{aligned}
+d_{10} &= -\frac{\pi \lambda_2 \sqrt{\lambda_1^2 - \lambda_3^2}}{2\, K_1^{(1)}}, &
+\qquad d_{11} &= -\frac{\pi \sqrt{\lambda_1^2 - \lambda_3^2}}{2\, K_2^{(1)}},\\[2mm]
+d_{20} &= -\,d_{10}, &
+\qquad d_{21} &= d_{11}.
+\end{aligned}
+\end{equation}
+
+
+\newpage
+
+\extra{}
+
+Define
+\begin{equation}\label{eq:F-def}
+F(z,k)=\int_0^z \frac{dt}{f(t,k)}, \qquad
+f(t,k)=\sqrt{(1-t^2)(1-k^2 t^2)}, \qquad 0<k<1,
+\end{equation}
+where the principal branch of the square root is chosen and we fix $f(0,k)=1$.
+
+Set
+\begin{equation}\label{eq:K-def}
+K(k)=F(1,k), \qquad K'(k)=K(k'), \qquad k'=\sqrt{1-k^2}.
+\end{equation}
+
+We take the segments $[-k^{-1},-1]\cup[1,k^{-1}]$ as branch cuts for $f(t,k)$ on the extended real axis. Starting at $t=0$ and moving right along the real axis, each time one crosses a branch point an extra phase factor $e^{-\pi\mathrm{i}/2}=-\mathrm{i}$ is accumulated; moving left from $0$ produces the conjugate factor $e^{\pi\mathrm{i}/2}=\mathrm{i}$. With these conventions, $f(t,k)$ on the first sheet admits the explicit real-axis description
+\begin{equation}\label{eq:f-real}
+f(t,k)=
+\begin{cases}
+\sqrt{(1-t^2)(1-k^2 t^2)}\in\mathbb{R}^+,
+& t\in(-1,1),\\[0.3em]
+-\mathrm{i}\sqrt{(t^2-1)(1-k^2 t^2)}\in\mathrm{i}\mathbb{R}^-, 
+& t\in(1,k^{-1}),\\[0.3em]
+\mathrm{i}\sqrt{(t^2-1)(1-k^2 t^2)}\in\mathrm{i}\mathbb{R}^+,
+& t\in(-k^{-1},-1),\\[0.3em]
+-\sqrt{(t^2-1)(k^2 t^2-1)}\in\mathbb{R}^-,
+& t\in(-\infty,-k^{-1})\cup(k^{-1},\infty).
+\end{cases}
+\end{equation}
+
+We now evaluate several definite integrals that will be used below.
+
+For the interval $(k^{-1},\infty)$ perform the substitution
+\begin{equation}\label{eq:t-sub-1}
+t=k^{-1}s^{-1}, \qquad dt=-k^{-1}s^{-2}\,ds ,
+\end{equation}
+which maps $t\in[k^{-1},\infty)$ to $s\in(0,1]$. Direct computation gives
+\begin{equation}\label{eq:int-infty}
+\begin{aligned}
+\int_{k^{-1}}^{\infty}\frac{dt}{\sqrt{(t^2-1)(k^2 t^2-1)}}
+&=\int_1^0
+\frac{-k^{-1}s^{-2}\,ds}
+{\sqrt{(k^{-2} s^{-2}-1)(s^{-2}-1)}}\\
+&=\int_0^1\frac{ds}{\sqrt{(1-s^2)(1-k^2 s^2)}}\\
+&=F(1,k)=K(k).
+\end{aligned}
+\end{equation}
+
+For the finite interval $(1,k^{-1})$ use the substitution
+\begin{equation}\label{eq:t-sub-2}
+t=\bigl(1-(k')^2 s^2\bigr)^{-1/2}, \qquad
+dt=(k')^2 s\bigl(1-(k')^2 s^2\bigr)^{-3/2}ds,
+\end{equation}
+which sends $s\in[0,1]$ to $t\in[1,k^{-1}]$. Under this change of variables
+\begin{equation}\label{eq:sqrt-expand}
+\begin{aligned}
+\sqrt{(t^2-1)(1-k^2 t^2)}
+&=\sqrt{\frac{(k's)^2}{1-(k's)^2}\cdot (k')^2\frac{1-s^2}{1-(k's)^2}}\\
+&=(k')^2 s\,\frac{\sqrt{1-s^2}}{1-(k's)^2}.
+\end{aligned}
+\end{equation}
+Hence
+\begin{equation}\label{eq:int-1-k}
+\begin{aligned}
+\int_1^{k^{-1}}
+\frac{dt}{\sqrt{(t^2-1)(1-k^2 t^2)}}
+&=\int_0^1\frac{ds}{\sqrt{(1-s^2)\bigl(1-(k')^2 s^2\bigr)}}\\
+&=F(1,k')=K(k')=K'(k).
+\end{aligned}
+\end{equation}
+
+Combining the evaluations on $[0,1]$ and $(1,k^{-1})$, and recalling the phase $-\mathrm{i}$ on $(1,k^{-1})$ from \eqref{eq:f-real}, we obtain
+\begin{equation}\label{eq:F-kinv}
+\begin{aligned}
+F(k^{-1},k)
+&=\int_0^1\frac{dt}{\sqrt{(1-t^2)(1-k^2 t^2)}}
++\mathrm{i}\int_1^{k^{-1}}
+\frac{dt}{\sqrt{(t^2-1)(1-k^2 t^2)}}\\
+&=K(k)+\mathrm{i}K'(k).
+\end{aligned}
+\end{equation}
+
+Taking the limit $z\to+\infty$ along the positive real axis (passing through $k^{-1}$) yields
+\begin{equation}\label{eq:F-infty}
+F(+\infty,k)=K(k)+\mathrm{i}K'(k)-K(k)=\mathrm{i}K'(k),
+\end{equation}
+while symmetry across the origin gives
+\begin{equation}\label{eq:F-minus1}
+F(-1,k)=-F(1,k)=-K(k).
+\end{equation}
+
+Similarly, evaluating $F$ at $-k^{-1}$ (follow the path from $0$ to $-1$ to $-k^{-1}$ and use the phase convention on $(-k^{-1},-1)$ in \eqref{eq:f-real}) yields
+\begin{equation}\label{eq:F-kminus}
+\begin{aligned}
+F(-k^{-1},k)
+&=-K(k)+\int_{-1}^{-k^{-1}}
+\frac{dt}{\mathrm{i}\sqrt{(t^2-1)(1-k^2 t^2)}}\\
+&=-K(k)+\mathrm{i}\int_{1}^{k^{-1}}
+\frac{dt}{\sqrt{(t^2-1)(1-k^2 t^2)}}\\
+&=-K(k)+\mathrm{i}K'(k).
+\end{aligned}
+\end{equation}
+Finally, taking $z\to-\infty$ along the negative real axis (passing through $-k^{-1}$) gives
+\begin{equation}\label{eq:F-minus-infty}
+F(-\infty,k)=-K(k)+\mathrm{i}K'(k)+K(k)=\mathrm{i}K'(k).
+\end{equation}
+
+
+Since
+\begin{equation}\label{eq:type1} \tag{type~1}
+\int \frac{\lambda^{2n}}{y(\lambda)}\,d\lambda
+=\int \frac{\Lambda^{n}\,d\Lambda}
+{2\bigl(\Lambda(\Lambda-\lambda_1^{2})(\Lambda-\lambda_2^{2})(\Lambda-\lambda_3^{2})\bigr)^{1/2}},
+\qquad \Lambda=\lambda^2,
+\end{equation}
+and
+\begin{equation}\label{eq:type2} \tag{type~2}
+\int \frac{\lambda^{2n+1}}{y(\lambda)}\,d\lambda
+=\int \frac{\Lambda^{n}\,d\Lambda}
+{2\bigl((\Lambda-\lambda_1^{2})(\Lambda-\lambda_2^{2})(\Lambda-\lambda_3^{2})\bigr)^{1/2}},
+\qquad \Lambda=\lambda^2,
+\end{equation}
+we treat the two types of integrals separately.  
+
+\medskip
+
+\textbf{Computation of Type~1 Integrals (\(\mathcal{Y}_{a_i}^{[0]}, \mathcal{Y}_{b_i}^{[0]}\)). }
+Introduce a change of variable from $\Lambda$ to $z$ by
+\begin{equation}\label{eq:z-def}
+z^{2}=\frac{\beta_{3}-\beta_{1}}{\beta_{4}-\beta_{1}}\,
+\frac{\Lambda-\beta_{4}}{\Lambda-\beta_{3}},
+\qquad \beta_{1}<\beta_{2}<\beta_{3}<\beta_{4}.
+\end{equation}
+Solving \eqref{eq:z-def} for $\Lambda$ yields
+\begin{equation}\label{eq:Lambda-z}
+\Lambda
+=\frac{z^{2}\beta_{3}(\beta_{4}-\beta_{1})-(\beta_{3}-\beta_{1})\beta_{4}}
+{z^{2}(\beta_{4}-\beta_{1})-(\beta_{3}-\beta_{1})}
+=\beta_{3}+\frac{(\beta_{3}-\beta_{1})(\beta_{3}-\beta_{4})}
+{(\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})}.
+\end{equation}
+Differentiation gives
+\begin{equation}\label{eq:dLambda}
+d\Lambda
+=\frac{2(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{3})(\beta_{4}-\beta_{1})\,z}
+{\bigl((\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})\bigr)^{2}}\,dz.
+\end{equation}
+
+The shifted factors $\Lambda-\beta_{i}$ become rational functions of $z$.  In particular
+\begin{align}
+\Lambda-\beta_{1}
+&=\frac{(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{1})(z^{2}-1)}
+{(\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})},\label{eq:Lambda-beta1}\\[4pt]
+\Lambda-\beta_{2}
+&=\frac{(\beta_{3}-\beta_{2})(\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{2})}
+{(\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})},\label{eq:Lambda-beta2}\\[4pt]
+\Lambda-\beta_{4}
+&=\frac{(\beta_{3}-\beta_{4})(\beta_{4}-\beta_{1})z^{2}}
+{(\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})}.\label{eq:Lambda-beta4}
+\end{align}
+
+Hence the full quartic factor factors as
+\begin{equation}\label{eq:prod-Lambda-beta}
+\begin{aligned}
+\prod_{i=1}^{4}(\Lambda-\beta_{i})
+&=\frac{(\beta_{3}-\beta_{1})^{2}(\beta_{4}-\beta_{1})^{2}(\beta_{4}-\beta_{3})^{2}\;z^{2}\;(z^{2}-1)}
+{\bigl((\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})\bigr)^{4}}\\
+&\qquad\times\Bigl((\beta_{3}-\beta_{2})(\beta_{4}-\beta_{1}) z^{2}
+-(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{2})\Bigr).
+\end{aligned}
+\end{equation}
+
+Define the modulus
+\begin{equation}\label{eq:k1-def}
+k_{1}^{2}=\frac{(\beta_{3}-\beta_{2})(\beta_{4}-\beta_{1})}
+{(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{2})}.
+\end{equation}
+Taking a principal square root of \eqref{eq:prod-Lambda-beta} (and grouping algebraic constants) yields
+\begin{equation}\label{eq:sqrt-prod}
+\Bigl(\prod_{i=1}^{4}(\Lambda-\beta_{i})\Bigr)^{1/2}
+=\frac{(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{1})(\beta_{4}-\beta_{3})}
+{\bigl((\beta_{4}-\beta_{1})z^{2}-(\beta_{3}-\beta_{1})\bigr)^{2}}\;
+\sqrt{(\beta_{3}-\beta_{1})(\beta_{4}-\beta_{2})}\; z\;\sqrt{(1-z^{2})(1-k_{1}^{2} z^{2})}.
+\end{equation}
+
+Combining \eqref{eq:dLambda} and \eqref{eq:sqrt-prod} produces the standard elliptic reduction
+\begin{equation}\label{eq:integral-reduction}
+\int\frac{d\Lambda}{\sqrt{\prod_{i=1}^{4}(\Lambda-\beta_{i})}}
+=\frac{2}{\sqrt{(\beta_{4}-\beta_{2})(\beta_{3}-\beta_{1})}}\,
+\int\frac{dz}{\sqrt{(1-z^{2})(1-k_{1}^{2} z^{2})}},
+\end{equation}
+valid on the appropriate choice of branches for the square roots.
+
+Specializing the parameters by
+\begin{equation}\label{eq:beta-lambda}
+\beta_{1}=\lambda_{3}^{2},\qquad \beta_{2}=\lambda_{2}^{2},
+\qquad \beta_{3}=\lambda_{1}^{2},\qquad \beta_{4}=0,
+\end{equation}
+the change of variable \eqref{eq:z-def} becomes
+\begin{equation}\label{eq:z-special}
+z^{2}=\frac{\lambda_{1}^{2}-\lambda_{3}^{2}}{-\lambda_{3}^{2}}\,
+\frac{\lambda^{2}}{\lambda^{2}-\lambda_{1}^{2}},
+\qquad
+z=\sqrt{\frac{\lambda_{1}^{2}-\lambda_{3}^{2}}{-\lambda_{3}^{2}}}\;
+\frac{\lambda}{\sqrt{\lambda^{2}-\lambda_{1}^{2}}},
+\end{equation}
+where the positive square root is taken for the principal branch.  The modulus \eqref{eq:k1-def} simplifies to
+\begin{equation}\label{eq:k1-lambda}
+k_{1}^{2}
+=\frac{(\lambda_{1}^{2}-\lambda_{2}^{2})(\lambda_{2}^{2}-\lambda_{3}^{2})}
+{(\lambda_{1}^{2}-\lambda_{3}^{2})(0-\lambda_{2}^{2})}
+=\frac{(\lambda_{1}^{2}-\lambda_{2}^{2})\,\lambda_{3}^{2}}
+{(\lambda_{1}^{2}-\lambda_{3}^{2})\,\lambda_{2}^{2}}.
+\end{equation}
+
+Choose the cut $[-\lambda_1,\lambda_1]$ for the function $\sqrt{\lambda^2-\lambda_1^2}$ and fix the sheet by requiring
+\[
+\sqrt{\lambda^2-\lambda_1^2}\sim\lambda\qquad(\lambda\to\infty).
+\]
+For $\operatorname{Re}\lambda\ge0$ and \(\lambda \in \mathrm{i}\mathbb{R}\) write $\lambda=\mathrm{i}t$ with $t\in\mathbb{R}$. If $\lambda_j=\mathrm{i}t_j$ then
+\begin{equation}\label{eq:sqrt-imag-axis}
+\sqrt{\lambda^2-\lambda_1^2}=
+\begin{cases}
+\mathrm{i}\sqrt{t^2-t_1^2}, & t>t_1,\\[4pt]
+\sqrt{t_1^2-t^2}, & -t_1<t<t_1,\\[4pt]
+-\mathrm{i}\sqrt{t^2-t_1^2}, & t<-t_1.
+\end{cases}
+\end{equation}
+
+Hence for \(\lambda \in \mathrm{i}\mathbb{R}\) on the imaginary axis with $\operatorname{Re}\lambda\ge0$,
+\begin{equation}\label{eq:z-values}
+z=
+\begin{cases}
+\displaystyle \sqrt{\frac{\lambda_1^2-\lambda_3^2}{-\lambda_3^2}}\;\frac{\lambda}{\sqrt{\lambda^2-\lambda_1^2}}\in\mathrm{i}\mathbb{R}, 
+& \lambda\in(-\lambda_1,\lambda_1),\\[12pt]
+\displaystyle \sqrt{\frac{\lambda_1^2-\lambda_3^2}{-\lambda_3^2}}\;\frac{|\lambda|}{\sqrt{\lambda_1^2-\lambda^2}}\in\mathbb{R}^{+}, 
+& \lambda\in(-\mathrm{i}\infty,-\lambda_1)\cup(\lambda_1,+\mathrm{i}\infty).
+\end{cases}
+\end{equation}
+
+The oriented real/imaginary segments map under $\lambda\mapsto z$ as follows (the images are indicated in the $z$-plane):
+\begin{equation}\label{eq:segment-mapping}
+\begin{aligned}
+(\lambda_3,\lambda_2)&\longrightarrow(1,k_1^{-1}), &\qquad (\lambda_2,\lambda_1)&\longrightarrow(k_1^{-1},+\infty),\\[4pt]
+(\lambda_1,0)&\longrightarrow(+\mathrm{i}\infty,0), &\qquad (0,-\lambda_1)&\longrightarrow(0,-\mathrm{i}\infty),\\[4pt]
+(-\lambda_1,-\lambda_2)&\longrightarrow(+\infty,k_1^{-1}), &\qquad (-\lambda_2,-\lambda_3)&\longrightarrow(k_1^{-1},1).
+\end{aligned}
+\end{equation}
+
+Since
+\begin{equation}\label{eq:lambda-y-z}
+\lambda\,y(\lambda)
+=\sqrt{\prod_{i=1}^4(\Lambda-\beta_i)}
+=\frac{(\beta_3-\beta_1)(\beta_4-\beta_1)(\beta_4-\beta_3)}
+{\bigl((\beta_4-\beta_1)z^2-(\beta_3-\beta_1)\bigr)^2}\; 
+z\sqrt{(1-z^2)(1-k_1^2 z^2)} ,
+\end{equation}
+for our chosen map between $\lambda$ and $z$ we may write
+\[
+\lambda\,y(\lambda)=c_0\, z\,\sqrt{(1-z^2)(1-k_1^2 z^2)},\qquad c_0>0.
+\]
+
+For $\lambda=\mathrm{i}t\in\mathrm{i}\mathbb{R}$, note that $z\in(0,1)$ when $\lambda\in(\lambda_3,+\mathrm{i}\infty)$; in this region $\lambda y(\lambda)\in\mathbb{R}^{+}$. The branch points $\pm\lambda_3,\pm\lambda_2$ of $y(\lambda)$ correspond to the branch points $1,k_1^{-1}$ of $f(z,k_1)$, where $f(z,k_1)=\sqrt{(1-z^2)(1-k_1^2 z^2)}$ and the branch cuts are chosen as in \eqref{eq:F-def}--\eqref{eq:f-real}.
+
+Thus, for \(\lambda\in\mathrm{i}\mathbb{R}\),
+\[
+\lambda\,y(\lambda)\sim
+\begin{cases}
+z\,f(z,k_1), & \lambda\in\left(-\lambda_2,+\mathrm{i}\infty\right)\cup\left(-\lambda_3,-\mathrm{i}\infty\right),\\[4pt]
+-\,z\,f(z,k_1), & \lambda\in\left(-\lambda_2,-\lambda_3\right).
+\end{cases}
+\]
+Hence for $\lambda\in\mathrm{i}\mathbb{R}\setminus[-\lambda_2,-\lambda_3]$,
+\begin{equation}\label{eq:dlambda-over-y}
+\frac{d\lambda}{y(\lambda)}
+=\frac{1}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}\,
+\frac{dz}{f(z,k_1)},
+\end{equation}
+and on the interval $(-\lambda_2,-\lambda_3)$, where the sign of the square root changes,
+\begin{equation}\label{eq:dlambda-over-y-minus}
+\frac{d\lambda}{y(\lambda)}
+=\frac{1}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}\,
+\frac{dz}{-\,f(z,k_1)} .
+\end{equation}
+
+Using \eqref{eq:dlambda-over-y}--\eqref{eq:dlambda-over-y-minus} together with the standard elliptic integrals, and noting
+\begin{equation}\label{eq:root-id}
+\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}= -\mathrm{i}\,\lambda_2\sqrt{\lambda_1^2-\lambda_3^2} >0,
+\end{equation}
+one obtains the following closed forms
+\begin{align}
+\mathcal{Y}_{a_1}^{[0]}
+=2\int_{\lambda_2}^{\lambda_1}\frac{d\lambda}{y(\lambda)}
+&=\frac{2}{\sqrt{-\lambda_2^{2}(\lambda_1^{2}-\lambda_3^{2})}}
+\int_{k_1^{-1}}^{+\infty}\frac{dz}{f(z,k_1)} \nonumber\\
+&=\frac{2}{-\mathrm{i}\,\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}\,
+\int_{K_1+\mathrm{i}K_1'}^{\,\mathrm{i}K_1'} d\nu
+=\frac{-2\mathrm{i}\,K_1}{\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\in\mathbb{R}^-,
+\label{eq:Y_a1_0_final}
+\end{align}
+
+\begin{align}
+\mathcal{Y}_{a_2}^{[0]}
+=2\int_{-\lambda_1}^{-\lambda_2}\frac{d\lambda}{y(\lambda)}
+&=\frac{2}{\sqrt{-\lambda_2^{2}(\lambda_1^{2}-\lambda_3^{2})}}
+\int_{+\infty}^{k_1^{-1}}\frac{dz}{f(z,k_1)} 
+=-\mathcal{Y}_{a_1}^{[0]}
+=\frac{2\mathrm{i}\,K_1}{\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\in \mathbb{R}^{+},
+\label{eq:Y_a2_0_final}
+\end{align}
+
+\begin{align}
+\mathcal{Y}_{b_2}^{[0]}
+=2\int_{-\lambda_2}^{-\lambda_3}\frac{d\lambda}{y(\lambda)}
+&=\frac{2}{\sqrt{-\lambda_2^{2}(\lambda_1^{2}-\lambda_3^{2})}}
+\int_{k_1^{-1}}^{1}\frac{dz}{-\,f(z,k_1)} \nonumber\\
+&=\frac{2}{-\mathrm{i}\,\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\int_{K_1}^{K_1+\mathrm{i}K_1'} d\nu
+=\frac{-2K_1'}{\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\in \mathrm{i}\mathbb{R}^{+},
+\label{eq:Y_b2_0_final}
+\end{align}
+
+and
+\begin{align}
+\mathcal{Y}_{b_1}^{[0]}
+=2\int_{-\lambda_2}^{-\lambda_3}\frac{d\lambda}{y(\lambda)}
++2\int_{\lambda_1}^{-\lambda_1}\frac{d\lambda}{y(\lambda)} 
+&=-\frac{2K_1'}{\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
++\frac{2(-\mathrm{i}K_1'-\mathrm{i}K_1')}{-\mathrm{i}\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}} \nonumber\\
+&=\frac{2K_1'}{\lambda_2\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\in \mathrm{i}\mathbb{R}^{-}.
+\label{eq:Y_b1_0_final}
+\end{align}
+
+
+\medskip
+\textbf{Computation of Type~2 Integrals (\(\mathcal{Y}_{a_i}^{[1]}, \mathcal{Y}_{b_i}^{[1]}\)).}
+
+Let $\beta_1<\beta_2<\beta_3$ and introduce the substitution
+\begin{equation}\label{eq:type2-z-def-repeat}
+z^{2}=\frac{\beta_{1}-\beta_{2}}{\Lambda-\beta_{3}},\qquad
+\Lambda=\beta_{3}+\frac{\beta_{1}-\beta_{3}}{z^{2}},\qquad \Lambda=\lambda^2.
+\end{equation}
+Differentiation yields
+\begin{equation}\label{eq:dLambda-type2-repeat}
+d\Lambda=\frac{2(\beta_{3}-\beta_{1})}{z^{3}}\,dz.
+\end{equation}
+Using \eqref{eq:type2-z-def-repeat} one checks
+\begin{align}
+\Lambda-\beta_{1} &= (\beta_{3}-\beta_{1})\frac{z^{2}-1}{z^{2}},\label{eq:Lambda-beta1-type2-repeat}\\[4pt]
+\Lambda-\beta_{2} &= \frac{(\beta_{3}-\beta_{2})z^{2}+(\beta_{1}-\beta_{3})}{z^{2}},\label{eq:Lambda-beta2-type2-repeat}\\[4pt]
+\Lambda-\beta_{3} &= \frac{\beta_{1}-\beta_{3}}{z^{2}}.\label{eq:Lambda-beta3-type2-repeat}
+\end{align}
+Consequently the cubic product factors as
+\begin{equation}\label{eq:prod-3-repeat}
+\prod_{i=1}^{3}(\Lambda-\beta_{i})
+=(\beta_{3}-\beta_{1})^{3}\frac{(z^{2}-1)\bigl(1-k_{2}^{2} z^{2}\bigr)}{z^{6}},
+\end{equation}
+with
+\begin{equation}\label{eq:k2-def-repeat}
+k_{2}^{2}=\frac{\beta_{3}-\beta_{2}}{\beta_{3}-\beta_{1}}\in(0,1).
+\end{equation}
+Taking principal square roots gives
+\begin{equation}\label{eq:sqrt-prod-3-repeat}
+\Bigl(\prod_{i=1}^{3}(\Lambda-\beta_{i})\Bigr)^{1/2}
+=(\beta_{3}-\beta_{1})\sqrt{\beta_{1}-\beta_{3}}\;\frac{\sqrt{(1-z^{2})(1-k_{2}^{2} z^{2})}}{z^{3}}.
+\end{equation}
+
+Combining \eqref{eq:dLambda-type2-repeat} and \eqref{eq:sqrt-prod-3-repeat} we obtain the reduction
+\begin{equation}\label{eq:integral-type2-elliptic-repeat}
+\int\frac{d\Lambda}{\sqrt{\prod_{i=1}^{3}(\Lambda-\beta_{i})}}
+=\frac{2}{\sqrt{\beta_{1}-\beta_{3}}}\,
+\int\frac{dz}{\sqrt{(1-z^{2})(1-k_{2}^{2} z^{2})}}.
+\end{equation}
+
+Specialize $\beta_{1}=\lambda_{3}^{2},\ \beta_{2}=\lambda_{2}^{2},\ \beta_{3}=\lambda_{1}^{2}$. Then
+\begin{equation}\label{eq:z-special-type2-repeat}
+z^{2}=\frac{\lambda_{3}^{2}-\lambda_{2}^{2}}{\lambda^{2}-\lambda_{1}^{2}},\qquad
+z=\frac{\sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}}{\sqrt{\lambda_{1}^{2}-\lambda^{2}}},
+\end{equation}
+and
+\begin{equation}\label{eq:k2-special-repeat}
+k_{2}^{2}=\frac{\lambda_{1}^{2}-\lambda_{2}^{2}}{\lambda_{1}^{2}-\lambda_{3}^{2}}\in(0,1).
+\end{equation}
+
+Choose the cut $[-\lambda_1,\lambda_1]$ for $\sqrt{\lambda_1^2-\lambda^2}$ and fix the sheet by the condition
+\[
+\sqrt{\lambda_1^2-\lambda^2}\sim -\mathrm{i}\,\lambda\qquad(\lambda\to\infty).
+\]
+For $\lambda=\mathrm{i}t$ ($t\in\mathbb{R}$) and $\lambda_j=\mathrm{i}t_j$ one then has the pointwise values (for $\operatorname{Re}\lambda\ge0$)
+\begin{equation}\label{eq:sqrt-l1-lambda-cases-again}
+\sqrt{\lambda_1^2-\lambda^2}=
+\begin{cases}
+\sqrt{t^2-t_1^2}, & t>t_1,\\[4pt]
+-\mathrm{i}\sqrt{t_1^2-t^2}, & -t_1<t<t_1,\\[4pt]
+-\sqrt{t^2-t_1^2}, & t<-t_1,
+\end{cases}
+\end{equation}
+which are consistent with the chosen asymptotics.
+
+Consequently, for $\lambda\in\mathrm{i}\mathbb{R}$ with $\operatorname{Re}\lambda\ge0$, the substitution takes values as follows
+\begin{equation}\label{eq:z-special-type2-repeat-again}
+z=\frac{\sqrt{\lambda_1^2-\lambda_3^2}}{\sqrt{\lambda_1^2-\lambda^2}}\in
+\begin{cases}
+\mathbb{R}^{+}, & \lambda\in(\lambda_1,+\mathrm{i}\infty),\\[4pt]
+\mathrm{i}\mathbb{R}^{+}, & \lambda\in(-\lambda_1,\lambda_1),\\[4pt]
+\mathbb{R}^{-}, & \lambda\in(-\mathrm{i}\infty,-\lambda_1).
+\end{cases}
+\end{equation}
+The oriented segments in the $\lambda$--plane map to the $z$--plane under \eqref{eq:z-special-type2-repeat-again} as follows (principal images):
+\begin{gather}
+(+\mathrm{i}\infty, \lambda_3)\longrightarrow(0,1),\qquad
+(\lambda_3,\lambda_2)\longrightarrow(1,k_2^{-1}),\qquad
+(\lambda_2,\lambda_1)\longrightarrow(k_2^{-1},+\infty),\\[6pt]
+(\lambda_1,0)\longrightarrow\Bigl(+\mathrm{i}\infty,\frac{\sqrt{\lambda_1^2-\lambda_3^2}}{-\lambda_1}\Bigr),\qquad
+(0,-\lambda_1)\longrightarrow\Bigl(\frac{\sqrt{\lambda_1^2-\lambda_3^2}}{-\lambda_1},+\infty\Bigr),\\[6pt]
+(-\lambda_1,-\lambda_2)\longrightarrow(-\infty,-k_2^{-1}),\qquad
+(-\lambda_2,-\lambda_3)\longrightarrow(-k_2^{-1},-1),\qquad
+(-\lambda_3,-\mathrm{i}\infty)\longrightarrow(-1,0).
+\end{gather}
+
+By the Type~2 reduction (with $\Lambda=\lambda^2$) the cubic factor admits the representation
+\[
+y(\lambda)=\prod_{i=1}^3(\Lambda-\beta_i)^{1/2}
+=(\beta_3-\beta_1)\sqrt{\beta_1-\beta_3}\;\frac{\sqrt{(1-z^2)(1-k_2^2 z^2)}}{z^3},
+\qquad \beta_j=\lambda_{4-j}^2,
+\]
+On the chosen sheet for $\lambda\in\mathrm{i}\mathbb{R}$ along the imaginary axis, comparison of signs yields
+\[
+y(\lambda)=-\mathrm{i}(\beta_3-\beta_1)\sqrt{\beta_3-\beta_1}\;\frac{f(z,k_2)}{z^3},
+\qquad f(z,k_2)=\sqrt{(1-z^2)(1-k_2^2 z^2)}.
+\]
+where the branch cuts of \(f(z,k_2)\) are chosen as in \eqref{eq:F-def}--\eqref{eq:f-real}.
+Hence, for $\lambda\in\mathrm{i}\mathbb{R}$,
+\[
+\frac{\lambda\,d\lambda}{y(\lambda)}
+=\frac{1}{-\mathrm{i}\sqrt{\beta_3-\beta_1}}\;\frac{dz}{f(z,k_2)}
+=\frac{\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}\;\frac{dz}{f(z,k_2)},
+\]
+
+Introducing the complete elliptic integrals $K_2=K(k_2)$ and $K_2'=K(k_2')$, and using the standard substitutions along the indicated images, the period integrals (type~2 moments with a factor $\lambda$) evaluate as follows.
+
+\begin{align}
+\mathcal{Y}_{a_1}^{[1]}
+&=2\int_{\lambda_2}^{\lambda_1}\frac{\lambda\,d\lambda}{y(\lambda)}
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{k_2^{-1}}^{+\infty}\frac{dz}{f(z,k_2)} 
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{K_2+\mathrm{i}K_2'}^{\,\mathrm{i}K_2'} d\nu
+=\frac{-2\mathrm{i}\,K_2}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\in \mathrm{i}\mathbb{R}^-,
+\label{eq:Y-a1-1-final}
+\\[6pt]
+\mathcal{Y}_{a_2}^{[1]}
+&=2\int_{-\lambda_1}^{-\lambda_2}\frac{\lambda\,d\lambda}{y(\lambda)}
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{-\infty}^{-k_2^{-1}}\frac{dz}{f(z,k_2)} 
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\int^{-K_2+\mathrm{i}K_2'}_{\,\mathrm{i}K_2'} d\nu
+=\frac{-2\mathrm{i}\,K_2}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\in \mathrm{i}\mathbb{R}^-,
+\label{eq:Y-a2-1-final}
+\\[6pt]
+\mathcal{Y}_{b_2}^{[1]}
+&=2\int_{-\lambda_2}^{-\lambda_3}\frac{\lambda\,d\lambda}{y(\lambda)}
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{-k_2^{-1}}^{-1}\frac{dz}{f(z,k_2)} 
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{-K_2+\mathrm{i}K_2'}^{\,-K_2} d\nu
+=\frac{2\,K_2'}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\in  \mathbb{R}^+,
+\label{eq:Y-b2-1-final}
+\\[6pt]
+\mathcal{Y}_{b_1}^{[1]}
+&=2\int_{-\lambda_2}^{-\lambda_3}\frac{\lambda\,d\lambda}{y(\lambda)}
++2\int_{\lambda_1}^{-\lambda_1}\frac{\lambda\,d\lambda}{y(\lambda)}
+=\mathcal{Y}_{b_2}^{[1]}
+=\frac{2\,K_2'}{\sqrt{\lambda_1^2-\lambda_3^2}}
+\in  \mathbb{R}^+.
+\label{eq:Y-b1-1-final}
+\end{align}
+
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (8)}{2025-11-11}
+\obj{Focus on Case~1. Compute \(\mathcal{Y}_{b_i}^{[0]}\), and discuss how to determine the value of a multivalued complex function with a prescribed branch cut, taking 
+\(y(\lambda)=\sqrt{(\lambda^2-\lambda_1^2)(\lambda^2-\lambda_2^2)(\lambda^2-\lambda_3^2)}\) with the asymptotic condition \(y(\lambda)\sim \lambda^3\) as \(\lambda\to\infty\).}
+
+We have
+\begin{equation}
+B \;=\; \begin{pmatrix} d_{10} & d_{11}\\[4pt] d_{20} & d_{21}\end{pmatrix}\,\begin{pmatrix}
+\displaystyle\oint_{b_1}\frac{d\lambda}{y} & \displaystyle\oint_{b_2}\frac{d\lambda}{y}\\[8pt]
+\displaystyle\oint_{b_1}\frac{\lambda\,d\lambda}{y} & \displaystyle\oint_{b_2}\frac{\lambda\,d\lambda}{y}
+\end{pmatrix}
+\;=\; \begin{pmatrix} d_{10} & d_{11}\\[4pt] d_{20} & d_{21}\end{pmatrix} \begin{pmatrix}
+  \mathcal{Y}_{b_1}^{[0]} & 0 \\
+  0 & \mathcal{Y}_{b_1}^{[1]}
+\end{pmatrix} \begin{pmatrix}
+  1 & -1 \\ 
+  1 & 1
+\end{pmatrix} .
+\end{equation}
+
+We can obtain
+\begin{equation}
+  \int_{0}^{\lambda}\frac{\chi \dd \chi}{\sqrt{\prod_{i=1}^3(\chi^2-\lambda_i^2)}}
+  = \frac{1}{\sqrt{\lambda_3^2-\lambda_1^2}} \int_{0}^{z} \frac{ \dd t}{\sqrt{(1-t^2)(1-k^{(1)\, 2}_2 t^2)}}
+  = \frac{1}{\sqrt{\lambda_3^2-\lambda_1^2}} \int_{0}^{\nu} \dd \nu.
+\end{equation}
+and
+\begin{equation}
+  \lambda^2=\frac{\lambda_3^2-\lambda_1^2\cn^2(\nu,  k^{(1)}_2)}{\sn^2(\nu,  k^{(1)}_2)}, \qquad
+  \sn(\nu,  k^{(1)}_2) = z =\sqrt{\frac{\lambda_1^2-\lambda_3^2}{\lambda_1^2-\lambda^2}} , \qquad k_2^{(1)} =\sqrt{\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2}}
+\end{equation}
+and
+\[
+  \nu = F(z,k_2^{(1)})= F(\sqrt{\frac{\lambda_1^2-\lambda_3^2}{\lambda_1^2-\lambda^2}},k_2^{(1)})
+\]
+
+
+\extra{}
+
+% Case 1: behaviour of y(\lambda) on the imaginary axis
+Let \(P=(\lambda,y)\) be a point on the Riemann surface defined by
+\[
+y(\lambda)=\sqrt{(\lambda^{2}-\lambda_{1}^{2})(\lambda^{2}-\lambda_{2}^{2})(\lambda^{2}-\lambda_{3}^{2})}.
+\]
+The first sheet is fixed by the asymptotic condition
+\[
+y(\lambda)\sim \lambda^{3}+O(\lambda),\qquad \lambda\to\infty.
+\]
+
+Set
+\begin{equation}\label{eq:lambda-j}
+\lambda_{j}=\mathrm{i}\,t_{j},\qquad 0<t_{1}<t_{2}<t_{3},\qquad j=1,2,3.
+\end{equation}
+
+
+For the chosen cut we rewrite \(y(\lambda)\) for \(\lambda=\mathrm{i}t\in \mathrm{i}\mathbb{R}\) (keeping the factorised form with the fractional square roots):
+\begin{equation}\label{eq:y-factorised}
+\begin{aligned}
+y(\lambda)
+&=(\lambda-\lambda_3)\sqrt{\frac{\lambda-\lambda_2}{\lambda-\lambda_3}}
+   (\lambda-\lambda_1)\sqrt{\frac{\lambda+\lambda_1}{\lambda-\lambda_1}}
+   (\lambda+\lambda_2)\sqrt{\frac{\lambda+\lambda_3}{\lambda+\lambda_2}}\\[4pt]
+&=-\mathrm{i}\,(t-t_3)(t-t_1)(t+t_2)
+   \sqrt{\frac{t-t_2}{t-t_3}}
+   \sqrt{\frac{t+t_1}{t-t_1}}
+   \sqrt{\frac{t+t_3}{t+t_2}}.
+\end{aligned}
+\end{equation}
+
+Here the square root is taken as the principal branch:
+\begin{equation}\label{eq:sqrt-branch}
+\sqrt{z}=\sqrt{|z|}\,{\mathrm e}^{\tfrac{1}{2}\mathrm{i}\arg z},\qquad \arg z\in(-\pi,\pi].
+\end{equation}
+
+To determine the permutation of real/imaginary values and the signs of \(y(\mathrm{i}t)\) as \(t\) varies along the imaginary axis, it is convenient to count
+\begin{itemize}
+  \item the sign \(s=\operatorname{sign}\bigl((t-t_3)(t-t_1)(t+t_2)\bigr)\) of the real linear prefactor, and
+  \item the number \(k\in\{0,1,2,3\}\) of the three real ratios
+    \[
+    \frac{t-t_2}{t-t_3},\qquad
+    \frac{t+t_1}{t-t_1},\qquad
+    \frac{t+t_3}{t+t_2}
+    \]
+    that are negative (each negative ratio contributes a factor \(\mathrm{i}\) from the principal square root).
+\end{itemize}
+With these conventions, from \eqref{eq:y-factorised} one has
+\[
+y(\mathrm{i}t)=(-\mathrm{i})\;s\;(\mathrm{i})^{\,k}\;\bigl(\text{positive real}\bigr)
+= -s\,\mathrm{i}^{\,k+1}\,\bigl(\text{positive real}\bigr),
+\]
+so that \(y(\mathrm{i}t)\) is imaginary when \(k\equiv 0,2\pmod 2\) and real when \(k\equiv 1,3\pmod 2\), with the sign determined by the combination above.
+
+Evaluating \(s\) and \(k\) on the natural partition of the real axis by \(\pm t_1,\pm t_2,\pm t_3\) gives the following classification:
+
+\begin{equation}\label{eq:yt-signs}
+y(\mathrm{i}t)\in
+\begin{cases}
+\mathrm{i}\,\mathbb{R}^{-}, & t>t_3,\\[4pt]
+\mathbb{R}^{-},          & t_2<t<t_3,\\[4pt]
+\mathrm{i}\,\mathbb{R}^{+}, & t_1<t<t_2,\\[4pt]
+\mathbb{R}^{+},          & -t_1<t<t_1,\\[4pt]
+\mathrm{i}\,\mathbb{R}^{-}, & -t_2<t<-t_1,\\[4pt]
+\mathbb{R}^{-},          & -t_3<t<-t_2,\\[4pt]
+\mathrm{i}\,\mathbb{R}^{+}, & t<-t_3.
+\end{cases}
+\end{equation}
+
+For clarity, a short justification for each interval is as follows (sign of linear prefactor \(s\) and number \(k\) of negative ratios are given in parentheses):
+
+\begin{itemize}
+  \item \(t>t_3\): \(s=+1,\ k=0\) \(\Rightarrow\) \(y=-\mathrm{i}\cdot(+1)\cdot 1\cdot(\text{pos})\in \mathrm{i}\mathbb{R}^{-}.\)
+  \item \(t_2<t<t_3\): \(s=-1,\ k=1\) \(\Rightarrow\) \(y=(-1)\cdot(\text{pos})\in\mathbb{R}^{-}.\)
+  \item \(t_1<t<t_2\): \(s=-1,\ k=0\) \(\Rightarrow\) \(y=+ \mathrm{i}\cdot(\text{pos})\in\mathrm{i}\mathbb{R}^{+}.\)
+  \item \(-t_1<t<t_1\): \(s=+1,\ k=1\) \(\Rightarrow\) \(y=+(\text{pos})\in\mathbb{R}^{+}.\)
+  \item \(-t_2<t<-t_1\): \(s=+1,\ k=0\) \(\Rightarrow\) \(y=-\mathrm{i}\cdot(\text{pos})\in\mathrm{i}\mathbb{R}^{-}.\)
+  \item \(-t_3<t<-t_2\): \(s=-1,\ k=1\) \(\Rightarrow\) \(y=(-1)\cdot(\text{pos})\in\mathbb{R}^{-}.\)
+  \item \(t<-t_3\): \(s=-1,\ k=0\) \(\Rightarrow\) \(y=+\mathrm{i}\cdot(\text{pos})\in\mathrm{i}\mathbb{R}^{+}.\)
+\end{itemize}
+
+All statements above are obtained without algebraically combining the fractional square-root factors; each square root is treated as the principal branch \eqref{eq:sqrt-branch} applied to the linear fractional arguments appearing in \eqref{eq:y-factorised}.
+
+Near each branch point $\lambda_j$ or $\lambda_j^{*}=-\lambda_j$ the function behaves locally as
+$\sqrt{\lambda\mp \lambda_j} \cdot (\text{analytic part})$, and starting from $\lambda=-\mathrm{i}\infty$
+(where $y\in \mathrm{i}\mathbb{R}^{+}$), moving upward along the right side of the imaginary
+axis one acquires at each branch point an additional phase $ \mathrm{i}\pi/2$, equivalently a
+multiplicative factor $\mathrm{i}$, fully consistent with the above sign computation.
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{fig-case1-value-of-y-lambda-on-first-sheet.pdf}
+  \caption{The sign values of \(y(\lambda)=\sqrt{(\lambda^2-\lambda_1^2)(\lambda^2-\lambda_2^2)(\lambda^2-\lambda_3^2)}\), with \(\lambda\to\infty,\; y\to \lambda^3 + O(\lambda)\)) on the first sheet for Case 1.}
+  \label{fig:Fg-case1-value-of-y-lambda}
+\end{figure}
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (9)}{2025-11-18}
+\obj{Focus on Case~1. Introduce the Joukowski function to parametrize the two transformations used in the computation of \(\mathcal{Y}_{a_i}^{[j]}\); compute \(\mathcal{Y}_{b_i}^{[1]}\) and \(B_{ij}\); and discuss how to determine a suitable ansatz for the differentials \(\dd\Omega_j\) for \(j=1,2,3\).}
+
+
+
+\extra{}
+
+The period normalization for the holomorphic differentials
+\[
+w_i(\lambda)=\sum_{k=0}^1 d_{ik}\lambda^k\,y^{-1}
+\]
+is expressed by
+\[
+2\pi\mathrm{i}\,\delta_{ij}
+=\oint_{a_j} w_i\,d\lambda
+=\sum_{k=0}^1 d_{ik}\,\mathcal{Y}_{a_j}^{[k]},
+\qquad
+B_{ij}
+=\oint_{b_j} w_i\,d\lambda
+=\sum_{k=0}^1 d_{ik}\,\mathcal{Y}_{b_j}^{[k]} .
+\]
+The symmetry properties of the period integrals,
+\[
+\mathcal{Y}_{a_1}^{[0]}=-\mathcal{Y}_{a_2}^{[0]},\qquad
+\mathcal{Y}_{b_1}^{[0]}=-\mathcal{Y}_{b_2}^{[0]},\qquad
+\mathcal{Y}_{a_1}^{[1]}=\mathcal{Y}_{a_2}^{[1]},\qquad
+\mathcal{Y}_{b_1}^{[1]}=\mathcal{Y}_{b_2}^{[1]},
+\]
+allow the normalization conditions to be written as
+\begin{equation}\label{eq:dY-rel}
+\begin{pmatrix}
+d_{10} & d_{11} \\
+d_{20} & d_{21}
+\end{pmatrix}
+\begin{pmatrix}
+\mathcal{Y}_{a_1}^{[0]} & 0 \\
+0 & \mathcal{Y}_{a_2}^{[1]}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+1 & 1
+\end{pmatrix}
+=2\pi\mathrm{i}\,\mathbb{I}_2 ,
+\end{equation}
+and
+\begin{equation}\label{eq:dy-rel}
+\begin{pmatrix}
+d_{10} & d_{11} \\
+d_{20} & d_{21}
+\end{pmatrix}
+\begin{pmatrix}
+\mathcal{Y}_{b_1}^{[0]} & 0 \\
+0 & \mathcal{Y}_{b_2}^{[1]}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+1 & 1
+\end{pmatrix}
+= B^{(1)} .
+\end{equation}
+
+Eliminating the coefficients \( d_{ik} \) between \eqref{eq:dY-rel} and \eqref{eq:dy-rel} gives
+\begin{equation}\label{eq:B1-def}
+\begin{aligned}
+B^{(1)}
+&=\pi\mathrm{i}
+\begin{pmatrix}
+1 & 1 \\
+-1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+\left(\mathcal{Y}_{a_1}^{[0]}\right)^{-1}\mathcal{Y}_{b_1}^{[0]} & 0 \\
+0 & \left(\mathcal{Y}_{a_2}^{[1]}\right)^{-1}\mathcal{Y}_{b_2}^{[1]}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+1 & 1
+\end{pmatrix} \\
+&=\pi\mathrm{i}
+\begin{pmatrix}
+1 & 1 \\
+-1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+\tau_1^{(1)} & 0 \\
+0 & \tau_2^{(1)}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+1 & 1
+\end{pmatrix} \\
+&=\pi\mathrm{i}
+\begin{pmatrix}
+\tau_1^{(1)} & \tau_2^{(1)} \\
+-\tau_1^{(1)} & \tau_2^{(1)}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+1 & 1
+\end{pmatrix} 
+=\pi\mathrm{i}
+\begin{pmatrix}
+\tau_1^{(1)}+\tau_2^{(1)} & \tau_2^{(1)}-\tau_1^{(1)} \\
+\tau_2^{(1)}-\tau_1^{(1)} & \tau_1^{(1)}+\tau_2^{(1)}
+\end{pmatrix}.
+\end{aligned}
+\end{equation}
+
+Here the reduced moduli are given by
+\begin{equation}\label{eq:c1c2-def}
+\tau_1^{(1)}
+=\left(\mathcal{Y}_{a_1}^{[0]}\right)^{-1}\mathcal{Y}_{b_1}^{[0]}
+=\mathrm{i}\,\frac{K_1^{(1)\prime}}{K_1^{(1)}},
+\qquad
+\tau_2^{(1)}
+=\left(\mathcal{Y}_{a_2}^{[1]}\right)^{-1}\mathcal{Y}_{b_2}^{[1]}
+=\mathrm{i}\,\frac{K_2^{(1)\prime}}{K_2^{(1)}}.
+\end{equation}
+
+
+By the definition of the Riemann theta function,
+\begin{equation}\label{eq:theta-B1}
+\begin{aligned}
+\Theta\!\left(B^{(1)};z\right)
+&=\sum_{n\in\mathbb{Z}^2}
+\exp\!\left\{
+\frac{1}{2} n^{\top} B^{(1)} n + n^{\top} z
+\right\} \\
+&=\sum_{n\in\mathbb{Z}^2}
+\exp\!\left\{
+\frac{\pi \mathrm{i}}{2}\,
+n^{\top}
+\begin{pmatrix}
+1 & 1 \\
+-1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+\tau_1^{(1)} & 0 \\
+0 & \tau_2^{(1)}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+1 & 1
+\end{pmatrix}
+n
++ n^{\top} z
+\right\},
+\end{aligned}
+\end{equation}
+where
+\begin{equation}\label{eq:nz-def}
+n=\binom{n_1}{n_2}, \qquad
+z=\binom{z_1}{z_2}, \qquad
+n_1,n_2\in\mathbb{Z}, \quad z_1,z_2\in\mathbb{C}.
+\end{equation}
+
+Decompose \(n\) as
+\begin{equation}\label{eq:n-decomp}
+n=
+\binom{n_1}{n_2}
+=
+\begin{pmatrix}
+1 & 1 \\
+-1 & 1
+\end{pmatrix}
+\binom{m_1}{m_2}
++
+\binom{t}{0}
+=
+\begin{pmatrix}
+1 & 1 \\
+-1 & 1
+\end{pmatrix}
+\binom{m_1+\tfrac{t}{2}}{m_2+\tfrac{t}{2}},
+\qquad
+t=0,1 ,
+\end{equation}
+so that
+\begin{equation}\label{eq:nm-rel}
+n_1=m_1+m_2+t=2 m_1+n_2+t,\qquad
+n_2=m_2-m_1,\qquad
+m_1,m_2\in\mathbb{Z}.
+\end{equation}
+As \((m_1,m_2)\) range over \(\mathbb{Z}^2\), so do \((n_1,n_2)\).
+
+Substituting \eqref{eq:n-decomp} into \eqref{eq:theta-B1} yields
+\begin{equation}\label{eq:theta-decomp}
+\begin{aligned}
+\Theta\!\left(B^{(1)};z\right)
+&=\sum_{t=0,1}\sum_{m_1,m_2\in\mathbb{Z}}
+\exp\Bigg\{2\pi\mathrm{i}\,
+\big(m_1+\tfrac{t}{2},\,m_2+\tfrac{t}{2}\big)
+\begin{pmatrix}\tau_1^{(1)} & 0\\[4pt]0 & \tau_2^{(1)} \end{pmatrix}
+\binom{m_1+\tfrac{t}{2}}{m_2+\tfrac{t}{2}}\\
+&\qquad
++\big(m_1+\tfrac{t}{2},\,m_2+\tfrac{t}{2}\big)
+\begin{pmatrix}1 & -1\\[4pt]1 & 1\end{pmatrix}
+\binom{z_1}{z_2}
+\Bigg\} \\
+&=\sum_{t=0,1}\sum_{m_1,m_2\in\mathbb{Z}}
+\exp\Big\{
+2\pi\mathrm{i}\big(m_1+\tfrac{t}{2}\big)^2\tau_1^{(1)}
++2\pi\mathrm{i}\big(m_2+\tfrac{t}{2}\big)^2\tau_2^{(1)} \\
+&\qquad
++\big(m_1+\tfrac{t}{2}\big)(z_1-z_2)
++\big(m_2+\tfrac{t}{2}\big)(z_1+z_2)
+\Big\} \\
+&=
+\vartheta_{3}\!\bigl(z_1-z_2;\,2\tau_1^{(1)}\bigr)\,
+\vartheta_{3}\!\bigl(z_1+z_2;\,2\tau_2^{(1)}\bigr)
++
+\vartheta_{2}\!\bigl(z_1-z_2;\,2\tau_1^{(1)}\bigr)\,
+\vartheta_{2}\!\bigl(z_1+z_2;\,2\tau_2^{(1)}\bigr).
+\end{aligned}
+\end{equation}
+
+\begin{definition}\label{def:v-functions}
+The Jacobi theta functions are defined by
+\begin{equation}\label{eq:v-defs}
+\begin{aligned}
+\vartheta_1(u,\tau)&:=\Theta\!\begin{bmatrix}1\\[2pt]1\end{bmatrix}(u,\tau), &
+\vartheta_2(u,\tau)&:=\Theta\!\begin{bmatrix}1\\[2pt]0\end{bmatrix}(u,\tau),\\[4pt]
+\vartheta_3(u,\tau)&:=\Theta\!\begin{bmatrix}0\\[2pt]0\end{bmatrix}(u,\tau), &
+\vartheta_4(u,\tau)&:=\Theta\!\begin{bmatrix}0\\[2pt]1\end{bmatrix}(u,\tau),
+\end{aligned}
+\end{equation}
+with \(\operatorname{Im}\tau>0\) and
+\begin{equation}\label{eq:theta-char}
+\Theta\!\begin{bmatrix}\epsilon\\[2pt]\epsilon'\end{bmatrix}(u,\tau)
+:=\sum_{n\in\mathbb{Z}}
+\exp\!\Big\{
+\pi\mathrm{i}\big(n+\tfrac{\epsilon}{2}\big)^2\tau
++\big(n+\tfrac{\epsilon}{2}\big)\big(u+\pi\mathrm{i}\epsilon'\big)
+\Big\},
+\qquad \epsilon,\epsilon'\in\{0,1\}.
+\end{equation}
+\end{definition}
+
+
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (10)}{2025-11-25}
+
+\obj{Focus on Case~1. Compute \(c_{2i}, c_{3,i}\) and \(\Omega_j^{(1)}(P)\).}
+
+
+
+\extra{}
+
+% Computation of Type~1 integrals \(\mathcal{Y}_{a_i}^{[2]},\ \mathcal{Y}_{b_i}^{[2]}\).
+% (References in text assume \eqref{eq:type1}, \eqref{eq:Lambda-z} appear elsewhere.)
+
+\textbf{Computation of Type~1 Integrals (\(\mathcal{Y}_{a_i}^{[2]}, \mathcal{Y}_{b_i}^{[2]}\)). }
+
+We introduce the auxiliary function \(\Lambda\) (cf.\ \eqref{eq:Lambda-z}) by
+\begin{equation}\label{eq:Lambda-def-z-rev}
+\Lambda(z)
+=\frac{\lambda_1^2 z^2}{\,z^2-\dfrac{\lambda_1^2-\lambda_3^2}{-\lambda_3^2}\,}
+=\frac{\lambda_1^2\lambda_3^2 z^2}{\lambda_3^2 z^2+\bigl(\lambda_1^2-\lambda_3^2\bigr)}
+=\frac{\lambda_1^2\lambda_3^2 z^2}{\lambda_1^2-\lambda_3^2\bigl(1-z^2\bigr)} .
+\end{equation}
+
+Recall the relation between \(z\) and the elliptic argument \(\nu\),
+\begin{equation}\label{eq:nu-z-rev}
+\nu = F\!\bigl(z,k_1^{(1)}\bigr),\qquad
+z=\operatorname{sn}\!\bigl(\nu,k_1^{(1)}\bigr).
+\end{equation}
+We will use the imaginary-period shift identities for Jacobi elliptic functions,
+\begin{equation}\label{eq:Jacobi-shift-rev}
+\operatorname{sn}\!\bigl(\nu+\mathrm{i}K_1',k_1^{(1)}\bigr)
+=\frac{1}{k_1^{(1)}\,\operatorname{sn}(\nu,k_1^{(1)})},\qquad
+\operatorname{cn}\!\bigl(\nu+\mathrm{i}K_1',k_1^{(1)}\bigr)
+=-\mathrm{i}\,\frac{\operatorname{dn}(\nu,k_1^{(1)})}{k_1^{(1)}\,\operatorname{sn}(\nu,k_1^{(1)})}.
+\end{equation}
+
+Set
+\begin{equation}\label{eq:nu-shift-rev}
+\nu=\nu_1+\mathrm{i}K_1',
+\end{equation}
+so that \(\operatorname{sn}(\nu,k_1^{(1)})\) and \(\operatorname{cn}(\nu,k_1^{(1)})\)
+in \eqref{eq:Lambda-def-z-rev} may be expressed in terms of \(\nu_1\).
+Substituting \(\,z=\operatorname{sn}(\nu,k_1^{(1)})\,\) into \eqref{eq:Lambda-def-z-rev}
+and using \eqref{eq:Jacobi-shift-rev} yields
+\begin{align}
+\Lambda
+=\frac{\lambda_1^2\lambda_3^2\,\operatorname{sn}^2\!\bigl(\nu,k_1^{(1)}\bigr)}
+{\lambda_1^2-\lambda_3^2\,\operatorname{cn}^2\!\bigl(\nu,k_1^{(1)}\bigr)} 
+&=\frac{\lambda_1^2\lambda_3^2}
+{\lambda_1^2\bigl(k_1^{(1)}\bigr)^2\operatorname{sn}^2\!\bigl(\nu_1,k_1^{(1)}\bigr)
++\lambda_3^2\operatorname{dn}^2\!\bigl(\nu_1,k_1^{(1)}\bigr)} \nonumber\\
+&=\frac{\lambda_1^2\lambda_3^2}
+{\lambda_3^2+\bigl(k_1^{(1)}\bigr)^2\bigl(\lambda_1^2-\lambda_3^2\bigr)
+\operatorname{sn}^2\!\bigl(\nu_1,k_1^{(1)}\bigr)} .
+\label{eq:Lambda-final-rev}
+\end{align}
+
+Using the identity
+\[
+\bigl(k_1^{(1)}\bigr)^2
+=\frac{(\lambda_1^2-\lambda_2^2)\lambda_3^2}{(\lambda_1^2-\lambda_3^2)\lambda_2^2},
+\]
+the expression \eqref{eq:Lambda-final-rev} can be rewritten in the equivalent forms
+\begin{equation}\label{eq:Lambda-alt-rev}
+\Lambda
+=\frac{\lambda_1^2\lambda_3^2}
+{\lambda_3^2+\dfrac{\lambda_3^2}{\lambda_2^2}\bigl(\lambda_1^2-\lambda_2^2\bigr)
+\operatorname{sn}^2\!\bigl(\nu_1,k_1^{(1)}\bigr)}
+=\frac{\lambda_1^2}
+{1-\dfrac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2}
+\operatorname{sn}^2\!\bigl(\nu_1,k_1^{(1)}\bigr)} .
+\end{equation}
+The last form highlights that \(\Lambda\) becomes a simple rational function
+of \(\operatorname{sn}^2(\nu_1,k_1^{(1)})\), which is convenient for integrating.
+
+We now compute \(\mathcal{Y}_{a_1}^{[2]}\). Starting from the integral in \eqref{eq:type1}
+and changing variables to the elliptic parameter \(\nu\) (with the shift \(\nu=\nu_1+\mathrm{i}K_1'\))
+one obtains
+\begin{equation}\label{eq:Ya1-change}
+\mathcal{Y}_{a_1}^{[2]}
+=2\int_{\lambda_2}^{\lambda_1}\frac{\lambda^2\,d\lambda}{y(\lambda)}
+=\frac{2\lambda_1^2}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}
+\int_{K_1+\mathrm{i}K_1'}^{\mathrm{i}K_1'}
+\frac{d\nu}{1-\dfrac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2}
+\operatorname{sn}^2\!\bigl(\nu-\mathrm{i}K_1',k_1^{(1)}\bigr)} .
+\end{equation}
+The integrand is an elementary function of \(\operatorname{sn}^2\), hence the integral
+is an incomplete elliptic integral of the third kind. Writing the integral in terms of
+\(\Pi(\alpha^2,u,k)\), with characteristic \(\alpha_1^2=\dfrac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2}\),
+modulus \(k=k_1^{(1)}\), and upper limit \(u\), we have
+\begin{equation}\label{eq:Ya1-incomplete}
+\mathcal{Y}_{a_1}^{[2]}
+=\frac{2\lambda_1^2}{-\mathrm{i}\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}\,
+\left.\Pi\!\biggl(\alpha_1^2,\,u,\,k_1^{(1)}\biggr)\right|_{u=K_1}^{u=0},
+\qquad \alpha_1^2=\frac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2}.
+\end{equation}
+Evaluating the difference of the incomplete elliptic integrals between \(u=K_1\) and \(u=0\)
+gives the complete elliptic integral of the third kind \(\Pi(\alpha_1^2,k)\). Therefore
+\begin{equation}\label{eq:Ya1-final}
+\mathcal{Y}_{a_1}^{[2]}
+=\frac{-2\mathrm{i}\lambda_1^2}{\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}\,
+\Pi\!\bigl(\alpha_1^2,\,k_1^{(1)}\bigr),
+\qquad \alpha_1^2=\frac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2}.
+\end{equation}
+
+By symmetry of the contour (or by the corresponding sign change in the integration limits),
+one obtains the companion relation
+\begin{equation}\label{eq:Ya2-final}
+\mathcal{Y}_{a_2}^{[2]}=-\mathcal{Y}_{a_1}^{[2]}.
+\end{equation}
+
+
+Similarly,
+\begin{equation}\label{eq:Yb2-2}
+\begin{aligned}
+\mathcal{Y}_{b_2}^{[2]}
+&=2\int_{-\lambda_2}^{-\lambda_3}\frac{\lambda^2\,d\lambda}{y(\lambda)}
+=\frac{2\lambda_1^2}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}
+\int_{K_1}^{K_1+\mathrm{i}K_1'}
+\frac{d\nu}{1-\alpha_1^2\,
+\operatorname{sn}^2\!\left(\nu-\mathrm{i}K_1',k_1^{(1)}\right)} \\
+&=\left.
+\frac{2\lambda_1^2}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}\,
+\Pi\!\bigl(\alpha_1^2,\,u,\,k_1^{(1)}\bigr)
+\right|_{u=K_1-\mathrm{i}K_1'}^{u=K_1},
+\qquad
+\alpha_1^2=\frac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2}.
+\end{aligned}
+\end{equation}
+
+We use the standard Jacobi identities
+\begin{equation}\label{eq:Jacobi-identities}
+\operatorname{sn}(z+K,k)=\frac{\operatorname{cn}(z,k)}{\operatorname{dn}(z,k)},\qquad
+\operatorname{sn}(\mathrm{i}z,k)=\mathrm{i}\,
+\frac{\operatorname{sn}(z,k')}{\operatorname{cn}(z,k')},
+\end{equation}
+\begin{equation}\label{eq:Jacobi-identities-2}
+\operatorname{cn}(\mathrm{i}z,k)=\frac{1}{\operatorname{cn}(z,k')},\qquad
+\operatorname{dn}(\mathrm{i}z,k)=\frac{\operatorname{dn}(z,k')}{\operatorname{cn}(z,k')},
+\end{equation}
+which imply
+\begin{equation}\label{eq:dn-shift}
+\operatorname{dn}(z-K_1',k_1')=\frac{k_1}{\operatorname{dn}(z,k_1')},\qquad
+\operatorname{sn}(\mathrm{i}z+K_1,k)=\frac{1}{\operatorname{dn}(z,k')}.
+\end{equation}
+Hence,
+\begin{equation}\label{eq:sn-transform}
+\operatorname{sn}\!\left(\mathrm{i}u+K_1-\mathrm{i}K_1',k_1^{(1)}\right)
+=\frac{1}{\operatorname{dn}\!\left(u-K_1',k_1^{(1)\prime}\right)}
+=\frac{\operatorname{dn}\!\left(u,k_1^{(1)\prime}\right)}{k_1^{(1)}} .
+\end{equation}
+
+Let \(\nu=\mathrm{i}u+K_1\). Then
+\begin{equation}\label{eq:gamma-b2-2-detailed}
+\begin{aligned}
+\mathcal{Y}_{b_2}^{[2]}
+&=\frac{2\lambda_1^2}{\sqrt{-\lambda_2^2(\lambda_1^2-\lambda_3^2)}}
+\int_{0}^{K_1'}
+\frac{\mathrm{i}\,du}
+{1-\alpha_1^2\,
+\operatorname{sn}^2\!\left(\mathrm{i}u+K_1-\mathrm{i}K_1',k_1^{(1)}\right)}\\
+&=\frac{2\lambda_1^2}{-\mathrm{i}\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{0}^{K_1'}
+\frac{\mathrm{i}\,du}
+{1-\alpha_1^2\left(\dfrac{1}{\bigl(k_1^{(1)}\bigr)^2}
+-\Bigl(\dfrac{k_1^{(1)\prime}}{k_1^{(1)}}\Bigr)^2
+\operatorname{sn}^2\!\left(u,k_1^{(1)\prime}\right)\right)}\\
+&=\frac{-2\lambda_3^2}{\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{0}^{K_1'}
+\frac{du}
+{1-\alpha_2^2\,
+\operatorname{sn}^2\!\left(u,k_1^{(1)\prime}\right)}
+=\frac{-2\lambda_3^2}{\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}\,
+\Pi\!\bigl(\alpha_2^2,\,k_1^{(1)\prime}\bigr),
+\qquad
+\alpha_2^2=\frac{\lambda_2^2-\lambda_3^2}{\lambda_2^2}.
+\end{aligned}
+\end{equation}
+
+
+% Corrected and completed derivation for \(\mathcal{Y}_{b_1}^{[2]}\).
+% (This replaces the scanned fragment; notation is made consistent with the rest of the text.)
+
+One has
+\begin{align}
+\mathcal{Y}_{b_1}^{[2]}
+&=2\int_{-\lambda_2}^{-\lambda_3}\frac{\lambda^2\,\mathrm{d}\lambda}{y(\lambda)}
++2\int_{\lambda_1}^{-\lambda_1}\frac{\lambda^2\,\mathrm{d}\lambda}{y(\lambda)} \nonumber\\
+&=\mathcal{Y}_{b_2}^{[2]}
++\frac{2\lambda_1^2}{-\mathrm{i}\,\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{\mathrm{i}K_1'}^{-\mathrm{i}K_1'}
+\frac{\mathrm{d}\nu}{1-\alpha_1^2\,\operatorname{sn}^2\!\bigl(\nu-\mathrm{i}K_1',\,k_1^{(1)}\bigr)}.
+\label{eq:Yb1-sum}
+\end{align}
+
+We simplify the elliptic integrand using standard shifts of Jacobi functions. For complementary modulus $k'$ one has
+\[
+\operatorname{sn}\bigl(u-K',k'\bigr)=-\frac{\operatorname{cn}(u,k')}{\operatorname{dn}(u,k')},
+\qquad
+\operatorname{cn}\bigl(u-K',k'\bigr)=\frac{k\,\operatorname{sn}(u,k')}{\operatorname{dn}(u,k')}.
+\]
+From these identities it follows that,
+\[
+\operatorname{sn}\bigl(\mathrm{i}u-\mathrm{i}K_1',k_1^{(1)}\bigr)
+=\mathrm{i}\,\frac{\operatorname{sn}\bigl(u-K_1',k_1^{(1)\prime}\bigr)}
+{\operatorname{cn}\bigl(u-K_1',k_1^{(1)\prime}\bigr)}
+=-\frac{\mathrm{i}}{k_1^{(1)}}\,
+\frac{\operatorname{cn}\bigl(u,k_1^{(1)\prime}\bigr)}
+{\operatorname{sn}\bigl(u,k_1^{(1)\prime}\bigr)}.
+\]
+
+Now set $\nu=\mathrm{i}u$ and substitute the last expression into the integrand. Using
+\[
+\alpha_1^2=\frac{\lambda_1^2-\lambda_2^2}{-\lambda_2^2},
+\qquad
+\bigl(k_1^{(1)}\bigr)^2=\frac{(\lambda_1^2-\lambda_2^2)\lambda_3^2}{(\lambda_1^2-\lambda_3^2)\lambda_2^2},
+\]
+we compute the denominator appearing in the integrand
+\begin{align}
+1-\alpha_1^2\,\operatorname{sn}^2\!\bigl(\nu-\mathrm{i}K_1',k_1^{(1)}\bigr)
+&=1-\frac{\lambda_1^2-\lambda_2^2}{\lambda_2^2}\,
+\frac{1}{\bigl(k_1^{(1)}\bigr)^2}\,
+\frac{\operatorname{cn}^2\!\bigl(u,k_1^{(1)\prime}\bigr)}
+{\operatorname{sn}^2\!\bigl(u,k_1^{(1)\prime}\bigr)} 
+=1-\frac{\lambda_1^2-\lambda_3^2}{\lambda_3^2}\,
+\frac{\operatorname{cn}^2\!\bigl(u,k_1^{(1)\prime}\bigr)}
+{\operatorname{sn}^2\!\bigl(u,k_1^{(1)\prime}\bigr)} \nonumber\\[4pt]
+&=\frac{\lambda_3^2\operatorname{sn}^2(u,k_1^{(1)\prime})
+-\bigl(\lambda_1^2-\lambda_3^2\bigr)
+\operatorname{cn}^2(u,k_1^{(1)\prime})}
+{\lambda_3^2\operatorname{sn}^2(u,k_1^{(1)\prime})} 
+=\frac{\lambda_1^2\operatorname{sn}^2(u,k_1^{(1)\prime})
+-\bigl(\lambda_1^2-\lambda_3^2\bigr)}
+{\lambda_3^2\operatorname{sn}^2(u,k_1^{(1)\prime})}.
+\label{eq:reciprocal-denom}
+\end{align}
+This expression for the denominator is used to rewrite the integral in \eqref{eq:Yb1-sum} in terms of elliptic functions with argument $u$.
+From \eqref{eq:reciprocal-denom} we obtain the partial-fraction-type decomposition
+\begin{equation}\label{eq:reciprocal-denom-alt}
+\begin{aligned}
+\frac{1}{
+1-\alpha_1^2\,\operatorname{sn}^2\!\bigl(\nu-\mathrm{i}K_1',k_1^{(1)}\bigr)}
+&=\frac{\lambda_3^2}{\lambda_1^2}
++\frac{\dfrac{\lambda_3^2}{\lambda_1^2}\bigl(\lambda_1^2-\lambda_3^2\bigr)}
+{\lambda_1^2\operatorname{sn}^2\!\bigl(u,k_1^{(1)\prime}\bigr)
+-\bigl(\lambda_1^2-\lambda_3^2\bigr)}\\[6pt]
+&=\frac{\lambda_3^2}{\lambda_1^2}
+-\dfrac{\lambda_3^2}{\lambda_1^2}\,
+\frac{1}{1-\dfrac{\lambda_1^2}{\lambda_1^2-\lambda_3^2}\,
+\operatorname{sn}^2\!\bigl(u,k_1^{(1)\prime}\bigr)} .
+\end{aligned}
+\end{equation}
+
+Hence the relation between \(\mathcal{Y}_{b_1}^{[2]}\) and \(\mathcal{Y}_{b_2}^{[2]}\) follows:
+\begin{equation}\label{eq:Yb1-after-subst-clean}
+\begin{aligned}
+\mathcal{Y}_{b_1}^{[2]}
+&=\mathcal{Y}_{b_2}^{[2]}
++\frac{2\lambda_3^2}{-\mathrm{i}\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}
+\int_{K_1'}^{-K_1'}
+\Biggl(1-\frac{1}{1-\dfrac{\lambda_1^2}{\lambda_1^2-\lambda_3^2}\,
+\operatorname{sn}^2(u,k_1^{(1)\prime})}\Biggr)\mathrm{i}\,du\\[6pt]
+&=\mathcal{Y}_{b_2}^{[2]}
++\frac{4\lambda_3^2 K_1'}{\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}
+-\frac{4\lambda_3^2}{\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}\,
+\Pi\!\Bigl(\frac{\lambda_1^2}{\lambda_1^2-\lambda_3^2},\,k_1^{(1)\prime}\Bigr)\\[6pt]
+&=\mathcal{Y}_{b_2}^{[2]}+2\lambda_3^2\,\mathcal{Y}_{b_1}^{[0]}
+-\frac{4\lambda_3^2}{\lambda_2\sqrt{\lambda_1^2-\lambda_3^2}}\,
+\Pi\!\Bigl(\alpha_3^2,\,k_1^{(1)\prime}\Bigr), \qquad \alpha_3^2=\frac{\lambda_1^2}{\lambda_1^2-\lambda_3^2},
+\end{aligned}
+\end{equation}
+where the middle line uses the definition of the complete elliptic integral of the third kind
+and the last line expresses the \(K_1'\)-term via \(\mathcal{Y}_{b_1}^{[0]}\).
+
+% \textbf{Computation of Type~2 Integrals (\(\mathcal{Y}_{a_i}^{[3]}, \mathcal{Y}_{b_i}^{[3]}\)). }
+
+% For integrals of type~2,
+% \begin{equation}\label{eq:Lambda-type2}
+% \Lambda=\lambda_1^2+\frac{\lambda_3^2-\lambda_1^2}{z^2},\qquad
+% z=\operatorname{sn}\!\bigl(\nu,k_2^{(1)}\bigr),\qquad
+% \bigl(k_2^{(1)}\bigr)^2=\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2},
+% \end{equation}
+% and with \(\nu=\nu_1+\mathrm{i}K\) one obtains the alternate forms
+% \[
+% \Lambda=\lambda_1^2+\left(\lambda_3^2-\lambda_1^2\right)\left(k_2^{(1)}\right)^2 \sn ^2 (\nu_1^2, k_2^{(1)})
+% =\lambda_1^2+(\lambda_3^2-\lambda_1^2)\bigl(1-\operatorname{dn}^2(\nu_1,k_2^{(1)})\bigr)
+% =\lambda_3^2+(\lambda_1^2-\lambda_3^2)\,\operatorname{dn}^2\!\bigl(\nu_1,k_2^{(1)}\bigr)
+% .
+% \]
+
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (11)}{2025-12-02}
+
+\obj{Focus on Case~1. Determine the parameters \(C_{u_0}^{(1)}\) and \(D^{(1)}\).}
+
+
+
 
 
 

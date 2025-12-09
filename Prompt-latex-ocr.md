@@ -9,7 +9,7 @@ Instructions:
    - Correct mis-scans such as:
      - `-1 \lambda x` → `- \mathrm{i} \lambda x`
      - `I I` → `\mathbb{I}`
-     - `\phi_{22, \pm}^p` → `\phi_{22, \pm}^\dagger`
+     - `v=v_1+i K` → `\nu=\nu_1+\mathrm{i} K`
      - `\alpha_p` → `\alpha_P`
 
 2. Standardize Formatting:
