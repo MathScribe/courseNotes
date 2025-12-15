@@ -1904,7 +1904,7 @@ Equating the \(\lambda^4\)-coefficients yields \(\alpha_1=-\tfrac12\sum_{j=1}^3\
 
 \Week{Algebro-Geometric Solutions for the mKdV Equation (5)}{2025-10-21}
 
-\obj{Express \(\omega_2\), \(\omega_3\), and \(\hat{U}\) via the Riemann bilinear relations, and obtain the identities relating \(\alpha_{P_0}(D_{\mu^*})\) and \(\alpha_{P_0}(D_{\mu})\) from Abel’s theorem.}
+\obj{Express \(\omega_2\), \(\omega_3\), and \(\widehat{U}\) via the Riemann bilinear relations, and obtain the identities relating \(\alpha_{P_0}(D_{\mu^*})\) and \(\alpha_{P_0}(D_{\mu})\) from Abel’s theorem.}
 
 
 \textbf{Riemann bilinear relation.}
@@ -2126,7 +2126,7 @@ which has degree zero.  Abel’s theorem then gives
 \[
 \alpha_{P_0}(D_{\mu^*})
 +
-A_{P_0}(\infty^-)
+\mathcal{A}_{P_0}(\infty^-)
 =
 \alpha_{P_0}(D_{\infty^-,\mu^*})
 =
@@ -2134,7 +2134,7 @@ A_{P_0}(\infty^-)
 =
 \alpha_{P_0}(D_\mu)
 +
-A_{P_0}(\infty^+),
+\mathcal{A}_{P_0}(\infty^+),
 \]
 hence
 \[
@@ -2142,11 +2142,11 @@ hence
 =
 \alpha_{P_0}(D_\mu)
 +
-A_{\infty^-}(\infty^+),
+\mathcal{A}_{\infty^-}(\infty^+),
 \]
 where
 \[
-A_{P_0}(P)
+\mathcal{A}_{P_0}(P)
 =
 \left(
 \int_{P_0}^{P} w_1\,\dd\lambda,
@@ -3283,6 +3283,84 @@ multiplicative factor $\mathrm{i}$, fully consistent with the above sign computa
 \obj{Focus on Case~1. Introduce the Joukowski function to parametrize the two transformations used in the computation of \(\mathcal{Y}_{a_i}^{[j]}\); compute \(\mathcal{Y}_{b_i}^{[1]}\) and \(B_{ij}\); and discuss how to determine a suitable ansatz for the differentials \(\dd\Omega_j\) for \(j=1,2,3\).}
 
 
+Introduce the Joukowski transformation
+\begin{equation}\label{eq:joukowski}
+\lambda=\frac{\lambda_{1}}{2}\bigl(\xi+\xi^{-1}\bigr).
+\end{equation}
+A direct computation gives
+\begin{equation}\label{eq:lam1-lam2}
+\lambda_{1}^{\,2}-\lambda^{2}
+=\lambda_{1}^{\,2}\!\left(1-\Bigl(\tfrac{1}{2}(\xi+\xi^{-1})\Bigr)^{2}\right)
+=-\Bigl(\tfrac{\lambda_{1}}{2}\Bigr)^{2}(\xi-\xi^{-1})^{2}.
+\end{equation}
+
+For a type~2 integral (see \eqref{eq:z-special-type2-repeat}),
+\begin{equation}\label{eq:type2-z}
+z=\frac{\sqrt{\lambda_{1}^{\,2}-\lambda_{3}^{\,2}}}{\sqrt{\lambda_{1}^{\,2}-\lambda^{2}}}
+  =\frac{\sqrt{\lambda_{1}^{\,2}-\lambda_{3}^{\,2}}}{\mathrm{i}\,\tfrac{\lambda_{1}}{2}}\,
+     \frac{1}{\xi-\xi^{-1}}.
+\end{equation}
+For a type~1 integral (see \eqref{eq:z-special}), using \eqref{eq:joukowski} one obtains
+\begin{equation}\label{eq:type1-z}
+z=\sqrt{\frac{\lambda_{1}^{\,2}-\lambda_{3}^{\,2}}{-\lambda_{3}^{\,2}}}\,
+   \frac{\lambda}{\sqrt{\lambda^{2}-\lambda_{1}^{\,2}}}
+ =\sqrt{\frac{\lambda_{1}^{\,2}-\lambda_{3}^{\,2}}{-\lambda_{3}^{\,2}}}\,
+   \frac{\tfrac{\lambda_{1}}{2}(\xi+\xi^{-1})}
+        {\tfrac{\lambda_{1}}{2}(\xi-\xi^{-1})}
+ =\sqrt{\frac{\lambda_{1}^{\,2}-\lambda_{3}^{\,2}}{-\lambda_{3}^{\,2}}}\,
+   \frac{\xi^{2}+1}{\xi^{2}-1}.
+\end{equation}
+
+As $\lambda\to\infty$, the function $y$ admits the expansion
+\begin{equation}\label{eq:y-expansion}
+y=\lambda^{3}\Bigl(1+\hat{v}_{1}\lambda^{-2}+\hat{v}_{2}\lambda^{-4}+\cdots\Bigr),
+\qquad
+y^{-1}=\lambda^{-3}\Bigl(1-\hat{v}_{1}\lambda^{-2}
+        +(\hat{v}_{1}^{2}-\hat{v}_{2})\lambda^{-4}+\cdots\Bigr).
+\end{equation}
+Decompose $y$ as
+\begin{equation}\label{eq:y-split}
+y=y^{[n_{+}]}+y^{[n_{-}]}
+=\lambda^{3}\Bigl(1+\hat{v}_{1}\lambda^{-2}+\cdots+\hat{v}_{n}\lambda^{-2n}\Bigr)
+  +y^{[n_{-}]},
+\end{equation}
+where $y^{[n_{-}]}=\hat{v}_{n+1}\lambda^{-2(n+1)+3}+\cdots$.  
+Multiplying \eqref{eq:y-split} by $y^{-1}$ and using \eqref{eq:y-expansion} gives
+\begin{align}
+y^{[n_{+}]}y^{-1}
+&=(y-y^{[n_{-}]})y^{-1}
+ =1-y^{[n_{-}]}y^{-1} \\
+&=1-\bigl(\hat{v}_{n+1}\lambda^{-2(n+1)}+\cdots\bigr)
+      \lambda^{3}\cdot\lambda^{-3}
+      \Bigl(1-\hat{v}_{1}\lambda^{-2}+\cdots\Bigr) \\
+&=1-\hat{v}_{n+1}\lambda^{-2(n+1)}+\cdots.
+\end{align}
+
+In particular,
+\begin{equation}\label{eq:lambda3y-1}
+\lambda^{3}y^{-1}=1-\hat{v}_{1}\lambda^{-2}+\cdots,
+\end{equation}
+and
+\begin{equation}\label{eq:lambda3y-1-next}
+\lambda^{3}\bigl(1+\hat{v}_{1}\lambda^{-2}\bigr)y^{-1}
+=1-\hat{v}_{2}\lambda^{-4}+\cdots,
+\end{equation}
+with analogous identities holding for higher-order terms.
+
+Since
+\begin{equation}\label{eq:Omega2-asymp}
+\Omega_{2}(P)=\pm\bigl(\lambda+\omega_{2}+o(1)\bigr),
+\qquad p\to\infty^{\pm},
+\end{equation}
+differentiation shows that
+\begin{equation}\label{eq:dOmega2-asymp}
+d\Omega_{2}(P)=\pm\bigl(1+O(\lambda^{-2})\bigr)\,d\lambda.
+\end{equation}
+Thus $d\Omega_{2}$ can be written in the form
+\begin{equation*}
+d\Omega_{2}(P)=\frac{1}{y}\bigl(\lambda^{3}+c_{21}\lambda+c_{20}\bigr)\,d\lambda.
+\end{equation*}
+
 
 \extra{}
 
@@ -3518,12 +3596,305 @@ with \(\operatorname{Im}\tau>0\) and
 \end{definition}
 
 
+Assume
+\begin{equation}
+d\Omega_{2}(P)=\sum_{i=0}^{3}c_{2i}\,\frac{\lambda^{i}}{y(\lambda)}\,d\lambda,
+\qquad
+d\Omega_{3}(P)=\sum_{i=0}^{5}c_{3i}\,\frac{\lambda^{i}}{y(\lambda)}\,d\lambda.
+\label{eq:dOmega-assume}
+\end{equation}
+The Abelian integrals satisfy, as \(P=(\lambda,y)\to\infty^{\pm}\),
+\begin{equation}
+\Omega_{2}(P)=\pm\bigl(\lambda+\omega_{2}+o(1)\bigr),\qquad
+\Omega_{3}(P)=\pm\bigl(4\lambda^{3}+\omega_{3}+o(1)\bigr),
+\end{equation}
+and differentiation yields the asymptotics of the differentials
+\begin{equation}
+d\Omega_{2}(P)=\pm\bigl(1+O(\lambda^{-2})\bigr)\,d\lambda,
+\qquad
+d\Omega_{3}(P)=\pm\bigl(12\lambda^{2}+O(\lambda^{-2})\bigr)\,d\lambda.
+\label{eq:dOmega-asymp}
+\end{equation}
+
+Two equivalent ways determine the coefficients \(c_{2i}\) and \(c_{3i}\).
+
+\medskip
+
+\emph{Method A — matching via the asymptotic identities.} Substitute the ansatzes \eqref{eq:dOmega-assume} into the asymptotic identities \eqref{eq:dOmega-asymp} and use \eqref{eq:lambda3y-1}-\eqref{eq:lambda3y-1-next}.
+
+For $d\Omega_{2}$ we require
+\[
+\biggl(\sum_{i=0}^{3}c_{2i}\lambda^{i}\biggr)y^{-1}
+=\pm\bigl(1+O(\lambda^{-2})\bigr)
+=\lambda^{3}y^{-1},
+\]
+hence
+\begin{equation}
+c_{23}=1,\qquad c_{22}=0.
+\label{eq:c2-top}
+\end{equation}
+
+For $d\Omega_{3}$ the asymptotic condition reads
+\[
+\biggl(\sum_{i=0}^{5}c_{3i}\lambda^{i}\biggr)y^{-1}
+=\pm\bigl(12\lambda^{2}+O(\lambda^{-2})\bigr)
+=12\lambda^{2}\bigl(1+O(\lambda^{-4})\bigr)
+=12\lambda^{2}\cdot\lambda^{3}\bigl(1+\hat{v}_{1}\lambda^{-2}\bigr)y^{-1},
+\]
+and matching powers of $\lambda$ gives
+\begin{equation}
+c_{35}=12,\qquad c_{34}=0,\qquad c_{33}=12\hat{v}_{1},\qquad c_{32}=0.
+\label{eq:c3-top}
+\end{equation}
+
+
+\emph{Method B — direct series expansion.} Expand the rational expressions in powers of \(\lambda^{-1}\) using the explicit series \eqref{eq:y-expansion} and compare coefficients.
+
+For \(d\Omega_{2}\) compute
+\begin{align}
+\Biggl(\sum_{i=0}^{3}c_{2i}\lambda^{i}\Biggr)y^{-1}
+&=\bigl(c_{23}\lambda^{3}+c_{22}\lambda^{2}+c_{21}\lambda+c_{20}\bigr)
+ \lambda^{-3}\bigl(1-\hat{v}_{1}\lambda^{-2}+\cdots\bigr)\nonumber\\
+&=c_{23}+c_{22}\lambda^{-1}+ (c_{21}- c_{23}\hat{v}_{1})\lambda^{-2}+\cdots.
+\label{eq:dOmega2-expansion}
+\end{align}
+Matching with \(\pm(1+O(\lambda^{-2}))\) shows directly that \(c_{23}=1\) and \(c_{22}=0\), in agreement with \eqref{eq:c2-top}.
+
+For \(d\Omega_{3}\) compute
+\begin{align}
+\Biggl(\sum_{i=0}^{5}c_{3i}\lambda^{i}\Biggr)y^{-1}
+&=\bigl(c_{35}\lambda^{5}+c_{34}\lambda^{4}+c_{33}\lambda^{3}+c_{32}\lambda^{2}+\cdots\bigr)
+  \lambda^{-3}\bigl(1-\hat{v}_{1}\lambda^{-2}+\cdots\bigr)\nonumber\\
+&=c_{35}\lambda^{2}+c_{34}\lambda
+  +\bigl(c_{33}-\hat{v}_{1}c_{35}\bigr)
+  +\bigl(c_{32}-\hat{v}_{1}c_{34}\bigr)\lambda^{-1}+\cdots.
+\label{eq:dOmega3-expansion}
+\end{align}
+Matching with \((12\lambda^{2}+O(\lambda^{-2}))\) yields \(c_{35}=12\), \(c_{34}=0\), and
+\(c_{33}-\hat v_{1}c_{35}=0\), \(c_{32}-\hat v_{1}c_{34}=0\), hence
+\[
+c_{35}=12,\qquad c_{34}=0,\qquad c_{33}=12\hat v_{1},\qquad c_{32}=0,
+\]
+which coincides with \eqref{eq:c3-top}.
+
+\medskip
+
+Thus both routes produce the same values for the top coefficients. Collecting the results gives the following forms
+\begin{equation}\label{eq:dOmega2-final}
+d\Omega_{2}(P)
+=\frac{\lambda^{3}+c_{21}\lambda+c_{20}}{y(\lambda)}\,d\lambda,
+\end{equation}
+and
+\begin{equation}\label{eq:dOmega3-final}
+d\Omega_{3}(P)
+=\frac{12\lambda^{5}+12\hat{v}_{1}\lambda^{3}+c_{31}\lambda+c_{30}}{y(\lambda)}\,d\lambda,
+\end{equation}
+where the remaining coefficients \(c_{21},c_{20},c_{31},c_{30}\) are fixed by the \(a\)-period normalization conditions.
+
 
 
 
 \Week{Algebro-Geometric Solutions for the mKdV Equation (10)}{2025-11-25}
 
 \obj{Focus on Case~1. Compute \(c_{2i}, c_{3,i}\) and \(\Omega_j^{(1)}(P)\).}
+
+The meromorphic differentials take the form
+\begin{equation}\label{eq:dOmega-forms}
+\begin{aligned}
+d\Omega_{2}^{(1)}(P)&=\frac{\lambda^{3}+c_{21}\lambda+c_{20}}{y(\lambda)}\,d\lambda,\\[4pt]
+d\Omega_{3}^{(1)}(P)&=\frac{12\lambda^{5}-3v\lambda^{3}+c_{31}\lambda+c_{30}}{y(\lambda)}\,d\lambda,
+\end{aligned}
+\end{equation}
+with
+\begin{equation}\label{eq:v-def}
+v=2\bigl(\lambda_{1}^{2}+\lambda_{2}^{2}+\lambda_{3}^{2}\bigr).
+\end{equation}
+The constants \(c_{21},c_{20},c_{31},c_{30}\) are determined by imposing vanishing of the \(a\)-periods,
+\begin{equation}\label{eq:a-periods}
+\oint_{a_i} d\Omega_{2}^{(1)}=\oint_{a_i} d\Omega_{3}^{(1)}=0,\qquad i=1,2.
+\end{equation}
+
+For \(d\Omega_{2}^{(1)}\) the conditions \eqref{eq:a-periods} yield the linear system
+\begin{equation}\label{eq:linear-c2}
+\begin{pmatrix}
+\displaystyle \oint_{a_1}\frac{\lambda}{y}\,d\lambda & \displaystyle \oint_{a_1}\frac{d\lambda}{y} \\[6pt]
+\displaystyle \oint_{a_2}\frac{\lambda}{y}\,d\lambda & \displaystyle \oint_{a_2}\frac{d\lambda}{y}
+\end{pmatrix}
+\begin{pmatrix} c_{21}\\[6pt] c_{20}\end{pmatrix}
+=
+-
+\begin{pmatrix}
+\displaystyle \oint_{a_1}\frac{\lambda^{3}}{y}\,d\lambda \\[8pt]
+\displaystyle \oint_{a_2}\frac{\lambda^{3}}{y}\,d\lambda
+\end{pmatrix}
+=-\oint_{a_1} \frac{\lambda^3}{y} d \lambda \begin{pmatrix} 1\\[4pt] 1\end{pmatrix}.
+\end{equation}
+
+Using the symmetry of the chosen \(a\)-cycles the period matrix on the left of \eqref{eq:linear-c2} decomposes as
+\[
+\begin{pmatrix}
+\oint_{a_1}\dfrac{\lambda}{y}\,d\lambda & \oint_{a_1}\dfrac{d\lambda}{y} \\
+\oint_{a_2}\dfrac{\lambda}{y}\,d\lambda & \oint_{a_2}\dfrac{d\lambda}{y}
+\end{pmatrix}
+=
+\begin{pmatrix}1 & 1\\[2pt] 1 & -1\end{pmatrix}
+\begin{pmatrix}
+\displaystyle \oint_{a_1}\dfrac{\lambda}{y}\,d\lambda & 0 \\[6pt]
+0 & \displaystyle \oint_{a_1}\dfrac{d\lambda}{y}
+\end{pmatrix},
+\]
+so the system \eqref{eq:linear-c2} is readily solved. The solution is
+\begin{equation}\label{eq:c21-c20}
+\begin{pmatrix} c_{21}\\[6pt] c_{20}\end{pmatrix}
+=-\oint_{a_1} \frac{\lambda^3}{y} d \lambda\left(\begin{array}{cc}
+\left(\oint_{a_1} \frac{\lambda}{y} d \lambda\right)^{-1} & 0 \\
+0 & \left(\oint_{a_1} \frac{d \lambda}{y}\right)^{-1}
+\end{array}\right)\binom{1}{0}
+=-\binom{\oint_{a_1} \frac{\lambda^3}{y} d \lambda\left(\oint_{a_1} \frac{\lambda}{y} d \lambda\right)^{-1}}{0} .
+\end{equation}
+Using the previously computed values of the \(a_1\)-periods,
+\begin{equation}\label{eq:Y-a1-values}
+\mathcal{Y}_{a_1}^{[3]}=-\frac{2\mathrm{i}\bigl(\lambda_3^2 K_2^{(1)}+(\lambda_1^2-\lambda_3^2)E_2^{(1)}\bigr)}{\sqrt{\lambda_1^2-\lambda_3^2}},
+\qquad
+\mathcal{Y}_{a_1}^{[1]}=-\frac{2\mathrm{i}\,K_2^{(1)}}{\sqrt{\lambda_1^2-\lambda_3^2}},
+\end{equation}
+one obtains the closed form
+\begin{equation}\label{eq:c21-final}
+c_{21}=\frac{(\lambda_3^2-\lambda_1^2)E_2^{(1)}}{K_2^{(1)}}-\lambda_3^2,\qquad c_{20}=0.
+\end{equation}
+
+The same procedure applied to \(d\Omega_{3}^{(1)}\) (matching its \(a\)-periods to zero) gives
+\begin{equation}\label{eq:c3-final}
+c_{30}=0,\qquad
+c_{31}=4v_{1}-\lambda_{3}^{2}v - v(\lambda_{1}^{2}-\lambda_{3}^{2})\frac{E_{2}^{(1)}}{K_{2}^{(1)}},
+\end{equation}
+where
+\begin{equation}\label{eq:v1-def}
+v_{1}=\lambda_{1}^{2}\lambda_{2}^{2}+\lambda_{1}^{2}\lambda_{3}^{2}+\lambda_{2}^{2}\lambda_{3}^{2},
+\end{equation}
+and \(v\) is given by \eqref{eq:v-def}. Thus the constants appearing in \eqref{eq:dOmega-forms} are determined by \eqref{eq:c21-final} and \eqref{eq:c3-final}.
+
+
+Thus
+\begin{equation}\label{eq:Omega2-integral}
+\begin{aligned}
+\Omega_{2}^{(1)}(P)
+&=\int_{(\lambda_{3},0)}^{P} d\Omega_{2}^{(1)}
+=\int_{\lambda_{3}}^{\lambda}\frac{\mu^{3}
++\Bigl((\lambda_{3}^{2}-\lambda_{1}^{2})\tfrac{E_{2}^{(1)}}{K_{2}^{(1)}}-\lambda_{3}^{2}\Bigr)\mu}{y(\mu)}\,d\mu \\[6pt]
+&=\frac{1}{\mathrm{i}\sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}}
+\int_{K_{2}^{(1)}}^{\nu}
+\Biggl(\frac{\lambda_{3}^{2}-\lambda_{1}^{2}}{\operatorname{sn}^{2}(u,k_{2}^{(1)})}
++(\lambda_{3}^{2}-\lambda_{1}^{2})\frac{E_{2}^{(1)}}{K_{2}^{(1)}}
+-(\lambda_{3}^{2}-\lambda_{1}^{2})\Biggr)\,du \\[6pt]
+&=-\,\mathrm{i}\sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}
+\int_{K_{2}^{(1)}}^{\nu}\Biggl(-\frac{1}{\operatorname{sn}^{2}(u,k_{2}^{(1)})}
+-\frac{E_{2}^{(1)}}{K_{2}^{(1)}}+1\Biggr)\,du,
+\end{aligned}
+\end{equation}
+where
+\begin{equation}\label{eq:nu-def-k2}
+\nu
+=F\!\left(\sqrt{\frac{\lambda_{1}^{2}-\lambda_{3}^{2}}{\lambda_{1}^{2}-\lambda^{2}}},\,k_{2}^{(1)}\right),\qquad
+\operatorname{sn}^{2}\!\bigl(\nu,k_{2}^{(1)}\bigr)
+=\frac{\lambda_{1}^{2}-\lambda_{3}^{2}}{\lambda_{1}^{2}-\lambda^{2}}, \qquad
+\lambda^{2}
+=\frac{\lambda_{3}^{2}-\lambda_{1}^{2}\operatorname{cn}^{2}(\nu,k_{2}^{(1)})}
+{\operatorname{sn}^{2}(\nu,k_{2}^{(1)})}.
+\end{equation}
+
+Define the Jacobi Zeta function by
+\begin{equation}\label{eq:Z-def}
+Z(u,k)
+=\frac{\partial}{\partial u}\ln\Theta_{4}\!\Bigl(\tfrac{\mathrm{i}\pi u}{K(k)}\Bigr)
+=\int_{0}^{u}\bigl(\operatorname{dn}^{2}(z,k)-\tfrac{E(k)}{K(k)}\bigr)\,dz,
+\end{equation}
+where \(K(k)\) and \(E(k)\) are the complete elliptic integrals of the first and second kind.
+
+Writing \(k=k_{2}^{(1)}=\sqrt{\tfrac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2}}\) and denoting the elliptic argument by \(x\), substitution into \eqref{eq:Omega2-integral} gives
+\begin{equation}\label{eq:Omega2-mid}
+\begin{aligned}
+\Omega_{2}^{(1)}(P)
+&=-\mathrm{i}\sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}\,
+\int_{K_{2}^{(1)}}^{\nu}\Bigl(\operatorname{dn}^{2}(x,k)+k^{2}\operatorname{sn}^{2}(x,k)
+-\tfrac{E_{2}^{(1)}}{K_{2}^{(1)}}-\tfrac{1}{\operatorname{sn}^{2}(x,k)}\Bigr)\,dx \\[6pt]
+&=-\mathrm{i}\sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}\,
+\Bigl[\,Z(x,k)+\tfrac{\operatorname{cn}(x,k)\operatorname{dn}(x,k)}
+{\operatorname{sn}(x,k)}\Bigr]_{x=K_{2}^{(1)}}^{x=\nu}.
+\end{aligned}
+\end{equation}
+Since the boundary term at \(x=K_{2}^{(1)}\) vanishes, \eqref{eq:Omega2-mid} becomes
+\begin{equation}\label{eq:Omega2-final}
+\Omega_{2}^{(1)}(P)
+=-\mathrm{i}\sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}
+\Bigl(Z(\nu,k)+\frac{\operatorname{cn}(\nu,k)\operatorname{dn}(\nu,k)}
+{\operatorname{sn}(\nu,k)}\Bigr).
+\end{equation}
+
+Using \eqref{eq:nu-def-k2}, one has
+\[
+\operatorname{sn}(\nu,k)=\sqrt{\frac{\lambda_{1}^{2}-\lambda_{3}^{2}}
+{\lambda_{1}^{2}-\lambda^{2}}},\qquad
+\operatorname{cn}(\nu,k)=\sqrt{\frac{\lambda_{3}^{2}-\lambda^{2}}
+{\lambda_{1}^{2}-\lambda^{2}}},\qquad
+\operatorname{dn}(\nu,k)=\sqrt{\frac{\lambda_{2}^{2}-\lambda^{2}}
+{\lambda_{1}^{2}-\lambda^{2}}},
+\]
+and then
+\begin{equation}\label{eq:cdn-expression}
+\frac{\operatorname{cn}(\nu,k)\operatorname{dn}(\nu,k)}
+{\operatorname{sn}(\nu,k)}
+=\sqrt{\frac{(\lambda_{3}^{2}-\lambda^{2})(\lambda_{2}^{2}-\lambda^{2})}
+{(\lambda_{1}^{2}-\lambda^{2})(\lambda_{1}^{2}-\lambda_{3}^{2})}}.
+\end{equation}
+
+Similarly,
+\begin{equation}\label{eq:Omega3-rel}
+\Omega_{3}^{(1)}(P)
+=\int_{\lambda_{3}}^{\lambda}
+\frac{12\mu^{5}-4v\mu^{3}+4v_1\mu}{y(\mu)}\,d\mu
++ v\,\Omega_{2}^{(1)}(P)
+=4y+v\,\Omega_{2}^{(1)}(P),
+\end{equation}
+where \(v\) and \(v_{1}\) are defined by \eqref{eq:v-def} and \eqref{eq:v1-def}.
+
+Furthermore,
+\begin{equation}\label{eq:dOmega1}
+d\Omega_{1}^{(1)}=\frac{\lambda^{2}+c_{10}}{y(\lambda)}\,d\lambda,\qquad
+c_{10}
+=-\lambda_{1}^{2}\,
+{\Pi\!\bigl(\tfrac{\lambda_{2}^{2}-\lambda_{1}^{2}}{\lambda_{2}^{2}},\,k_{1}^{(1)}\bigr)}/
+{K_{1}^{(1)}},
+\end{equation}
+and the corresponding elliptic parametrization is
+\begin{equation}\label{eq:nu-def-k1}
+\nu
+=F\!\Bigl(\sqrt{\tfrac{\lambda^{2}(\lambda_{1}^{2}-\lambda_{3}^{2})}
+{\lambda_{3}^{2}(\lambda_{1}^{2}-\lambda^{2})}},\,k_{1}^{(1)}\Bigr),\qquad
+\lambda^{2}
+=\frac{\lambda_{1}^{2}\lambda_{3}^{2}\operatorname{sn}^{2}(\nu,k_{1}^{(1)})}
+{\lambda_{1}^{2}-\lambda_{3}^{2}\operatorname{cn}^{2}(\nu,k_{1}^{(1)})}.
+\end{equation}
+Hence
+\begin{equation}\label{eq:Omega1-final}
+\Omega_{1}^{(1)}(P)
+=\int_{\lambda_{3}}^{\lambda}\frac{\mu^{2}+c_{10}}{y(\mu)}\,d\mu.
+\end{equation}
+
+One has
+\begin{equation}
+\Pi(u,\alpha^{2},k)=\frac{\sn(a,k)}{\operatorname{cn}(a,k)\operatorname{dn}(a,k)}
+\Biggl(\tfrac{1}{2}\ln\frac{\vartheta_{1}\!\bigl(\tfrac{\mathrm{i}\pi(a+u)}{K}\,,\tau\bigr)}
+{\vartheta_{1}\!\bigl(\tfrac{\mathrm{i}\pi(a-u)}{K}\,,\tau\bigr)}-u\,Z(a,k)\Biggr), \qquad
+\alpha = \frac{1}{\sn (a,k)}
+\end{equation}
+and
+\begin{equation}
+\Omega_{1}^{(1)}(P)
+=\frac{-\mathrm{i}}{\lambda_{2} \sqrt{\lambda_{1}^{2}-\lambda_{3}^{2}}} \int_{K_{1}^{(1)}}^{\nu} \frac{\lambda_{1}^{2} \lambda_{3}^{2} \mathrm{sn}^{2}\left(x, k_{1}^{(1)}\right)}{\lambda_{1}^{2}-\lambda_{3}^{2} \mathrm{cn}^{2}\left(x, k_{1}^{(1)}\right)}-\frac{\lambda_{1}^{2}}{K_{1}^{(1)}} \Pi\left(\frac{\lambda_{2}^{2}-\lambda_{1}^{2}}{\lambda_{2}^{2}}, k_{1}^{(1)}\right) \mathrm{d} x.
+\end{equation}
+
+
 
 
 
@@ -3793,21 +4164,132 @@ Hence the relation between \(\mathcal{Y}_{b_1}^{[2]}\) and \(\mathcal{Y}_{b_2}^{
 where the middle line uses the definition of the complete elliptic integral of the third kind
 and the last line expresses the \(K_1'\)-term via \(\mathcal{Y}_{b_1}^{[0]}\).
 
-% \textbf{Computation of Type~2 Integrals (\(\mathcal{Y}_{a_i}^{[3]}, \mathcal{Y}_{b_i}^{[3]}\)). }
+\textbf{Computation of Type~2 Integrals (\(\mathcal{Y}_{a_i}^{[3]}, \mathcal{Y}_{b_i}^{[3]}\)).}
 
-% For integrals of type~2,
-% \begin{equation}\label{eq:Lambda-type2}
-% \Lambda=\lambda_1^2+\frac{\lambda_3^2-\lambda_1^2}{z^2},\qquad
-% z=\operatorname{sn}\!\bigl(\nu,k_2^{(1)}\bigr),\qquad
-% \bigl(k_2^{(1)}\bigr)^2=\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2},
-% \end{equation}
-% and with \(\nu=\nu_1+\mathrm{i}K\) one obtains the alternate forms
-% \[
-% \Lambda=\lambda_1^2+\left(\lambda_3^2-\lambda_1^2\right)\left(k_2^{(1)}\right)^2 \sn ^2 (\nu_1^2, k_2^{(1)})
-% =\lambda_1^2+(\lambda_3^2-\lambda_1^2)\bigl(1-\operatorname{dn}^2(\nu_1,k_2^{(1)})\bigr)
-% =\lambda_3^2+(\lambda_1^2-\lambda_3^2)\,\operatorname{dn}^2\!\bigl(\nu_1,k_2^{(1)}\bigr)
-% .
-% \]
+For integrals of type~2, we use the parametrization
+\begin{equation}\label{eq:Lambda-type2}
+\Lambda
+=\lambda_1^2+\frac{\lambda_3^2-\lambda_1^2}{z^2},
+\qquad
+z=\operatorname{sn}\!\bigl(\nu,k_2^{(1)}\bigr),
+\qquad
+\bigl(k_2^{(1)}\bigr)^2
+=\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2}.
+\end{equation}
+Writing \(\nu=\nu_1+\mathrm{i}K^{\prime}\), this expression admits several equivalent forms. Indeed,
+\[
+\Lambda
+=\lambda_1^2
++\bigl(\lambda_3^2-\lambda_1^2\bigr)\bigl(k_2^{(1)}\bigr)^2
+\operatorname{sn}^2\!\bigl(\nu_1,k_2^{(1)}\bigr)
+=\lambda_1^2
++\bigl(\lambda_3^2-\lambda_1^2\bigr)
+\bigl(1-\operatorname{dn}^2(\nu_1,k_2^{(1)})\bigr),
+\]
+and hence
+\[
+\Lambda
+=\lambda_3^2
++\bigl(\lambda_1^2-\lambda_3^2\bigr)
+\operatorname{dn}^2\!\bigl(\nu_1,k_2^{(1)}\bigr).
+\]
+
+Using this representation, we compute
+\begin{equation}\label{eq:Y-a1-3}
+\begin{aligned}
+\mathcal{Y}_{a_1}^{[3]}
+&=2\int_{\lambda_2}^{\lambda_1}\frac{\lambda^{3}\,d\lambda}{y(\lambda)} 
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\int_{K_2+\mathrm{i}K_2'}^{\mathrm{i}K_2'}
+\Bigl(
+\lambda_3^{2}
++\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)
+\operatorname{dn}^{2}\!\bigl(\nu-\mathrm{i}K_2',k_2^{(1)}\bigr)
+\Bigr)\,d\nu .
+\end{aligned}
+\end{equation}
+The integral separates into a constant term and a term involving \(\operatorname{dn}^2\). Evaluating each contribution yields
+\[
+\mathcal{Y}_{a_1}^{[3]}
+=-\frac{2\mathrm{i}\lambda_3^{2}K_2^{(1)}}{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
++\left.
+\frac{2\mathrm{i}\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)}
+{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+E(u,k_2^{(1)})\right|_{u=K_2}^{u=0}=-\frac{2\mathrm{i}\bigl(
+\lambda_3^{2}K_2^{(1)}
++\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)E_2^{(1)}
+\bigr)}
+{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}.
+\]
+By symmetry of the \(a\)-cycles,
+\begin{equation}\label{eq:Y-a2-3}
+\mathcal{Y}_{a_2}^{[3]}=\mathcal{Y}_{a_1}^{[3]}.
+\end{equation}
+
+We next turn to the \(b\)-cycle integrals. Starting from
+\begin{equation}\label{eq:Y-b2-3-start}
+\begin{aligned}
+\mathcal{Y}_{b_2}^{[3]}
+&=2\int_{-\lambda_2}^{-\lambda_3}\frac{\lambda^{3}\,d\lambda}{y(\lambda)} 
+=\frac{2\mathrm{i}}{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\int_{-K_2+\mathrm{i}K_2'}^{-K_2}
+\Bigl(
+\lambda_3^{2}
++\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)
+\operatorname{dn}^{2}\!\bigl(\nu-\mathrm{i}K_2',k_2^{(1)}\bigr)
+\Bigr)\,d\nu ,
+\end{aligned}
+\end{equation}
+we employ the standard shift identities
+\begin{equation}\label{eq:dn-cn-shift}
+\operatorname{dn}(z-K,k)=\frac{k'}{\operatorname{dn}(z,k)},
+\qquad
+\operatorname{cn}(z-K',k')
+=\frac{k\,\operatorname{sn}(z,k')}{\operatorname{dn}(z,k')}.
+\end{equation}
+From these formulas one obtains
+\begin{equation}\label{eq:dn-transform}
+\begin{aligned}
+\operatorname{dn}\!\left(\mathrm{i}u-K_2-\mathrm{i}K_2',k_2^{(1)}\right)
+&=\frac{k_2^{(1)\prime}}
+{\operatorname{dn}\!\left(\mathrm{i}(u-K_2'),k_2^{(1)}\right)} \\
+&=k_2^{(1)\prime}
+\frac{\operatorname{cn}(u-K_2',k_2^{(1)\prime})}
+{\operatorname{dn}(u-K_2',k_2^{(1)\prime})}
+=k_2^{(1)\prime}\operatorname{sn}(u,k_2^{(1)\prime}).
+\end{aligned}
+\end{equation}
+
+Setting \(\nu=\mathrm{i}u-K_2\), the integral becomes
+\begin{equation}\label{eq:Y-b2-3}
+\begin{aligned}
+\mathcal{Y}_{b_2}^{[3]}
+&=\frac{2\mathrm{i}}{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\int_{K_2'}^{0}
+\Bigl(
+\lambda_3^{2}
++\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)
+\bigl(k_2^{(1)\prime}\bigr)^{2}
+\operatorname{sn}^{2}(u,k_2^{(1)\prime})
+\Bigr)\,\mathrm{i}\,du \\
+&=\frac{2}{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}
+\int_{0}^{K_2'}
+\Bigl(
+\lambda_1^{2}
+-\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)
+\operatorname{dn}^{2}(u,k_2^{(1)\prime})
+\Bigr)\,du 
+=\frac{
+2\lambda_1^{2}K_2'
+-2\bigl(\lambda_1^{2}-\lambda_3^{2}\bigr)E_2'
+}
+{\sqrt{\lambda_1^{2}-\lambda_3^{2}}}.
+\end{aligned}
+\end{equation}
+Again by symmetry of the \(b\)-cycles,
+\begin{equation}\label{eq:Y-b1-3}
+\mathcal{Y}_{b_1}^{[3]}=\mathcal{Y}_{b_2}^{[3]}.
+\end{equation}
 
 
 
@@ -3815,6 +4297,620 @@ and the last line expresses the \(K_1'\)-term via \(\mathcal{Y}_{b_1}^{[0]}\).
 \Week{Algebro-Geometric Solutions for the mKdV Equation (11)}{2025-12-02}
 
 \obj{Focus on Case~1. Determine the parameters \(C_{u_0}^{(1)}\) and \(D^{(1)}\).}
+
+We set
+\begin{equation}\label{eq:D-Delta-def}
+D
+=\mathcal{C}
++\mathcal{A}_{P_0}(\infty^-)
+-\alpha_{P_0}(D_{\mu_0}),
+\qquad
+\Delta
+=\mathcal{A}_{P_0}(\infty^+)-\mathcal{A}_{P_0}(\infty^-)
+=\mathcal{A}_{\infty^-}(\infty^+),
+\qquad
+\mu_0=\mu(x_0,t_0).
+\end{equation}
+
+The Abel images of the divisors \(D_\mu\) and \(D_{\mu^*}\) are related by
+\begin{equation}\label{eq:alpha-mu-star}
+\alpha_{P_0}(D_{\mu^*})
+=\alpha_{P_0}(D_\mu)+\Delta .
+\end{equation}
+Moreover, the evolution of \(\alpha_{P_0}(D_\mu)\) along the flow is given by
+\begin{equation}\label{eq:alpha-mu-flow}
+\alpha_{P_0}(D_\mu)
+=\alpha_{P_0}(D_{\mu_0})
+-\mathrm{i}\,\widehat{U}(x-x_0)
+-\mathrm{i}\,\widehat{V}(t-t_0)
+=\alpha_{P_0}(D_{\mu_0})
+-\mathrm{i}\,\widehat{U}(x+v t),
+\end{equation}
+where we have fixed \((x_0,t_0)=(0,0)\) and used the relation
+\[
+\widehat{V}=v\,\widehat{U},
+\qquad
+v=2(\lambda_1^2+\lambda_2^2+\lambda_3^2).
+\]
+
+Combining these identities with the definition of \(D\) yields the following shifted forms:
+\begin{equation}\label{eq:D-Delta-shift1}
+D+\Delta
+=\mathcal{C}
++\mathcal{A}_{P_0}(\infty^+)
+-\alpha_{P_0}(D_{\mu_0}),
+\end{equation}
+\begin{equation}\label{eq:D-Delta-shift2}
+D+\Delta+\mathrm{i}\widehat{U}(x+v t)
+=\mathcal{C}
++\mathcal{A}_{P_0}(\infty^+)
+-\alpha_{P_0}(D_\mu),
+\end{equation}
+\begin{equation}\label{eq:D-shift}
+D+\mathrm{i}\widehat{U}(x+v t)
+=\mathcal{C}
++\mathcal{A}_{P_0}(\infty^-)
+-\alpha_{P_0}(D_\mu)
+=\mathcal{C}
++\mathcal{A}_{P_0}(\infty^+)
+-\alpha_{P_0}(D_{\mu^*}),
+\end{equation}
+and
+\begin{equation}\label{eq:D-minus-Delta}
+D-\Delta+\mathrm{i}\widehat{U}(x+v t)
+=\mathcal{C}
++\mathcal{A}_{P_0}(\infty^-)
+-\alpha_{P_0}(D_{\mu^*}).
+\end{equation}
+
+We now introduce the constant
+\begin{equation}\label{eq:Cu0-def}
+C_{u_0}
+=\frac{\Theta(D)}
+{\Phi_{1,0}^{+}\,\Theta(D+\Delta)} .
+\end{equation}
+With this notation, the representation \eqref{eq:u-by-phi10+-theta-mu} can be rewritten as
+\begin{equation}\label{eq:u-theta-ratio-1}
+\begin{aligned}
+u(x,t)
+&=\frac{\Theta(D)\,
+\Theta\!\bigl(D+\Delta+\mathrm{i}\widehat{U}(x+v t)\bigr)}
+{\Phi_{1,0}^{+}\,
+\Theta(D+\Delta)\,
+\Theta\!\bigl(D+\mathrm{i}\widehat{U}(x+v t)\bigr)}
+\,\mathrm{e}^{2\mathrm{i}\omega_2 x+2\mathrm{i}\omega_3 t} \\
+&=C_{u_0}\,
+\frac{\Theta\!\bigl(D+\Delta+\mathrm{i}\widehat{U}(x+v t)\bigr)}
+{\Theta\!\bigl(D+\mathrm{i}\widehat{U}(x+v t)\bigr)}
+\,\mathrm{e}^{2\mathrm{i}\omega_2 x+2\mathrm{i}\omega_3 t}.
+\end{aligned}
+\end{equation}
+Equivalently, starting from \eqref{eq:u-by-phi10+-theta-mu*}, one obtains
+\begin{equation}\label{eq:u-theta-ratio-2}
+u(x,t)
+=\frac{-4\,\Theta\!\bigl(D-\Delta+\mathrm{i}\widehat{U}(x+v t)\bigr)}
+{\omega_1^{2}\,C_{u_0}\,
+\Theta\!\bigl(D+\mathrm{i}\widehat{U}(x+v t)\bigr)}
+\,\mathrm{e}^{-2\mathrm{i}\omega_2 x-2\mathrm{i}\omega_3 t}.
+\end{equation}
+
+
+
+\textbf{For Case~1.}
+
+Since
+\begin{equation}\label{eq:U-def}
+\widehat{U}=(U_1,U_2)=(2d_{11},2d_{21}),
+\qquad
+d_{21}=d_{11}
+=-\frac{\pi\sqrt{\lambda_1^2-\lambda_3^2}}{2K_2^{(1)}}\in\mathbb{R}^{-},
+\end{equation}
+it follows that \(U_1=U_2\). Consequently,
+\begin{equation}\label{eq:omega2-zero}
+\omega_2
+=-\frac{\mathrm{i}}{4\pi}\sum_{j=1}^2 U_j\,\mathcal{Y}_{a_j}^{[2]}
+=-\frac{\mathrm{i}}{4\pi}
+\bigl(U_1\mathcal{Y}_{a_1}^{[2]}+U_2\mathcal{Y}_{a_2}^{[2]}\bigr)
+=0,
+\end{equation}
+where we have used \(\mathcal{Y}_{a_1}^{[2]}=-\mathcal{Y}_{a_2}^{[2]}\). Hence
+\begin{equation}\label{eq:omega3-zero}
+\omega_3=v\,\omega_2=0.
+\end{equation}
+
+Moreover,
+\begin{equation}\label{eq:Delta1-def}
+\Delta=\Delta^{(1)}
+=\binom{\pi\mathrm{i}+\nu^{(1)}}{\pi\mathrm{i}-\nu^{(1)}},
+\qquad
+\nu^{(1)}
+=\frac{\pi\mathrm{i}}{K_1^{(1)}}\,
+F\!\left(\frac{\lambda_2}{\lambda_3},k_1^{(1)}\right)
+\in \mathrm{i}\mathbb{R}.
+\end{equation}
+From this explicit form one readily finds
+\begin{equation}\label{eq:Delta-sym}
+\Delta^*=-\Delta,
+\qquad
+\sigma_1\Delta
+=\binom{\pi\mathrm{i}-\nu^{(1)}}{\pi\mathrm{i}+\nu^{(1)}}
+=\binom{2\pi\mathrm{i}}{2\pi\mathrm{i}}-\Delta,
+\qquad
+\sigma_1=
+\begin{pmatrix}
+0&1\\[2pt]
+1&0
+\end{pmatrix}.
+\end{equation}
+
+Using \eqref{eq:B1-def} and \eqref{eq:c1c2-def}, the period matrix satisfies
+\begin{equation}\label{eq:sigma-B-sym}
+\sigma_1 B^{(1)} \sigma_1=B^{(1)},
+\qquad
+\sigma_1^{\top}=\sigma_1,
+\qquad
+\sigma_1^{2}=\mathbb{I}.
+\end{equation}
+Letting \(m=\sigma_1 n\), we compute
+\begin{equation}\label{eq:theta-sigma}
+\begin{aligned}
+\Theta\!\left(B^{(1)},\sigma_1 z\right)
+&=\sum_{n\in\mathbb{Z}^2}
+\exp\!\left\{\tfrac12 n^{\top}B^{(1)}n+n^{\top}\sigma_1 z\right\} \\
+&=\sum_{n\in\mathbb{Z}^2}
+\exp\!\left\{\tfrac12(\sigma_1 n)^{\top}\sigma_1 B^{(1)}\sigma_1 n
++(\sigma_1 n)^{\top} z\right\} \\
+&=\sum_{m\in\mathbb{Z}^2}
+\exp\!\left\{\tfrac12 m^{\top}B^{(1)}m+m^{\top} z\right\}
+=\Theta\!\left(B^{(1)},z\right).
+\end{aligned}
+\end{equation}
+
+Using the identities
+\[
+\Theta^*(z)=\Theta(z^*),
+\qquad
+\Theta(\sigma_1 z)=\Theta(z),
+\qquad
+\Theta(-z)=\Theta(z),
+\]
+and the representation
+\begin{equation}\label{eq:u-theta-ratio-1-case1}
+u(x,t)
+=C_{u_0}\,
+\frac{\Theta\!\bigl(D+\Delta+\mathrm{i}\widehat{U}(x+vt)\bigr)}
+{\Theta\!\bigl(D+\mathrm{i}\widehat{U}(x+vt)\bigr)},
+\end{equation}
+we obtain
+\begin{equation}\label{eq:u-conj}
+\begin{aligned}
+u^*(x,t)
+&=C_{u_0}^*\,
+\frac{\Theta\!\bigl(D^*+\Delta^*-\mathrm{i}\widehat{U}(x+vt)\bigr)}
+{\Theta\!\bigl(D^*-\mathrm{i}\widehat{U}(x+vt)\bigr)} \\
+&=C_{u_0}^*\,
+\frac{\Theta\!\bigl(\sigma_1 D^*+\sigma_1\Delta^*-\mathrm{i}\widehat{U}(x+vt)\bigr)}
+{\Theta\!\bigl(\sigma_1 D^*-\mathrm{i}\widehat{U}(x+vt)\bigr)} \\
+&=C_{u_0}^*\,
+\frac{\Theta\!\bigl(-\sigma_1 D^*-\Delta+\mathrm{i}\widehat{U}(x+vt)\bigr)}
+{\Theta\!\bigl(-\sigma_1 D^*+\mathrm{i}\widehat{U}(x+vt)\bigr)} .
+\end{aligned}
+\end{equation}
+
+
+Requiring \(u(x,t)\in\mathbb{R}\) and comparing \eqref{eq:u-theta-ratio-2} with
+\eqref{eq:u-conj}, we obtain the constraint
+\begin{equation}\label{eq:D-reality}
+D=-\sigma_1 D^*+2\pi\mathrm{i}\,n+B^{(1)}m,
+\qquad
+D=\binom{D_1}{D_2},
+\qquad
+n,m\in\mathbb{Z}^2 .
+\end{equation}
+Equivalently, this condition can be written componentwise as
+\begin{equation}\label{eq:D-components}
+\begin{aligned}
+D_1+D_2^*
+&=2\pi\mathrm{i}n_1+B_{11}m_1+B_{12}m_2,\\
+D_1^*+D_2
+&=2\pi\mathrm{i}n_2+B_{21}m_1+B_{22}m_2 .
+\end{aligned}
+\end{equation}
+
+Using the symmetry properties of the period matrix,
+\begin{equation}\label{eq:B-sym-real}
+B_{11}=B_{22},
+\qquad
+B_{21}=B_{12},
+\qquad
+B_{ij}\in\mathbb{R},
+\end{equation}
+and noting that \(B_{11}\neq B_{12}\), we conclude that
+\begin{equation}\label{eq:constraints}
+n_1=-n_2,
+\qquad
+m_1=m_2 .
+\end{equation}
+Substituting these relations back into \eqref{eq:D-components} yields
+\begin{equation}\label{eq:D-sum}
+D_1+D_2^*
+=2\pi\mathrm{i}\,n_1+\bigl(B_{11}+B_{12}\bigr)m_1 .
+\end{equation}
+
+On the other hand, rewriting \(u(x,t)\) in \eqref{eq:u-theta-ratio-2} in the form
+\begin{equation}\label{eq:u-sigma1-form}
+u(x,t)
+=\frac{-4\,\Theta\!\bigl(\sigma_1 D-\sigma_1\Delta+\mathrm{i}\widehat{U}(x+vt)\bigr)}
+{\omega_1^{2}C_{u_0}\,\Theta\!\bigl(D+\mathrm{i}\widehat{U}(x+vt)\bigr)}
+=\frac{-4\,\Theta\!\bigl(\sigma_1 D+\Delta+\mathrm{i}\widehat{U}(x+vt)\bigr)}
+{\omega_1^{2}C_{u_0}\,\Theta\!\bigl(D+\mathrm{i}\widehat{U}(x+vt)\bigr)},
+\end{equation}
+and comparing with \eqref{eq:u-theta-ratio-1-case1}, we impose the condition
+\begin{equation}\label{eq:D-sigma1}
+D=\sigma_1 D+2\pi\mathrm{i}\,n',
+\qquad
+n'\in\mathbb{Z}^2 .
+\end{equation}
+This is equivalent to the pair of relations
+\begin{equation}\label{eq:D-diff}
+D_1-D_2=2\pi\mathrm{i}\,n_1',
+\qquad
+D_2-D_1=2\pi\mathrm{i}\,n_2',
+\end{equation}
+and hence
+\begin{equation}\label{eq:nprime}
+n_2'=-n_1',
+\qquad
+D_1-D_2=2\pi\mathrm{i}\,n_1'.
+\end{equation}
+
+Under the condition \eqref{eq:D-sigma1}, comparison of \eqref{eq:u-theta-ratio-2} with
+\eqref{eq:u-theta-ratio-1-case1} yields
+\begin{equation}\label{eq:Cu0-square-long}
+\begin{aligned}
+C_{u_0}^2
+&=\frac{-4\,\Theta\!\left(D-\Delta+\mathrm{i}\widehat{U}(x+vt)\right)}
+{\omega_1^2\,\Theta\!\left(D+\Delta+\mathrm{i}\widehat{U}(x+vt)\right)} 
+=\frac{-4\,\Theta\!\left(\sigma_1 D+\Delta+\mathrm{i}\widehat{U}(x+vt)\right)}
+{\omega_1^2\,\Theta\!\left(D+\Delta+\mathrm{i}\widehat{U}(x+vt)\right)}
+=\frac{-4}{\omega_1^2},
+\end{aligned}
+\end{equation}
+where the \(\sigma_1\)-symmetry of the theta function has been used.
+Consequently,
+\begin{equation}\label{eq:Cu0-final}
+C_{u_0}=\frac{2\mathrm{i}}{\omega_1}.
+\end{equation}
+
+Combining \eqref{eq:D-sum} with \eqref{eq:nprime}, we obtain the constraints
+\begin{equation}\label{eq:D-final-constraints}
+D_1-D_2=2\pi\mathrm{i}\,n_1',
+\qquad
+D_1+D_2^*
+=2\pi\mathrm{i}\,n_1+\bigl(B_{11}+B_{12}\bigr)m_1 .
+\end{equation}
+These imply
+\begin{equation}\label{eq:D-real-imag}
+\operatorname{Re} D_1=\operatorname{Re} D_2
+=\frac{1}{2}m_1\bigl(B_{11}+B_{12}\bigr),
+\qquad
+\operatorname{Im} D_1=\operatorname{Im} D_2+2\pi n_1 .
+\end{equation}
+Equivalently, the vector \(D\) admits the parameterization
+\begin{equation}\label{eq:D-vector}
+\binom{D_1}{D_2}
+=\frac{m_1}{2}\,B^{(1)}\binom{1}{1}
++\mathrm{i}\binom{1}{1}\alpha
++\binom{2\pi\mathrm{i}n_1}{0},
+\qquad
+\alpha\in\mathbb{R}.
+\end{equation}
+
+By \eqref{eq:D-reality}, we have
+\begin{equation}\label{eq:D-conj-assumption}
+-\sigma_1 D^*=D-2\pi\mathrm{i}\,n-B^{(1)}m .
+\end{equation}
+Under this condition, the complex conjugate of \(u(x,t)\) in \eqref{eq:u-conj} can be written as
+\begin{equation}\label{eq:u-conj-long}
+\begin{aligned}
+u^*(x,t)
+&=C_{u_0}^*
+\frac{\Theta\!\left(D-2\pi\mathrm{i}n-B^{(1)}m-\Delta+\mathrm{i}\widehat{U}(x+vt)\right)}
+{\Theta\!\left(D-2\pi\mathrm{i}n-B^{(1)}m+\mathrm{i}\widehat{U}(x+vt)\right)} \\[4pt]
+&=C_{u_0}^*
+\frac{
+\Theta\!\left(D-\Delta+\mathrm{i}\widehat{U}(x+vt)\right)
+\exp\!\left\{\langle D-\Delta+\mathrm{i}\widehat{U}(x+vt),m\rangle
++\tfrac12\bigl(B_{11}m_1+B_{22}m_2\bigr)\right\}}
+{
+\Theta\!\left(D+\mathrm{i}\widehat{U}(x+vt)\right)
+\exp\!\left\{\langle D+\mathrm{i}\widehat{U}(x+vt),m\rangle + \tfrac12\bigl(B_{11}m_1+B_{22}m_2\bigr)\right\}
+} \\[4pt]
+&=C_{u_0}^*
+\frac{\Theta\!\left(D-\Delta+\mathrm{i}\widehat{U}(x+vt)\right)
+\exp\!\left\{-\langle\Delta,m\rangle\right\}}
+{\Theta\!\left(D+\mathrm{i}\widehat{U}(x+vt)\right)} .
+\end{aligned}
+\end{equation}
+
+Here \(m_2=m_1\), and therefore
+\begin{equation}\label{eq:Delta-m-exp}
+\begin{aligned}
+\exp\!\left\{-\langle\Delta,m\rangle\right\}
+&=\exp\!\left\{-\bigl(\pi\mathrm{i}+\nu^{(1)}\bigr)m_1
+-\bigl(\pi\mathrm{i}-\nu^{(1)}\bigr)m_1\right\} \\
+&=\exp(-2\pi\mathrm{i}m_1)=1 .
+\end{aligned}
+\end{equation}
+It then follows from \eqref{eq:u-theta-ratio-2} and \eqref{eq:u-conj-long} that
+\begin{equation}\label{eq:Cu0-modulus}
+\lvert C_{u_0}\rvert^2=\frac{-4}{\omega_1^{2}} .
+\end{equation}
+
+
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (12)}{2025-12-09}
+
+\obj{Focus on Case~1. Introduce the effective integration method.}
+
+Recall that
+\begin{equation}\label{eq:L-def}
+L(\lambda;x,t)=\frac14\,V(\lambda;Q)+\alpha_1\,U(\lambda;Q),
+\end{equation}
+whose entries are given explicitly by
+\begin{equation}\label{eq:L-entries}
+\begin{aligned}
+&L_{11}(\lambda)
+=-\mathrm{i}\bigl(\lambda^{3}+\lambda(\alpha_1-\tfrac12 u^{2})\bigr),
+\qquad
+L_{22}(\lambda)=-L_{11}(\lambda),\\
+&L_{12}(\lambda)
+=u\!\left(\lambda^{2}+\mathrm{i}\frac{u_x}{2u}\lambda-\frac{u_{xx}}{4u}
++\alpha_1-\frac{u^{2}}{2}\right)
+=u(\lambda-\mu_1)(\lambda-\mu_2),\\
+&L_{21}(\lambda)
+=-u\!\left(\lambda^{2}-\mathrm{i}\frac{u_x}{2u}\lambda-\frac{u_{xx}}{4u}
++\alpha_1-\frac{u^{2}}{2}\right)
+=-u(\lambda-\mu_1^*)(\lambda-\mu_2^*).
+\end{aligned}
+\end{equation}
+
+The effective integration method amounts to exploiting the fact that the
+\(x\)-part of \eqref{eq:Lax-12} is an ordinary differential equation,
+\[
+u_{xxx}+6u^2u_x-4\alpha_1 u_x=0,
+\]
+which is encoded in the equations
+\begin{equation}\label{eq:Lax-12}
+L_x=[U(\lambda,Q),L],
+\qquad
+L_t=[V(\lambda,Q),L].
+\end{equation}
+
+We compute the determinant of \(L\). Using the structure of the matrix,
+\begin{equation}\label{eq:detL-start}
+\begin{aligned}
+\det L
+&=-L_{11}^2-L_{12}L_{21}\\
+&=\lambda^2\bigl(\lambda^2+\alpha_1-\tfrac12 u^2\bigr)^2
++u^2\!\left[
+\left(\lambda^2-\frac{u_{xx}}{4u}+\alpha_1-\frac{u^2}{2}\right)^2
++\frac{u_x^2}{4u^2}\lambda^2
+\right].
+\end{aligned}
+\end{equation}
+A direct expansion yields the polynomial form
+\begin{equation}\label{eq:detL-poly}
+\begin{aligned}
+\det L
+&=\lambda^6+2\alpha_1\lambda^4
++\left(
+\frac14(u_x^2-2u u_{xx}-3u^4)
++\alpha_1u^2+\alpha_1^2
+\right)\lambda^2
++\left(\frac{u_{xx}}{4}-\alpha_1 u+\frac{u^3}{2}\right)^2\\
+&=\lambda^6+2\alpha_1\lambda^4+s_2\lambda^2+s_0 .
+\end{aligned}
+\end{equation}
+
+Identifying coefficients in \eqref{eq:detL-poly} gives, at order \(O(1)\),
+\begin{equation}\label{eq:O1}
+u_{xx}-4\alpha_1 u+2u^3=4\sqrt{s_0},
+\end{equation}
+and, at order \(O(\lambda^2)\),
+\begin{equation}\label{eq:O2}
+u_x^2-2u u_{xx}-3u^4+4\alpha_1 u^2+4\alpha_1^2=4s_2 .
+\end{equation}
+
+Substituting \eqref{eq:O1} into \eqref{eq:O2} eliminates \(u_{xx}\) and yields
+\begin{equation}\label{eq:ux2-step1}
+u_x^2
+-2u\bigl(4\sqrt{s_0}+4\alpha_1 u-2u^3\bigr)
+-3u^4+4\alpha_1 u^2+4\alpha_1^2
+=4s_2,
+\end{equation}
+which simplifies to
+\begin{equation}\label{eq:ux2-step2}
+u_x^2-8u\sqrt{s_0}-8\alpha_1 u^2+u^4+4\alpha_1 u^2+4\alpha_1^2=4s_2 .
+\end{equation}
+
+Equivalently,
+\begin{equation}\label{eq:ux2-final}
+\begin{aligned}
+u_x^2
+&=-\bigl(u^4-4\alpha_1 u^2-8u\sqrt{s_0}
++4\alpha_1^2-4s_2\bigr)\\
+&=-R(u)
+=-\prod_{i=1}^4 (u-u_i),
+\end{aligned}
+\end{equation}
+from which it follows immediately that
+\begin{equation}\label{eq:sum-ui}
+\sum_{i=1}^4 u_i=0 .
+\end{equation}
+
+Multiplying \eqref{eq:O1} by \(u_x\) yields
+\begin{equation}\label{eq:uxx-note}
+u_x u_{xx}
+=4\alpha_1 u u_x+2u^3u_x
+=4\sqrt{s_0}\,u_x .
+\end{equation}
+Integrating once with respect to \(x\), we obtain
+\begin{equation}\label{eq:ux2-int}
+u_x^2
+=-\bigl(-4\alpha_1 u^2+u^4-8\sqrt{s_0}\,u\bigr)+c_0,
+\qquad
+c_0=4s_2-4\alpha_1^2 ,
+\end{equation}
+which is precisely equivalent to \eqref{eq:ux2-final}.
+From a different perspective, the conserved energy is
+\begin{equation}\label{eq:energy}
+E=4s_2-4\alpha_1^2
+=u_x^2+\bigl(u^4-4\alpha_1 u^2-8\sqrt{s_0}\,u\bigr).
+\end{equation}
+
+
+
+Since \(u_x^2=-R(u)\), we may write equivalently
+\begin{equation}\label{eq:du-dx}
+\frac{du}{dx}=\pm\sqrt{-R(u)}.
+\end{equation}
+Separating variables gives
+\begin{equation}\label{eq:du-int}
+\int\frac{du}{\sqrt{-R(u)}}=\pm x+C .
+\end{equation}
+
+
+Note that \(u\) and \(u_x\) are real-valued.
+\paragraph{Case I.}
+\(s_0\neq 0\), \(u_i\in\mathbb{R}\), \(u_1>u_2>u_3>u_4\).
+In this case there are two types of real solutions, corresponding to the admissible intervals
+\begin{equation}\label{eq:case1}
+u_2\le u^{[1]}\le u_1,
+\qquad
+u_4\le u^{[2]}\le u_3 .
+\end{equation}
+
+\paragraph{Case II.}
+\(s_0\neq 0\), \(u_{1,3}\in\mathbb{R}\), \(u_1>u_3\), and \(u_{2,4}\in\mathbb{C}\setminus\mathbb{R}\).
+Then the real solution satisfies
+\begin{equation}\label{eq:case2}
+u_3\le u^{[3]}\le u_1 .
+\end{equation}
+
+\paragraph{Case III.}
+\(s_0=0\), \(u_4=-u_1\), \(u_3=-u_2\) (genus one).
+
+
+We now describe the correspondence between the branch points \(\lambda_i\) and the roots \(u_i\).
+If \(R(u_i)=0\), then \(\mu_1^*=\mu_1\) and \(\mu_2^*=\mu_2\), and the determinant of \(L\) takes the form
+\begin{equation}\label{eq:detL-ui}
+\begin{aligned}
+\det L
+&=\lambda^2\left(\lambda^2+\alpha_1-\frac{u_i^2}{2}\right)^2
++u_i^2(\lambda-\mu_1)^2(\lambda-\mu_2)^2 \\
+&=\Bigl(\lambda^3+\lambda\!\left(\alpha_1-\frac{u_i^2}{2}\right)
++\mathrm{i}u_i(\lambda-\mu_1)(\lambda-\mu_2)\Bigr) \\
+&\qquad\times
+\Bigl(\lambda^3+\lambda\!\left(\alpha_1-\frac{u_i^2}{2}\right)
+-\mathrm{i}u_i(\lambda-\mu_1)(\lambda-\mu_2)\Bigr).
+\end{aligned}
+\end{equation}
+We wish to decompose
+\(\det L=\prod_{j=1}^3(\lambda^2-\lambda_j^2)\)
+into two cubic polynomials of the above form. This requires that the two factors have opposite coefficients in the quadratic and constant terms.
+In the Case~1, all \(\lambda_j\) lie on the imaginary axis, \(\lambda_j\in\mathrm{i}\mathbb{R}\).
+In the Case~2, one has
+\(\lambda_1\in\mathbb{C}\setminus(\mathbb{R}\cup\mathrm{i}\mathbb{R})\),
+\(\lambda_2\in\mathrm{i}\mathbb{R}\), and \(\lambda_3=-\lambda_1^*\).
+
+For distinct \(\lambda_i,\lambda_j,\lambda_k\), the identities
+\begin{equation}\label{eq:poly-id1}
+\begin{aligned}
+(\lambda^2-\lambda_i^2)(\lambda-\lambda_j)
+&=\lambda^3-\lambda_j\lambda^2-\lambda_i^2\lambda+\lambda_i^2\lambda_j,\\
+(\lambda^2-\lambda_k^2)(\lambda+\lambda_j)
+&=\lambda^3+\lambda_j\lambda^2-\lambda_k^2\lambda-\lambda_k^2\lambda_j
+\end{aligned}
+\end{equation}
+show that the constant terms cannot be matched in this manner.
+
+Instead, consider \(S_{i},S_{j},S_{k}\in\{\pm1\}\) and distinct \(\lambda_i,\lambda_j,\lambda_k\).
+Then
+\begin{equation}\label{eq:sign-prod1}
+(\lambda-S_i\lambda_i)(\lambda-S_j\lambda_j)(\lambda-S_k\lambda_k)
+=\lambda^3-(S_i\lambda_i+S_j\lambda_j+S_k\lambda_k)\lambda^2+\cdots
+-S_iS_jS_k\lambda_i\lambda_j\lambda_k,
+\end{equation}
+and
+\begin{equation}\label{eq:sign-prod2}
+(\lambda+S_i\lambda_i)(\lambda+S_j\lambda_j)(\lambda+S_k\lambda_k)
+=\lambda^3+(S_i\lambda_i+S_j\lambda_j+S_k\lambda_k)\lambda^2+\cdots
++S_iS_jS_k\lambda_i\lambda_j\lambda_k .
+\end{equation}
+Comparing coefficients with \eqref{eq:detL-ui}, we obtain the relations
+\begin{equation}\label{eq:ui-lambdai}
+\begin{array}{ll}
+\mathrm{i}u_1=\lambda_1+\lambda_2+\lambda_3,
+& \mathrm{i}u_2=-(\lambda_1+\lambda_2-\lambda_3),\\[4pt]
+\mathrm{i}u_3=-(\lambda_1-\lambda_2+\lambda_3),
+& \mathrm{i}u_4=-(-\lambda_1+\lambda_2+\lambda_3).
+\end{array}
+\end{equation}
+
+\extra{}
+
+
+Set \(\sqrt{s_0}=\mathrm{i}\lambda_1\lambda_2\lambda_3\). With this choice, the quartic equation admits four roots given explicitly by
+\[
+u_1=-\mathrm{i}\bigl(\lambda_1+\lambda_2+\lambda_3\bigr),\qquad
+u_2=\mathrm{i}\bigl(\lambda_1+\lambda_2-\lambda_3\bigr),\qquad
+u_3=\mathrm{i}\bigl(\lambda_1-\lambda_2+\lambda_3\bigr),\qquad
+u_4=\mathrm{i}\bigl(-\lambda_1+\lambda_2+\lambda_3\bigr).
+\]
+Pairing the factors gives
+\[
+\begin{aligned}
+(u-u_1)(u-u_2)
+&=\bigl(u+\mathrm{i}(\lambda_1+\lambda_2+\lambda_3)\bigr)
+   \bigl(u-\mathrm{i}(\lambda_1+\lambda_2-\lambda_3)\bigr)
+   =u^2+2\mathrm{i}\lambda_3\,u+(\lambda_1+\lambda_2)^2-\lambda_3^2 .
+\end{aligned}
+\]
+\[
+\begin{aligned}
+(u-u_3)(u-u_4)
+&=\bigl(u-\mathrm{i}(\lambda_1-\lambda_2+\lambda_3)\bigr)
+   \bigl(u-\mathrm{i}(-\lambda_1+\lambda_2+\lambda_3)\bigr)
+   =u^2-2\mathrm{i}\lambda_3\,u+(\lambda_1-\lambda_2)^2-\lambda_3^2 .
+\end{aligned}
+\]
+Hence
+\[
+\begin{aligned}
+\prod_{i=1}^4 (u-u_i)
+&=\bigl(u^2+2\mathrm{i}\lambda_3 u+(\lambda_1+\lambda_2)^2-\lambda_3^2\bigr)
+  \bigl(u^2-2\mathrm{i}\lambda_3 u+(\lambda_1-\lambda_2)^2-\lambda_3^2\bigr)\\
+&=u^4+2(\lambda_1^2+\lambda_2^2+\lambda_3^2)u^2
+   -8\mathrm{i}\lambda_1\lambda_2\lambda_3\,u
+   +\bigl((\lambda_1^2+\lambda_2^2+\lambda_3^2)^2
+          -4(\lambda_1^2\lambda_2^2+\lambda_1^2\lambda_3^2+\lambda_2^2\lambda_3^2)\bigr).
+\end{aligned}
+\]
+
+Using \(\lambda_1^2+\lambda_2^2+\lambda_3^2=-2\alpha_1\),
+\(\lambda_1^2\lambda_2^2+\lambda_1^2\lambda_3^2+\lambda_2^2\lambda_3^2=s_2\),
+and \(\sqrt{s_0}=\mathrm{i}\lambda_1\lambda_2\lambda_3\), we obtain
+\[
+\prod_{i=1}^4 (u-u_i)
+= u^4-4\alpha_1 u^2-8\sqrt{s_0}\,u+4\alpha_1^2-4s_2
+=R(u),
+\]
+so each \(u_i\) is a root of \(R(u)=0\).
+
+
 
 
 
