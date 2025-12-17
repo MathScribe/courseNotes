@@ -4911,6 +4911,561 @@ and \(\sqrt{s_0}=\mathrm{i}\lambda_1\lambda_2\lambda_3\), we obtain
 so each \(u_i\) is a root of \(R(u)=0\).
 
 
+\Week{Algebro-Geometric Solutions for the mKdV Equation (13)}{2025-12-16}
+
+\obj{Derive explicit expressions for \(u\) by integrating the first-order equation \(u_x^2=-R(u)\) and reducing the resulting integrals to standard elliptic forms.}
+
+We begin with
+\begin{equation}\label{eq:mkdv-review}
+u_x^2=-R(u)=-\prod_{i=1}^4 (u-u_i).
+\end{equation}
+We solve this equation by direct integration, distinguishing cases according to the location of the roots.
+
+\noindent
+\textbf{Case 1.} All roots are real, $u_i\in\mathbb{R}$ (equivalently $\lambda_i\in\mathrm{i}\mathbb{R}$), ordered as
+\[
+u_1>u_2>u_3>u_4.
+\]
+We consider the initial value problem on the interval $u_4\le u\le u_3$,
+\begin{equation}\label{eq:ivp}
+\begin{cases}
+\dfrac{d u}{d x}= \pm \sqrt{-R(u)},\\[6pt]
+u(0)=u_3.
+\end{cases}
+\end{equation}
+
+Setting
+\[
+y=u_x,\qquad z=u,
+\]
+the corresponding algebraic curve takes the form
+\begin{equation}\label{eq:elliptic-curve}
+y^2=-\prod_{i=1}^4 (z-u_i).
+\end{equation}
+Integrating \eqref{eq:ivp} yields
+\begin{equation}\label{eq:integral-form}
+\int_{u_3}^{u}\frac{d v}{\sqrt{-R(v)}}=\pm \int_0^x d y=\pm x.
+\end{equation}
+
+We recall the incomplete elliptic integral of the first kind,
+\begin{equation}\label{eq:F-def-13}
+\nu=F(z,k)=\int_0^z \frac{d t}{\sqrt{(1-t^2)(1-k^2 t^2)}},
+\qquad 
+z=\operatorname{sn}(\nu,k).
+\end{equation}
+Differentiating with respect to $\nu$ gives
+\[
+1=\frac{1}{\sqrt{(1-z^2)(1-k^2 z^2)}}\,\frac{d z}{d\nu},
+\]
+and hence
+\begin{equation}\label{eq:dz-dnu}
+\frac{d z}{d\nu}
+=\sqrt{(1-z^2)(1-k^2 z^2)}
+=\operatorname{cn}(\nu,k)\operatorname{dn}(\nu,k),
+\end{equation}
+where
+\[
+\operatorname{cn}(\nu,k)=\sqrt{1-z^2},\qquad 
+\operatorname{dn}(\nu,k)=\sqrt{1-k^2 z^2}.
+\]
+
+To reduce the integral \eqref{eq:integral-form} to the standard form, we introduce a fractional linear transformation $u\mapsto t$, followed by the substitution $t=z^2$, such that
+\[
+u_3\leftrightarrow 0,\qquad 
+u_4\leftrightarrow 1,\qquad 
+u_2\leftrightarrow \infty.
+\]
+An explicit choice is
+\begin{equation}\label{eq:t-transform}
+t=\frac{u-u_3}{u-u_2}\,\frac{u_4-u_2}{u_4-u_3}.
+\end{equation}
+Solving for $u$ gives
+\begin{equation}\label{eq:u-of-t}
+u
+= u_2+\frac{(u_3-u_2)(u_4-u_2)}
+{\,u_4-u_2+(u_3-u_4)t\,},
+\qquad t=z^2.
+\end{equation}
+
+From \eqref{eq:u-of-t}, straightforward algebra yields
+\begin{equation}\label{eq:u-u1}
+u-u_1
+=\frac{(u_3-u_1)(u_4-u_2)+(u_2-u_1)(u_3-u_4)t}
+{\,u_4-u_2+(u_3-u_4)t\,},
+\end{equation}
+\begin{equation}\label{eq:u-u3}
+u-u_3
+=\frac{(u_2-u_3)(u_3-u_4)t}
+{\,u_4-u_2+(u_3-u_4)t\,},
+\end{equation}
+and
+\begin{equation}\label{eq:u-u4}
+u-u_4
+=\frac{(u_2-u_4)(u_4-u_3)(1-t)}
+{\,u_4-u_2+(u_3-u_4)t\,}.
+\end{equation}
+Combining these expressions, we find
+\begin{equation}\label{eq:prod-ui}
+\prod_{i=1}^4 (u-u_i)
+=
+\frac{-(u_2-u_3)^2 (u_2-u_4)^2 (u_3-u_4)^2\,
+t(1-t)\Bigl((u_1-u_3)(u_2-u_4)+(u_2-u_1)(u_3-u_4)t\Bigr)}
+{\bigl(u_4-u_2+(u_3-u_4)t\bigr)^4}.
+\end{equation}
+
+Consequently,
+\begin{equation}\label{eq:sqrt-Ru}
+\sqrt{-R(u)}
+=
+\frac{(u_2-u_3)(u_2-u_4)(u_3-u_4)}
+{\bigl(u_4-u_2+(u_3-u_4)t\bigr)^2}
+\sqrt{(u_1-u_3)(u_2-u_4)}\,
+\sqrt{t(1-t)(1-k^2 t)},
+\end{equation}
+where the elliptic modulus is given by
+\begin{equation}\label{eq:k-def}
+k^2=\frac{(u_1-u_2)(u_3-u_4)}{(u_1-u_3)(u_2-u_4)} .
+\end{equation}
+
+Moreover, differentiating \eqref{eq:u-of-t} with respect to $t$ yields
+\begin{equation}\label{eq:du-dt}
+d u
+=
+\frac{(u_2-u_4)(u_2-u_3)(u_4-u_3)}
+{\bigl(u_4-u_2+(u_3-u_4)t\bigr)^2}\,d t .
+\end{equation}
+Substituting this expression together with \eqref{eq:sqrt-Ru} and setting $t=z^2$, we obtain
+\begin{align}\label{eq:du-over-sqrtR}
+\frac{d u}{\sqrt{-R(u)}}
+&=
+\frac{-d t}{\sqrt{(u_1-u_3)(u_2-u_4)}\,\sqrt{t(1-t)(1-k^2 t)}}\\
+&=
+\frac{-2\,d z}{\sqrt{(u_1-u_3)(u_2-u_4)}\,\sqrt{(1-z^2)(1-k^2 z^2)}} ,
+\qquad  z\in(0,1).
+\end{align}
+
+Consequently, for \(u\in[u_4,u_3]\),
+\begin{align}\label{eq:integral-final}
+\int_{u_3}^{u}\frac{d v}{\sqrt{-R(v)}}
+&=
+-\frac{2}{\sqrt{(u_1-u_3)(u_2-u_4)}}
+\int_0^z \frac{d t}{\sqrt{(1-t^2)(1-k^2 t^2)}}\\
+&=
+-\frac{2}{\sqrt{(u_1-u_3)(u_2-u_4)}}\,F(z,k)
+=\pm x .
+\end{align}
+
+Inverting this relation gives
+\begin{equation}\label{eq:z-solution}
+z^2
+=
+\operatorname{sn}^2(\alpha x,k),
+\qquad
+\alpha^2=\frac{(u_1-u_3)(u_2-u_4)}{4}.
+\end{equation}
+Substituting back into \eqref{eq:u-of-t} yields the explicit solution
+\begin{equation}\label{eq:u-solution-real}
+u(x)
+=
+u_2+\frac{(u_3-u_2)(u_4-u_2)}
+{(u_4-u_2)+(u_3-u_4)\operatorname{sn}^2(\alpha x,k)} ,
+\qquad
+x\in\mathbb{R},\quad u\in[u_4,u_3].
+\end{equation}
+
+\medskip
+\noindent
+\textbf{Case 2.}
+Assume
+\[
+u_1>u_3\in\mathbb{R},\qquad
+u_2=u_4^{*}\in\mathbb{C}\setminus(\mathbb{R}\cup \mathrm{i}\mathbb{R}).
+\]
+Then
+\begin{equation}\label{eq:case2-R}
+\begin{aligned}
+-R(u)
+&=-(u-u_3)(u-u_1)(u-u_2)(u-u_2^{*}) \\
+&=-(u-u_3)(u-u_1)\bigl((u-u_{2R})^2+u_{2I}^2\bigr),
+\end{aligned}
+\end{equation}
+where $u_2=u_{2R}+\mathrm{i}u_{2I}=a+\mathrm{i}b$.
+
+Using the identity $\operatorname{cn}'(x,k)=-\operatorname{sn}(x,k)\operatorname{dn}(x,k)$, we set
+\[
+z=\operatorname{cn}(x,k).
+\]
+Then
+\begin{equation}\label{eq:cn-derivative}
+\left(\frac{d z}{d x}\right)^2
+=
+\operatorname{sn}^2(x,k)\operatorname{dn}^2(x,k)
+=
+(1-z^2)(k'^2+k^2 z^2),
+\end{equation}
+where $k'=\sqrt{1-k^2}$. It follows that
+\begin{equation}\label{eq:dz-case2}
+\frac{d z}{\sqrt{(1-z^2)(k'^2+k^2 z^2)}}=-d x .
+\end{equation}
+Integrating from $x=0$ (so that $z=1$) to $x$ gives
+\begin{equation}\label{eq:int-case2}
+-\int_{1}^{z}\frac{d t}{\sqrt{(1-t^2)(k'^2+k^2 t^2)}}
+=\int_{0}^{x} d y
+= x .
+\end{equation}
+
+To relate $z$ to $u$, we introduce a Möbius transformation mapping
+\[
+u_1 \leftrightarrow 1,\qquad
+u_3 \leftrightarrow -1 .
+\]
+Let
+\begin{equation}\label{eq:mobius-def}
+\delta\,\frac{u-u_1}{u-u_3}=\frac{z-1}{z+1}.
+\end{equation}
+Solving for $u$ gives
+\begin{equation}\label{eq:u-mobius-raw}
+u
+=\frac{u_1-\dfrac{z-1}{\delta(z+1)}\,u_3}
+{1-\dfrac{z-1}{\delta(z+1)}}
+= u_1+\frac{(u_1-u_3)\dfrac{z-1}{\delta(z+1)}}
+{1-\dfrac{z-1}{\delta(z+1)}} .
+\end{equation}
+Equivalently, this can be written as
+\begin{equation}\label{eq:u-mobius}
+u= u_1+\frac{(u_3-u_1)(1-z)}{(1-z)+\delta(1+z)}
+= u_1+\frac{(u_3-u_1)(1-z)}{1+\delta+(\delta-1)z} .
+\end{equation}
+
+
+\extra{}
+
+To simplify the computations, we employ the complex projective line notation on $\mathbb{C}\mathbb{P}^1$.
+We write a Möbius transformation as
+\[
+\frac{a z+b w}{c z+d w}
+=
+\begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}
+\binom{z}{w},
+\qquad
+\binom{z}{w}=(z:w)=\frac{z}{w}\in\mathbb{C}\mathbb{P}^1 .
+\]
+For any nonzero scalar $f$, this representation is homogeneous:
+\[
+\begin{pmatrix}
+f a & f b\\
+f c & f d
+\end{pmatrix}
+\binom{z}{w}
+=
+f\begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}
+\binom{z}{w}
+=
+\begin{pmatrix}
+a & b\\
+c & d
+\end{pmatrix}
+\binom{z}{w}.
+\]
+Moreover, if two matrices share the same second row, then
+\[
+\begin{pmatrix}
+a_1 & b_1\\
+c & d
+\end{pmatrix}
+\binom{z}{w}
++
+\begin{pmatrix}
+a_2 & b_2\\
+c & d
+\end{pmatrix}
+\binom{z}{w}
+=
+\begin{pmatrix}
+a_1+a_2 & b_1+b_2\\
+c & d
+\end{pmatrix}
+\binom{z}{w}.
+\]
+
+From \eqref{eq:mobius-def} we have the matrix identity
+\begin{equation}\label{eq:matrix-relation}
+\begin{pmatrix}
+1 & -u_1\\
+1 & -u_3
+\end{pmatrix}
+\binom{u}{1}
+=
+\begin{pmatrix}
+1 & -1\\
+\delta & \delta
+\end{pmatrix}
+\binom{z}{1}.
+\end{equation}
+Multiplying by the inverse of the left matrix yields
+\begin{equation}\label{eq:u-matrix}
+\binom{u}{1}
+=
+\frac{1}{u_1-u_3}
+\begin{pmatrix}
+-u_3 & u_1\\
+-1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1\\
+\delta & \delta
+\end{pmatrix}
+\binom{z}{1}
+=
+\begin{pmatrix}
+\delta u_1-u_3 & \delta u_1+u_3\\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1}.
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:u-mobius-final}
+u
+=
+\frac{(\delta u_1-u_3)z+\delta u_1+u_3}
+{(\delta-1)z+\delta+1}
+=
+\frac{\delta u_1(z+1)+u_3(1-z)}
+{\delta(z+1)+1-z}.
+\end{equation}
+
+Subtracting $\binom{u_2}{1}$ from \eqref{eq:u-matrix} gives
+\begin{equation}\label{eq:u-minus-u2}
+\begin{aligned}
+\binom{u}{1}-\binom{u_2}{1}
+&=
+\begin{pmatrix}
+\delta u_1-u_3 & \delta u_1+u_3\\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1}
+-
+\begin{pmatrix}
+u_2(\delta-1) & u_2(\delta+1)\\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1} \\
+&=
+\begin{pmatrix}
+\delta(u_1-u_2)+u_2-u_3 & \delta(u_1-u_2)+u_3-u_2\\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1}.
+\end{aligned}
+\end{equation}
+
+Recall that multiplication in $\mathbb{C}\mathbb{P}^1$ is represented componentwise:
+\[
+\binom{z_1}{w_1}\cdot\binom{z_2}{w_2}
+=\binom{z_1 z_2}{w_1 w_2}
+=\frac{z_1 z_2}{w_1 w_2}.
+\]
+Similarly,
+\begin{equation}\label{eq:u-u2star}
+\binom{u-u_2^{*}}{1}
+=
+\begin{pmatrix}
+\delta(u_1-u_2^{*})+u_2^{*}-u_3 &
+\delta(u_1-u_2^{*})+u_3-u_2^{*} \\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1}.
+\end{equation}
+It follows that the denominator of $(u-u_2)(u-u_2^{*})$ is
+\begin{equation}\label{eq:den-u2}
+\bigl((\delta-1)z+\delta+1\bigr)^2,
+\end{equation}
+while the numerator is
+\begin{equation}\label{eq:num-u2}
+\begin{pmatrix} z & 1 \end{pmatrix}
+\binom{\delta(u_1-u_2)+u_2-u_3}{\delta(u_1-u_2)+u_3-u_2}
+\begin{pmatrix}
+\delta(u_1-u_2^{*})+u_2^{*}-u_3 &
+\delta(u_1-u_2^{*})+u_3-u_2^{*}
+\end{pmatrix}
+\binom{z}{1}.
+\end{equation}
+
+Requiring the coefficient of the linear term in $z$ to vanish leads to
+\begin{equation}\label{eq:linear-vanish}
+\operatorname{Re}\!\left(
+\bigl(\delta(u_1-u_2)+u_2-u_3\bigr)
+\bigl(\delta(u_1-u_2^{*})+u_3-u_2^{*}\bigr)
+\right)=0 .
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:delta-eq}
+\delta^2 |u_1-u_2|^2
++\operatorname{Re}\!\left(
+(u_2-u_3)(u_1-u_2^{*})-(u_2^{*}-u_3)(u_1-u_2)
+\right)\delta
+-|u_2-u_3|^2=0 .
+\end{equation}
+Using
+\[
+\operatorname{Re}\!\left(
+(u_2-u_3)(u_1-u_2^{*})-(u_2^{*}-u_3)(u_1-u_2)
+\right)
+=\operatorname{Re}\!\left(2\mathrm{i}\,\operatorname{Im}(u_2-u_3)(u_1-u_2)\right)=0,
+\]
+we obtain
+\begin{equation}\label{eq:delta-sq}
+\delta^2=\frac{|u_2-u_3|^2}{|u_1-u_2|^2},
+\qquad
+\delta=\frac{|u_2-u_3|}{|u_1-u_2|}.
+\end{equation}
+
+Hence
+\begin{equation}\label{eq:u2u2star}
+(u-u_2)(u-u_2^{*})
+=
+\frac{
+\bigl|\delta(u_1-u_2)+u_2-u_3\bigr|^2 z^2
++\bigl|\delta(u_1-u_2)+u_3-u_2\bigr|^2
+}{
+\bigl((\delta-1)z+\delta+1\bigr)^2
+}.
+\end{equation}
+
+Moreover,
+\[
+\binom{u-u_1}{1}
+=
+\begin{pmatrix}
+u_1-u_3 & u_3-u_1\\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1},
+\qquad
+\binom{u-u_3}{1}
+=
+\begin{pmatrix}
+\delta(u_1-u_3) & \delta(u_1-u_3)\\
+\delta-1 & \delta+1
+\end{pmatrix}
+\binom{z}{1},
+\]
+so that
+\begin{equation}\label{eq:u-u1-u-u3}
+u-u_1=\frac{(u_1-u_3)(z-1)}{(\delta-1)z+\delta+1},
+\qquad
+u-u_3=\frac{\delta(u_1-u_3)(z+1)}{(\delta-1)z+\delta+1}.
+\end{equation}
+
+Substituting \eqref{eq:u2u2star} and \eqref{eq:u-u1-u-u3} into \eqref{eq:case2-R}, we obtain
+\begin{equation}\label{eq:R-case2-final}
+-R(u)
+=
+\frac{\delta (u_1-u_3)^2(1-z)(1+z)}
+{\bigl((\delta-1)z+\delta+1\bigr)^4}
+\left(
+\bigl|\delta(u_1-u_2)+u_2-u_3\bigr|^2 z^2
++\bigl|\delta(u_1-u_2)+u_3-u_2\bigr|^2
+\right).
+\end{equation}
+
+Using the identity, valid for all $z_1,z_2\in\mathbb{C}$,
+\begin{equation}\label{eq:complex-identity}
+|z_1+z_2|^2+|z_1-z_2|^2=2|z_1|^2+2|z_2|^2,
+\end{equation}
+we find
+\begin{equation}\label{eq:sum-moduli}
+\begin{aligned}
+&\bigl|\delta(u_1-u_2)+u_2-u_3\bigr|^2
++\bigl|\delta(u_1-u_2)+u_3-u_2\bigr|^2 \\
+&\qquad
+=2\delta^2|u_1-u_2|^2+2|u_2-u_3|^2
+=4|u_2-u_3|^2 ,
+\end{aligned}
+\end{equation}
+where we used $\delta^2|u_1-u_2|^2=|u_2-u_3|^2$.
+
+Consequently,
+\begin{equation}\label{eq:sqrtR-case2}
+\sqrt{-R(u)}
+=
+\frac{2\sqrt{\delta}\,(u_1-u_3)\,|u_2-u_3|}
+{\bigl((\delta-1)z+\delta+1\bigr)^2}
+\sqrt{(1-z^2)(k'^2+k^2 z^2)},
+\end{equation}
+where
+\begin{equation}\label{eq:k-case2}
+k
+=\frac{\bigl|\delta(u_1-u_2)+u_2-u_3\bigr|}{2|u_2-u_3|},
+\qquad
+k'=\sqrt{1-k^2}.
+\end{equation}
+
+Differentiating \eqref{eq:u-mobius-final} with respect to $z$ gives
+\begin{equation}\label{eq:du-dz-case2}
+\begin{aligned}
+d u
+&=\frac{(\delta u_1-u_3)\bigl((\delta-1)z+\delta+1\bigr)
+-\bigl((\delta u_1-u_3)z+\delta u_1+u_3\bigr)(\delta-1)}
+{\bigl((\delta-1)z+\delta+1\bigr)^2}\,d z \\
+&=\frac{2\delta (u_1-u_3)}{\bigl((\delta-1)z+\delta+1\bigr)^2}\,d z .
+\end{aligned}
+\end{equation}
+Combining this with \eqref{eq:sqrtR-case2}, we obtain
+\begin{equation}\label{eq:du-over-sqrtR-case2}
+\frac{d u}{\sqrt{-R(u)}}
+=
+\frac{\sqrt{\delta}}{|u_2-u_3|}
+\frac{d z}{\sqrt{(1-z^2)(k'^2+k^2 z^2)}}
+=
+\frac{1}{\alpha}
+\frac{d z}{\sqrt{(1-z^2)(k'^2+k^2 z^2)}},
+\end{equation}
+where
+\begin{equation}\label{eq:alpha-def-case2}
+\alpha=\frac{|u_2-u_3|}{\sqrt{\delta}}
+=\sqrt{|u_1-u_2|\,|u_2-u_3|}.
+\end{equation}
+
+For $u_3\le u\le u_1$, integration yields
+\begin{equation}\label{eq:integral-case2-final}
+\int_{u_1}^{u}\frac{d v}{\sqrt{-R(v)}}
+=
+\frac{1}{\alpha}
+\int_{1}^{z}\frac{d t}{\sqrt{(1-t^2)(k'^2+k^2 t^2)}}
+=\pm x .
+\end{equation}
+Since $\operatorname{cn}$ is an even function, inversion gives
+\begin{equation}\label{eq:z-cn}
+z=\operatorname{cn}(\alpha x,k).
+\end{equation}
+
+Substituting this expression into \eqref{eq:u-mobius-final}, we arrive at the explicit solution
+\begin{equation}\label{eq:u-solution-case2}
+u(x)
+=
+u_1+\frac{(u_3-u_1)\bigl(1-\operatorname{cn}(\alpha x,k)\bigr)}
+{1+\delta+(\delta-1)\operatorname{cn}(\alpha x,k)},
+\qquad
+x\in\mathbb{R},\quad u\in[u_3,u_1].
+\end{equation}
+The parameters are given by
+\begin{equation}\label{eq:params-case2}
+\delta=\frac{|u_2-u_3|}{|u_1-u_2|},
+\qquad
+\alpha^2=| (u_1-u_2)(u_2-u_3) |,
+\qquad
+k^2=\frac{\bigl|\delta(u_1-u_2)+u_2-u_3\bigr|^2}{4|u_2-u_3|^2}.
+\end{equation}
+
+
+
 
 
 
