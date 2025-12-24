@@ -3565,11 +3565,11 @@ Substituting \eqref{eq:n-decomp} into \eqref{eq:theta-B1} yields
 +\big(m_2+\tfrac{t}{2}\big)(z_1+z_2)
 \Big\} \\
 &=
-\vartheta_{3}\!\bigl(z_1-z_2;\,2\tau_1^{(1)}\bigr)\,
-\vartheta_{3}\!\bigl(z_1+z_2;\,2\tau_2^{(1)}\bigr)
+\vartheta_{3}\!\bigl(z_1-z_2,\,2\tau_1^{(1)}\bigr)\,
+\vartheta_{3}\!\bigl(z_1+z_2,\,2\tau_2^{(1)}\bigr)
 +
-\vartheta_{2}\!\bigl(z_1-z_2;\,2\tau_1^{(1)}\bigr)\,
-\vartheta_{2}\!\bigl(z_1+z_2;\,2\tau_2^{(1)}\bigr).
+\vartheta_{2}\!\bigl(z_1-z_2,\,2\tau_1^{(1)}\bigr)\,
+\vartheta_{2}\!\bigl(z_1+z_2,\,2\tau_2^{(1)}\bigr).
 \end{aligned}
 \end{equation}
 
@@ -5464,6 +5464,377 @@ The parameters are given by
 k^2=\frac{\bigl|\delta(u_1-u_2)+u_2-u_3\bigr|^2}{4|u_2-u_3|^2}.
 \end{equation}
 
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (14)}{2025-12-23}
+
+\obj{Consider Case~1 with $\lambda_j\in \mathrm{i}\mathbb{R}$.  
+Verify by direct computation that the two explicit expressions for the solution $u$ coincide.}
+
+
+Recall from \eqref{eq:u-solution-real} that for $x\in\mathbb{R}$ and
+$u\in [u_4,u_3]$ one has
+\begin{equation}
+u(x,t)
+=
+u_2+\frac{(u_3-u_2)(u_4-u_2)}
+{(u_4-u_2)+(u_3-u_4)\operatorname{sn}^2\!\bigl(\alpha (x+vt),k\bigr)} ,
+\label{eq:u-solution-real-14}
+\end{equation}
+where the parameters are given by
+\begin{equation}
+k^2=\frac{(u_1-u_2)(u_3-u_4)}{(u_1-u_3)(u_2-u_4)} ,
+\qquad
+\alpha^2=\frac{(u_1-u_3)(u_2-u_4)}{4}.
+\label{eq:k-alpha-14}
+\end{equation}
+The constants $u_j$ are expressed in terms of $\lambda_j$ as
+\begin{equation}
+\begin{aligned}
+u_1&=-\mathrm{i}(\lambda_1+\lambda_2+\lambda_3),\qquad
+u_2=\mathrm{i}(\lambda_1+\lambda_2-\lambda_3),\\
+u_3&=\mathrm{i}(\lambda_1-\lambda_2+\lambda_3),\qquad
+u_4=\mathrm{i}(-\lambda_1+\lambda_2+\lambda_3).
+\end{aligned}
+\label{eq:define-u-lambda-14}
+\end{equation}
+
+On the other hand, the theta-functional representation
+\eqref{eq:u-theta-ratio-1-case1} reads
+\begin{equation}
+u(x,t)
+=
+C_{u_0}^{(1)}\,
+\frac{\Theta\!\bigl(D^{(1)}+\Delta^{(1)}+\mathrm{i}U^{(1)}(x+vt)\bigr)}
+{\Theta\!\bigl(D^{(1)}+\mathrm{i}U^{(1)}(x+vt)\bigr)},
+\label{eq:u-theta-ratio-1-case1-14}
+\end{equation}
+with
+\[
+U^{(1)}=\kappa^{(1)}\mathbf{1},\qquad
+\Delta^{(1)}=(\mathrm{i}\pi+\nu^{(1)}\sigma_3)\mathbf{1},\qquad
+\mathbf{1}=[1\ \ 1]^{\top},\qquad
+D^{(1)}=\mathbf{0},
+\]
+and
+\[
+\kappa^{(1)}=\frac{\pi(\lambda_1^2-\lambda_3^2)^{1/2}}{K^{(1)}_2},\qquad
+k^{(1)}_2=\frac{(\lambda_1^2-\lambda_2^2)^{1/2}}{(\lambda_1^2-\lambda_3^2)^{1/2}},\qquad
+k^{(1)}_1=k^{(1)}_2\frac{\lambda_3}{\lambda_2}, \qquad
+\nu^{(1)}=\frac{\mathrm{i}\pi}{K^{(1)}_1}
+F\!\left(\frac{\lambda_2}{\lambda_3},\,k^{(1)}_1\right).
+\]
+Using \eqref{eq:int-lambda-to-F} and \eqref{eq:int-lambda-dlambda-y-to-F},
+the moduli $k^{(1)}_1$ and $k^{(1)}_2$ can be written equivalently as
+\begin{equation}
+k^{(1)}_1=\frac{\lambda_3}{\lambda_2}
+\sqrt{\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2}},
+\qquad
+k^{(1)}_2=\sqrt{\frac{\lambda_1^2-\lambda_2^2}{\lambda_1^2-\lambda_3^2}} .
+\label{eq:k1k2-case1-14}
+\end{equation}
+One verifies directly that
+\[
+k=k^{(1)}_2,
+\qquad
+\alpha=\kappa^{(1)}\frac{K^{(1)}_2}{\pi}.
+\]
+
+
+Applying the theta-function decomposition \eqref{eq:theta-decomp},
+\begin{equation}
+\begin{aligned}
+\Theta\!\left(B^{(1)};z\right)
+&=
+\vartheta_{3}\!\bigl(z_1-z_2,\,2\tau_1^{(1)}\bigr)\,
+\vartheta_{3}\!\bigl(z_1+z_2,\,2\tau_2^{(1)}\bigr)
++
+\vartheta_{2}\!\bigl(z_1-z_2,\,2\tau_1^{(1)}\bigr)\,
+\vartheta_{2}\!\bigl(z_1+z_2,\,2\tau_2^{(1)}\bigr),
+\end{aligned}
+\label{eq:theta-decomp-14}
+\end{equation}
+we first write out explicitly the numerator and denominator of
+\eqref{eq:u-theta-ratio-1-case1-14}.  Using
+$D^{(1)}=\mathbf{0}$,
+$\Delta^{(1)}=(\mathrm{i}\pi+\nu^{(1)}\sigma_3)\mathbf{1}$, and
+$U^{(1)}=\kappa^{(1)}\mathbf{1}$, we obtain
+\begin{equation}
+\begin{aligned}
+&\phantom{=} \Theta\!\bigl(D^{(1)}+\Delta^{(1)}+\mathrm{i}U^{(1)}(x+vt)\bigr)
+=\Theta\!\bigl((\mathrm{i}\pi+\nu^{(1)}\sigma_3)\mathbf{1}+\mathrm{i}\kappa^{(1)}\mathbf{1}(x+vt)\bigr) \\
+&=
+\vartheta_3\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)\,
+\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt)+2\pi\mathrm{i},2\tau^{(1)}_2\bigr) 
++\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)\,
+\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt)+2\pi\mathrm{i},2\tau^{(1)}_2\bigr)\\
+&=
+\vartheta_3\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)\,
+\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr) 
+-\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)\,
+\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr),
+\end{aligned}
+\label{eq:u-theta-num-14}
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+&\phantom{=} \Theta\!\bigl(D^{(1)}+\mathrm{i}U^{(1)}(x+vt)\bigr) 
+=\Theta\!\bigl(\mathrm{i}\kappa^{(1)}\mathbf{1}(x+vt)\bigr)\\
+&=
+\vartheta_3\!\bigl(0,2\tau^{(1)}_1\bigr)\,
+\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr) 
++\vartheta_2\!\bigl(0,2\tau^{(1)}_1\bigr)\,
+\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr).
+\end{aligned}
+\label{eq:u-theta-den-14}
+\end{equation}
+Substituting \eqref{eq:u-theta-num-14} and \eqref{eq:u-theta-den-14} into
+\eqref{eq:u-theta-ratio-1-case1-14} and dividing numerator and denominator
+by $\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)$,
+the ratio simplifies to
+\begin{equation}
+\begin{aligned}
+u(x,t)=
+C_{u_0}^{(1)}
+\frac{
+\vartheta_3\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)
+-\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)
+\dfrac{\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+{\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+}{
+\vartheta_3\!\bigl(0,2\tau^{(1)}_1\bigr)
++\vartheta_2\!\bigl(0,2\tau^{(1)}_1\bigr)
+\dfrac{\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+{\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+}.
+\end{aligned}
+\label{eq:u-convert-p-14a}
+\end{equation}
+Equivalently, factoring out the theta-constants
+$\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)$ and
+$\vartheta_2\!\bigl(0,2\tau^{(1)}_1\bigr)$ from the numerator and
+denominator, respectively, yields
+\begin{equation}
+\begin{aligned}
+u(x,t)=
+C_{u_0}^{(1)}
+\frac{\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)}
+{\vartheta_2\!\bigl(0,2\tau^{(1)}_1\bigr)}
+\frac{
+\dfrac{\vartheta_3\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)}
+{\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)}
+-
+\dfrac{\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+{\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+}{
+\dfrac{\vartheta_3\!\bigl(0,2\tau^{(1)}_1\bigr)}
+{\vartheta_2\!\bigl(0,2\tau^{(1)}_1\bigr)}
++
+\dfrac{\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+{\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+}.
+\end{aligned}
+\label{eq:u-convert-p-14b}
+\end{equation}
+
+
+Introduce the parameters $\tilde{\nu}_1$ and $\tilde{\nu}_2$ by
+\begin{equation}\label{eq:tilde-v-1-2-14}
+\tilde{\nu}_1=\frac{\mathrm{i}\pi}{K^{(1)}_2}
+F\!\left(\frac{(u_2-u_4)^{1/2}}{(u_3-u_4)^{1/2}},\,k^{(1)}_2\right),
+\qquad
+\tilde{\nu}_2=\frac{\mathrm{i}\pi}{K^{(1)}_2}
+F\!\left(\frac{\bigl(u_3(u_2-u_4)\bigr)^{1/2}}{\bigl(u_2(u_3-u_4)\bigr)^{1/2}},\,k^{(1)}_2\right).
+\end{equation}
+
+By \eqref{eq:u-solution-real-14}, the solution can be rewritten as
+\begin{equation}
+u(x,t)
+=
+u_2\,
+\frac{
+\dfrac{u_3(u_2-u_4)}{u_2(u_3-u_4)}
+-\operatorname{sn}^2\!\bigl(\alpha (x+vt),k\bigr)
+}{
+\dfrac{(u_2-u_4)}{(u_3-u_4)}
+-\operatorname{sn}^2\!\bigl(\alpha (x+vt),k\bigr)
+}.
+\label{eq:u-solution-real-ratio-14}
+\end{equation}
+Using the definitions \eqref{eq:tilde-v-1-2-14}, the constant ratios in
+\eqref{eq:u-solution-real-ratio-14} admit the representations
+\[
+\frac{u_2-u_4}{u_3-u_4}
+=
+\operatorname{sn}^2\!\bigl(\tilde{\nu}_1 K^{(1)}_2/(\mathrm{i}\pi),\,k^{(1)}_2\bigr),
+\qquad
+\frac{u_3(u_2-u_4)}{u_2(u_3-u_4)}
+=
+\operatorname{sn}^2\!\bigl(\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),\,k^{(1)}_2\bigr)
+.
+\]
+Substituting these expressions yields
+\begin{equation}\label{eq:u-convert-p-2-14}
+u(x,t)
+=
+u_2\,
+\frac{
+\operatorname{sn}^2\!\bigl(\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),\,k^{(1)}_2\bigr)
+-\operatorname{sn}^2\!\bigl(\alpha(x+vt),\,k^{(1)}_2\bigr)
+}{
+\operatorname{sn}^2\!\bigl(\tilde{\nu}_1 K^{(1)}_2/(\mathrm{i}\pi),\,k^{(1)}_2\bigr)
+-\operatorname{sn}^2\!\bigl(\alpha(x+vt),\,k^{(1)}_2\bigr)
+}.
+\end{equation}
+
+
+\begin{lem}\label{lem-theta-23-identity}
+\begin{equation}\tag{a}\label{eq:theta-ratio-identity-14}
+\frac{\vartheta_2\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+     {\vartheta_3\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+=
+\frac{\vartheta_3\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)}
+     {\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)} .
+\end{equation}
+\begin{equation}\tag{b}\label{eq:theta-ratio-identity-14b}
+\frac{\vartheta_2(2\tilde{\nu}_1,2\tau^{(1)}_2)}{\vartheta_3(2\tilde{\nu}_1,2\tau^{(1)}_2)}
+= -\frac{\vartheta_3(0,2\tau^{(1)}_1)}{\vartheta_2(0,2\tau^{(1)}_1)} .
+\end{equation}
+
+\end{lem}
+
+\begin{proof}
+We begin with the three-term bilinear identities
+\begin{equation}\label{eq:formula-theta-2tau-1-14}
+\begin{aligned}
+2\,\vartheta_3(u+v,2\tau)\vartheta_3(u-v,2\tau)
+&=\vartheta_3(u,\tau)\vartheta_3(v,\tau)
+ +\vartheta_4(u,\tau)\vartheta_4(v,\tau),\\
+2\,\vartheta_2(u+v,2\tau)\vartheta_3(u-v,2\tau)
+&=\vartheta_2(u,\tau)\vartheta_2(v,\tau)
+ -\vartheta_1(u,\tau)\vartheta_1(v,\tau).
+\end{aligned}
+\end{equation}
+Setting $u=2\tilde{\nu}_2$ and $v=0$, these identities reduce to
+\begin{equation}
+\begin{aligned}
+2\,\vartheta_3\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)\vartheta_3\!\bigl(0,2\tau^{(1)}_2\bigr)
+&=\vartheta_3\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_3\!\bigl(0,\tau^{(1)}_2\bigr)
+ +\vartheta_4\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_4\!\bigl(0,\tau^{(1)}_2\bigr),\\
+2\,\vartheta_2\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)\vartheta_3\!\bigl(0,2\tau^{(1)}_2\bigr)
+&=\vartheta_2\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_2\!\bigl(0,\tau^{(1)}_2\bigr)
+ -\vartheta_1\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_1\!\bigl(0,\tau^{(1)}_2\bigr).
+\end{aligned}
+\end{equation}
+Since $\vartheta_1(0,\tau^{(1)}_2)=0$, the last term in the second identity vanishes.
+Dividing the second identity by the first, we obtain
+\begin{equation}\label{eq:theta-ratio-tau2-14}
+\frac{\vartheta_2\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+     {\vartheta_3\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+=
+\frac{
+\vartheta_2\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_2\!\bigl(0,\tau^{(1)}_2\bigr)
+}{
+\vartheta_3\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_3\!\bigl(0,\tau^{(1)}_2\bigr)
++\vartheta_4\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_4\!\bigl(0,\tau^{(1)}_2\bigr)
+}.
+\end{equation}
+
+We now express the right-hand side in terms of Jacobi elliptic functions.
+Using the standard relations
+\begin{equation}\label{eq:formula-trans-theta-elliptic-14}
+\begin{aligned}
+\cn(u,k)
+&=\frac{\vartheta_4(0,\tau)\vartheta_2(\pi\mathrm{i}u/K,\tau)}
+        {\vartheta_2(0,\tau)\vartheta_4(\pi\mathrm{i}u/K,\tau)},\qquad
+\dn(u,k)
+=\frac{\vartheta_4(0,\tau)\vartheta_3(\pi\mathrm{i}u/K,\tau)}
+        {\vartheta_3(0,\tau)\vartheta_4(\pi\mathrm{i}u/K,\tau)},\\
+k&=\frac{\vartheta_2^2(0,\tau)}{\vartheta_3^2(0,\tau)},\qquad
+k'=\frac{\vartheta_4^2(0,\tau)}{\vartheta_3^2(0,\tau)},
+\end{aligned}
+\end{equation}
+with $\tau=\tau^{(1)}_2$ and $u=2\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi)$,
+we obtain
+\[
+\frac{\vartheta_2\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_2\!\bigl(0,\tau^{(1)}_2\bigr)}
+     {\vartheta_3\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_3\!\bigl(0,\tau^{(1)}_2\bigr)}
+=
+k^{(1)}_2\,
+\frac{\cn\!\bigl(2\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),k^{(1)}_2\bigr)}
+     {\dn\!\bigl(2\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),k^{(1)}_2\bigr)} ,
+\]
+and
+\[
+\frac{\vartheta_4\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_4\!\bigl(0,\tau^{(1)}_2\bigr)}
+     {\vartheta_3\!\bigl(2\tilde{\nu}_2,\tau^{(1)}_2\bigr)\vartheta_3\!\bigl(0,\tau^{(1)}_2\bigr)}
+=
+ \frac{k^{(1)\prime}_2}{\dn\!\bigl(2\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),k^{(1)}_2\bigr)}.
+\]
+Substituting these expressions into \eqref{eq:theta-ratio-tau2-14} yields
+\begin{equation}\label{eq:theta-ratio-tau2-cn-dn-14}
+\frac{\vartheta_2\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+     {\vartheta_3\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+=
+\frac{
+k^{(1)}_2\,
+\cn\!\bigl(2\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),k^{(1)}_2\bigr)
+}{
+\dn\!\bigl(2\tilde{\nu}_2 K^{(1)}_2/(\mathrm{i}\pi),k^{(1)}_2\bigr)
++k^{(1)\prime}_2
+}.
+\end{equation}
+
+Applying the double-angle identities
+\begin{equation}\label{eq:Jacobi-double-14}
+\cn(2u)=\frac{\cn^2(u)-\sn^2(u)\dn^2(u)}{1-k^2\sn^4(u)},\qquad
+\dn(2u)=\frac{\dn^2(u)-k^2\sn^2(u)\cn^2(u)}{1-k^2\sn^4(u)},
+\end{equation}
+together with the definition of $\tilde{\nu}_2$ and \eqref{eq:define-u-lambda-14},
+the expression \eqref{eq:theta-ratio-tau2-cn-dn-14} simplifies to
+\[
+\frac{\vartheta_2\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+     {\vartheta_3\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+=\frac{(\lambda_1^{2}-\lambda_2^{2}-\lambda_3^{2})k^{(1)\prime}_1
+-(\lambda_1^{2}-\lambda_2^{2}+\lambda_3^{2})}
+{k^{(1)}_1(\lambda_1^{2}+\lambda_2^{2}-\lambda_3^{2})}.
+\]
+
+An analogous computation starting from $\nu^{(1)}$ yields the same value for
+\[
+\frac{\vartheta_3\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)}
+     {\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)},
+\]
+which proves the claim.
+\end{proof}
+
+By Lemma~\ref{lem-theta-23-identity}, \eqref{eq:u-convert-p-14b} can be rewritten as
+\begin{equation}
+\begin{aligned}
+u(x,t) =
+C_{u_0}^{(1)}
+\frac{\vartheta_2\!\bigl(2\nu^{(1)},2\tau^{(1)}_1\bigr)}{\vartheta_2\!\bigl(0,2\tau^{(1)}_1\bigr)}
+\frac{
+\dfrac{\vartheta_2\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}{\vartheta_3\!\bigl(2\tilde{\nu}_2,2\tau^{(1)}_2\bigr)}
+-
+\dfrac{\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}{\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+}{
+-\dfrac{\vartheta_2(2\tilde{\nu}_1,2\tau^{(1)}_2)}{\vartheta_3(2\tilde{\nu}_1,2\tau^{(1)}_2)}
++
+\dfrac{\vartheta_2\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}{\vartheta_3\!\bigl(2\mathrm{i}\kappa^{(1)}(x+vt),2\tau^{(1)}_2\bigr)}
+}.
+\end{aligned}
+\label{eq:u-convert-p}
+\end{equation}
+
+From this expression, one deduces that the poles of $u(x,t)$ occur at
+\[
+2\mathrm{i}\kappa^{(1)} (x+vt) = 2\tilde{\nu}_1 + 4\mathrm{i} n \pi + 4\mathrm{i} m \pi \tau^{(1)}_2, \quad n,m \in \mathbb{Z},
+\]
+while the zeros occur at
+\[
+2\mathrm{i}\kappa^{(1)} (x+vt) = 2\tilde{\nu}_2 + 4\mathrm{i} n \pi + 4\mathrm{i} m \pi \tau^{(1)}_2, \quad n,m \in \mathbb{Z}.
+\]
 
 
 
