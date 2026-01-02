@@ -6,6 +6,7 @@
 \usepackage{epstopdf}
 \usepackage{tikz}
 \usepackage{setspace}%Ê¹ÓÃŒäŸàºê°ü
+\usepackage{extarrows}
 \usepackage{hyperref}
 %\usepackage[backref]{hyperref}
 %\usepackage[ctex]{ulem}
@@ -5827,18 +5828,351 @@ C_{u_0}^{(1)}
 \label{eq:u-convert-p}
 \end{equation}
 
-From this expression, one deduces that the poles of $u(x,t)$ occur at
+From \eqref{eq:u-convert-p} it follows that the poles of $u(x,t)$ are located at
+\begin{equation}\label{eq:u-poles}
+2\mathrm{i}\kappa^{(1)}(x+vt)
+=\pm 2\tilde{\nu}_1
++4\mathrm{i}n\pi
++4\mathrm{i}m\pi\tau^{(1)}_2,
+\qquad n,m\in\mathbb{Z},
+\end{equation}
+while its zeros are given by
+\begin{equation}\label{eq:u-zeros}
+2\mathrm{i}\kappa^{(1)}(x+vt)
+=\pm 2\tilde{\nu}_2
++4\mathrm{i}n\pi
++4\mathrm{i}m\pi\tau^{(1)}_2,
+\qquad n,m\in\mathbb{Z}.
+\end{equation}
+
+
+
+\Week{Algebro-Geometric Solutions for the mKdV Equation (15)}{2025-12-30}
+
+\obj{Introduce some basics of elliptic functions and elliptic integrals.}
+
+For an ellipse, a convenient parametrization is
+\begin{equation}\label{eq:ellipse-param}
+\left\{
+\begin{aligned}
+x &= a \cos \theta, \\
+y &= b \sin \theta, \qquad 0 \le \theta < 2\pi, \qquad a \ge b .
+\end{aligned}
+\right.
+\end{equation}
+Differentiating with respect to $\theta$ yields
+\begin{equation}\label{eq:ds-ellipse}
+\begin{aligned}
+ds
+&=\bigl((dx)^2+(dy)^2\bigr)^{1/2}
+=\bigl(a^2\sin^2\theta+b^2\cos^2\theta\bigr)^{1/2}\,d\theta \\
+&=a\Bigl(1-\frac{a^2-b^2}{a^2}\cos^2\theta\Bigr)^{1/2}\,d\theta .
+\end{aligned}
+\end{equation}
+
+Introduce the parameter
+\begin{equation}\label{eq:k-def-15}
+k^2=\frac{a^2-b^2}{a^2}.
+\end{equation}
+The arc length can then be written as
+\begin{equation}\label{eq:arc-length}
+\begin{aligned}
+s
+&=a\int \bigl(1-k^2\cos^2\theta\bigr)^{1/2}\,d\theta .
+\end{aligned}
+\end{equation}
+With the substitution $t=\cos\theta$, one has $dt=-\sin\theta\,d\theta=-\sqrt{1-t^2}\,d\theta$, and hence
+\begin{equation}\label{eq:arc-length-t}
+\begin{aligned}
+s
+&=-a\int\frac{\sqrt{1-k^2 t^2}}{\sqrt{1-t^2}}\,dt
+= a\int\frac{k^2 t^2-1}{\sqrt{(1-t^2)(1-k^2 t^2)}}\,dt .
+\end{aligned}
+\end{equation}
+
+The elliptic integral of the first kind is defined by
+\begin{equation}\label{eq:F-def-15}
+u=F(z,k)=\int_0^z\frac{dt}{\sqrt{(1-t^2)(1-k^2 t^2)}},
+\qquad z=\operatorname{sn}(u,k).
+\end{equation}
+Setting $t=\sin\varphi$, this integral takes the form
+\begin{equation}\label{eq:F-phi}
+\begin{aligned}
+u=F(z,k)
+=\int_0^{\arcsin z}\frac{d\varphi}{\sqrt{1-k^2\sin^2\varphi}} 
+=\int_0^\theta\frac{d\varphi}{\sqrt{1-k^2\sin^2\varphi}},
+\qquad \theta=\operatorname{am}(u,k).
+\end{aligned}
+\end{equation}
+By definition of the Jacobi amplitude, the Jacobi elliptic functions satisfy
+\begin{equation}\label{eq:jacobi-def}
+\operatorname{sn}(u,k)=\sin(\operatorname{am}(u,k)),
+\qquad 
+\operatorname{cn}(u,k)=\cos(\operatorname{am}(u,k)).
+\end{equation}
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig-Fz-circle-even.pdf}
+    \subcaption{$n$ even}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig-Fz-circle-odd.pdf}
+    \subcaption{$n$ odd}
+  \end{subfigure}
+  \caption{Integration paths for $F(z)$ winding a total of $n$ times around branch points.}
+  \label{fig:integration-path}
+\end{figure}
+
+Consider the elliptic integral
+\begin{equation}\label{eq:elliptic-cubic}
+F(z)
+=\int_{z_0}^z\frac{dt}{\sqrt{(t-e_1)(t-e_2)(t-e_3)}}
+=\int_{z_0}^z\frac{dt}{y(t)},
+\end{equation}
+where
 \[
-2\mathrm{i}\kappa^{(1)} (x+vt) = 2\tilde{\nu}_1 + 4\mathrm{i} n \pi + 4\mathrm{i} m \pi \tau^{(1)}_2, \quad n,m \in \mathbb{Z},
+y(t)=\sqrt{(t-e_1)(t-e_2)(t-e_3)},
 \]
-while the zeros occur at
-\[
-2\mathrm{i}\kappa^{(1)} (x+vt) = 2\tilde{\nu}_2 + 4\mathrm{i} n \pi + 4\mathrm{i} m \pi \tau^{(1)}_2, \quad n,m \in \mathbb{Z}.
-\]
+and the branch cuts of $y(t)$ are chosen as rays connecting each branch point
+$e_j$ to $\infty$.
+
+For each branch point $e_j$, introduce the quantities
+\begin{equation}\label{eq:Ej-I-def}
+E_j=\int_{z_0}^{e_j}\frac{dt}{y(t)},
+\qquad
+I=\int_{\overrightarrow{z_0 z}}\frac{dt}{y(t)},
+\end{equation}
+where $\overrightarrow{z_0 z}$ denotes the chosen path from $z_0$ to $z$ that does
+not wind around any branch point.
+Let $C_{e_j}^{\varepsilon}$ be a sufficiently small positively oriented circle
+around $e_j$.
+The integral over the closed contour
+$\overrightarrow{z_0 e_j}+C_{e_j}^{\varepsilon}+\overrightarrow{e_j z_0}$
+then satisfies
+\begin{equation}\label{eq:path-decomposition}
+\int_{\overrightarrow{z_0 e_j}+C_{e_j}^{\varepsilon}+\overrightarrow{e_j z_0}}
+\frac{dt}{y(t)}=2E_j.
+\end{equation}
+
+Suppose now that the integration path defining $F(z)$ winds around branch points
+a total of $n$ times.
+The resulting value of $F(z)$ depends only on the parity of $n$.
+If $n$ is even, the contributions from the successive loops combine to give
+\begin{equation}\label{eq:F-even}
+F(z)
+=2(E_\alpha-E_\beta)
+ +2(E_\gamma-E_\delta)
+ +\cdots
+ +2(E_\kappa-E_\rho)
+ +I .
+\end{equation}
+If $n$ is odd, the contribution of the final loop changes sign, and one obtains
+\begin{equation}\label{eq:F-odd}
+F(z)
+=2(E_\alpha-E_\beta)
+ +2(E_\gamma-E_\delta)
+ +\cdots
+ +2(E_\mu-E_\rho)
+ +2E_\mu
+ -I .
+\end{equation}
 
 
+Introduce the quantities
+\begin{equation}\label{eq:omega-def}
+\omega_1=E_1-E_3, \qquad
+\omega_2=E_2-E_3, \qquad
+\omega_3=0 .
+\end{equation}
+In particular,
+\begin{equation}\label{eq:E-diff}
+E_1-E_2=\omega_1-\omega_2 .
+\end{equation}
+With this notation, the multivaluedness of $F(z)$ can be described as follows.
+If $n$ is even,
+\begin{equation}\label{eq:F-even-omega}
+F(z)=I+2m_1\omega_1+2m_2\omega_2,
+\qquad m_1,m_2\in\mathbb{Z}.
+\end{equation}
+If $n$ is odd,
+\begin{equation}\label{eq:F-odd-omega}
+F(z)=2E_\mu-I+2m_1'\omega_1+2m_2'\omega_2,
+\qquad m_1',m_2'\in\mathbb{Z}.
+\end{equation}
+Moreover, the periods $\omega_1$ and $\omega_2$ are linearly independent over
+$\mathbb{R}$, since
+\begin{equation}\label{eq:Im-nonzero}
+\operatorname{Im}\!\left(\frac{\omega_2}{\omega_1}\right)\neq 0 .
+\end{equation}
+
+Let $f(z)$ be a single-valued meromorphic function admitting two periods
+$2\omega$ and $2\omega'$, with
+\begin{equation}\label{eq:Im-positive}
+\operatorname{Im}\!\left(\frac{\omega}{\omega'}\right)>0 .
+\end{equation}
+Then
+\begin{equation}\label{eq:periodicity}
+f(z+2\omega)=f(z), \qquad f(z+2\omega')=f(z).
+\end{equation}
+For integers $m_1,n_1$, define the lattice
+\begin{equation}\label{eq:lattice-def}
+W=2m_1\omega+2n_1\omega', \qquad m_1,n_1\in\mathbb{Z}.
+\end{equation}
+The function $f$ is invariant under translations by any lattice vector,
+$f(z+W)=f(z)$.
+Functions with this property are called elliptic functions.
+An elliptic function is a doubly periodic meromorphic function whose only
+singularities are poles.
+The order of an elliptic function is defined as the total number of its poles,
+counted with multiplicities, contained in a fundamental period parallelogram.
+
+\begin{prop}\label{prop:derivative}
+The derivative of an elliptic function is again an elliptic function.
+\end{prop}
+
+\begin{prop}\label{prop:residue}
+Let $f(z)$ be an elliptic function and let $\mathcal{P}$ be a fundamental period
+parallelogram.
+Then
+\begin{equation}\label{eq:residue-zero}
+\int_{\partial\mathcal{P}} f(z)\,dz
+=2\pi \mathrm{i}\sum_j \operatorname{Res}_{z=z_j} f(z)=0 ,
+\end{equation}
+where the sum is taken over all poles $z_j$ of $f$ in $\mathcal{P}$.
+\end{prop}
+
+As a consequence, a nonconstant elliptic function must have order at least $2$.
+
+The Weierstrass $\wp$-function associated with a lattice is defined by
+\begin{equation}\label{eq:wp-def}
+\wp(z)=\frac{1}{z^2}
++\sum\nolimits_{w\neq 0}
+\left(\frac{1}{(z-w)^2}-\frac{1}{w^2}\right),
+\end{equation}
+where the sum extends over all nonzero lattice points $w$.
+It satisfies the differential equation
+\begin{equation}\label{eq:wp-eq}
+\bigl(\wp'(z)\bigr)^2
+=4\wp^3(z)-g_2\wp(z)-g_3,
+\end{equation}
+with invariants
+\begin{equation}\label{eq:g2g3}
+g_2=60\sum\nolimits_{w\neq 0} w^{-4},
+\qquad
+g_3=140\sum\nolimits_{w\neq 0} w^{-6}.
+\end{equation}
+
+The Jacobi theta functions satisfy the quasi-periodicity relations
+\begin{equation}\label{eq:theta-shift-1}
+\vartheta_2(z+1)=-\vartheta_2(z), \qquad
+\vartheta_3(z+1)=\vartheta_3(z),
+\end{equation}
+and
+\begin{equation}\label{eq:theta-shift-tau}
+\vartheta_2(z+\tau)=q^{-1}e^{-2\pi \mathrm{i} z}\vartheta_2(z), \qquad
+\vartheta_3(z+\tau)=q\,e^{-2\pi \mathrm{i} z}\vartheta_3(z),
+\qquad q=e^{\mathrm{i}\pi\tau}.
+\end{equation}
+They are even functions of the argument,
+\begin{equation}\label{eq:theta-sym}
+\vartheta_{2,3}(z)=\vartheta_{2,3}(-z).
+\end{equation}
+
+The zeros of the Jacobi theta functions $\vartheta_k(z)$ are located at
+\begin{equation}\label{eq:theta-zeros}
+z=m+m'\tau+V_k,
+\qquad m,m'\in\mathbb{Z},
+\end{equation}
+where the shifts $V_k$ are given by
+\begin{equation}\label{eq:Vk}
+V_1=0, \qquad
+V_2=\tfrac12, \qquad
+V_3=\tfrac12+\tfrac{\tau}{2}, \qquad
+V_4=\tfrac{\tau}{2}.
+\end{equation}
+
+To compare the two representations \eqref{eq:u-convert-p-2-14} and
+\eqref{eq:u-convert-p}, introduce the elliptic function
+\begin{equation}\label{eq:f-theta}
+f(z)
+=
+\frac{\vartheta_2\!\left(z,\,2\tau_2^{(1)}\right)}
+{\vartheta_3\!\left(z,\,2\tau_2^{(1)}\right)} .
+\end{equation}
+By the quasi-periodicity and parity properties of the Jacobi theta functions,
+$f$ is doubly periodic and even. In particular,
+\begin{equation}\label{eq:f-period-even}
+f(z+\omega)=f(z), \qquad
+\omega=2m_1+2n_1\tau_2^{(1)}, \qquad
+f(z)=f(-z),
+\end{equation}
+for all $m_1,n_1\in\mathbb{Z}$.
+Moreover, $f(z)$ is an elliptic function of order $2$, since
+$\vartheta_3\!\left(z,\,2\tau_2^{(1)}\right)$ has exactly two zeros in a
+fundamental period parallelogram associated with $f(z)$.
+It therefore follows that the zeros and poles of $u(x,t)$ are precisely those
+described in \eqref{eq:u-zeros} and \eqref{eq:u-poles}.
+
+On the other hand, the zeros and poles of the solution $u(x,t)$ given by
+\eqref{eq:u-convert-p-2-14} are determined by the corresponding properties of
+the Jacobi elliptic functions.
+More precisely, the zeros occur at
+\begin{equation}\label{eq:u-zeros-sn}
+\alpha(x+vt)
+=\frac{\kappa^{(1)}K_2^{(1)}}{\pi}(x+vt)
+=\pm \frac{\tilde{\nu}_2 K_2^{(1)}}{\mathrm{i}\pi}
++2nK_2^{(1)}+2\mathrm{i}mK_2^{(1)\prime},
+\qquad n,m\in\mathbb{Z},
+\end{equation}
+while the poles are located at
+\begin{equation}\label{eq:u-poles-sn}
+\alpha(x+vt)
+=\frac{\kappa^{(1)}K_2^{(1)}}{\pi}(x+vt)
+=\pm \frac{\tilde{\nu}_1 K_2^{(1)}}{\mathrm{i}\pi}
++2nK_2^{(1)}+2\mathrm{i}mK_2^{(1)\prime},
+\qquad n,m\in\mathbb{Z}.
+\end{equation}
+Hence the solution $u(x,t)$ in \eqref{eq:u-convert-p-2-14} possesses the same
+zeros and poles, with the same multiplicities, as the representation
+\eqref{eq:u-convert-p}.
+Since two elliptic functions of the same order that share identical zeros and
+poles can differ only by a multiplicative constant, evaluating the two
+expressions at a single convenient point suffices to conclude that
+\eqref{eq:u-convert-p-2-14} and \eqref{eq:u-convert-p} are identical.
 
 
+% \clearpage
+% \section*{References}
+
+% \begin{enumerate}
+
+% \item Ling, L. and Sun, X., \emph{Focusing mKdV equation: Two-phase solutions and their stability analysis}, 2025. \url{https://arxiv.org/abs/2510.12073}
+
+% \item Bobenko, A., \emph{Compact Riemann Surfaces}. \url{https://page.math.tu-berlin.de/~bobenko/Lehre/Skripte/RS.pdf}
+
+% \item Bertola, M., \emph{Riemann Surfaces and Theta Functions}. \url{https://mypage.concordia.ca/mathstat/bertola/ThetaCourse/ThetaCourse.pdf}
+
+% \item Taylor, M., \emph{Notes on Compact Riemann Surfaces}. \url{https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/RSURF.pdf}
+
+% % \item 王竹溪, 郭敦仁, \emph{特殊函数概论}, 北京大学出版社, 2012.
+
+% % \item 吴崇试, \emph{特殊函数概论习题解答}, 北京大学出版社.
+
+% \item Simon, B., \emph{Basic Complex Analysis}, American Mathematical Society, Part 2A, 2015.
+
+% \item Belokolos, E. D., Bobenko, A. I., Enolskii, V. Z., Its, A. R., Matveev, V. B., \emph{Algebro-Geometric Approach to Nonlinear Integrable Equations}, Springer, 1994.
+
+% \item Gesztesy, F., Holden, H., \emph{Soliton Equations and Their Algebro-Geometric Solutions}, Cambridge University Press, 2003.
+
+% \end{enumerate}
+
+\bibliographystyle{plainurl}
+\nocite{*}          % include all BibTeX entries
+\bibliography{references}  
 
 
 
