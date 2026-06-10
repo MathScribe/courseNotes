@@ -8,7 +8,7 @@
 \usepackage{tikz}
 \usepackage{setspace}%Ê¹ÓÃŒäŸàºê°ü
 \usepackage{extarrows}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 %\usepackage[backref]{hyperref}
 %\usepackage[ctex]{ulem}
 \newcommand{\ii}{\mathrm{i}}
@@ -63,15 +63,29 @@
 
 \newcounter{hw}
 \setcounter{hw}{0}
+\newcounter{note}
+\setcounter{note}{0}
 
 \numberwithin{equation}{hw}
 \renewcommand{\theequation}{\thehw.\arabic{equation}}
+\renewcommand{\theHequation}{\thehw.\arabic{equation}}
 
 \newcommand{\HW}[2]{%
   \refstepcounter{hw}%
   \setcounter{equation}{0}%
+  \renewcommand{\theequation}{\thehw.\arabic{equation}}%
+  \renewcommand{\theHequation}{\thehw.\arabic{equation}}%
   \subsection*{HW \thehw: #1 \hfill {\small #2}}%
   \addcontentsline{toc}{section}{HW \thehw: #1 --- #2}%
+}
+
+\newcommand{\notes}[2]{%
+  \refstepcounter{note}%
+  \setcounter{equation}{0}%
+  \renewcommand{\theequation}{N\thenote.\arabic{equation}}%
+  \renewcommand{\theHequation}{N\thenote.\arabic{equation}}%
+  \subsection*{Note \thenote: #1 \hfill {\small #2}}%
+  \addcontentsline{toc}{section}{Note \thenote: #1 --- #2}%
 }
 
 % Define a better heading style for note sections
@@ -94,6 +108,7 @@
 \titleformat{\section}{\centering\LARGE\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}
 \begin{document}
+\raggedbottom
 
 
 \title{Nonlinear Wave Theory Seminar Notes}
@@ -106,9 +121,11 @@
 \email{zxdengmath@163.com}
 
 \begin{abstract}
-These notes collect problems, computations, and numerical experiments from the seminar-style course \emph{Nonlinear Wave Theory} in the Spring semester of the 2025--2026 academic year. Since regular lectures were interrupted, the notes record problems suggested by Professor Liming Ling, including gauge transformations, squared eigenfunctions at Weierstrass points, and numerical reproduction of one-mode anomalous-wave recurrence for the focusing NLS equation.
+These notes collect selected computations and seminar writeups for the course
+\emph{Nonlinear Wave Theory}, delivered by Professor Liming Ling in Spring 2026.
 
-Some reference papers, arXiv source files, and MATLAB scripts are kept in the repository for study and reproducibility.
+The full \LaTeX{} source code of these notes is available at:
+\href{https://codeberg.org/killlakill/courseNotes}{\texttt{https://codeberg.org/killlakill/courseNotes}}.
 \end{abstract}
 
 
@@ -117,16 +134,8 @@ Some reference papers, arXiv source files, and MATLAB scripts are kept in the re
 \maketitle
 
 
-% ---------- Table of contents for a notes file ----------
-% \begin{center}
-%   \textbf{\large Course Notes (weekly)}\\[4pt]
-%   \textit{--- Table of Contents (auto-generated) ---}
-% \end{center}
-% \smallskip
-% \tableofcontents
-% \bigskip
-% \hrule
-% \bigskip
+\tableofcontents
+\bigskip
 
 
 \HW{Two-Step Gauge Transformation}{2026-04-22}
@@ -1077,33 +1086,28 @@ Then
 
 The Baker--Akhiezer function associated with the two-phase solution is given by
 \begin{equation}
-\begin{pmatrix}
-\Phi_{11}(P;x,t)\\[4pt]
-\Phi_{21}(P;x,t)
-\end{pmatrix}
+\eta(P;x,t)
 =
-\exp\!\left[
--
-\mathrm{i}
-\left(
 \omega_2x+\omega_3t+\frac{\theta}{2}
-+\frac{\mathrm{i}}{2}\Omega_1(P)
-\right)
-\sigma_3
-\right]
-\begin{pmatrix}
-\Theta\bigl(\Omega+\mathcal{A}_{\infty^+}(P)\bigr)\\[4pt]
-\Theta\bigl(\Omega+\Delta+\mathcal{A}_{\infty^+}(P)\bigr)
-\end{pmatrix}
-\frac{
-\exp\!\bigl(
-\mathrm{i}\Omega_2(P)x
-+
-\mathrm{i}\Omega_3(P)t
-\bigr)
++\frac{\mathrm{i}}{2}\Omega_1(P),
+\label{eq:BA-phase-eta}
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+\binom{\Phi_{11}(P;x,t)}{\Phi_{21}(P;x,t)}
+&=
+\frac{\exp\!\bigl(\mathrm{i}\Omega_2(P)x+\mathrm{i}\Omega_3(P)t\bigr)}
+{\Theta(\Omega)}
+\exp\!\bigl(-\mathrm{i}\eta(P;x,t)\sigma_3\bigr)
+\\
+&\quad\times
+\binom{
+\Theta\bigl(\Omega+\mathcal{A}_{\infty^+}(P)\bigr)
 }{
-\Theta(\Omega)
+\Theta\bigl(\Omega+\Delta+\mathcal{A}_{\infty^+}(P)\bigr)
 }.
+\end{aligned}
 \label{eq:BA-function}
 \end{equation}
 Here \(\omega_2=0\) and \(\omega_3\in\mathbb{R}\).
@@ -3110,15 +3114,13 @@ away the large empty white margins.  It then writes the final v6 PNG.
 This changes only the exported canvas, not the computed solution.
 
 \begin{center}
+\begin{minipage}{0.88\textwidth}
 \captionsetup{type=figure,hypcap=false}
 \centering
-\includegraphics[width=0.88\textwidth]{computations/one-mode-recurrence/paper_fig1_reproduction_bw_v6.png}
-\caption{Paper-style black-and-white reproduction produced by
-\texttt{reproduce\_paper\_fig1\_bw\_v6.m}.  This version uses the same
-split-step Fourier data as before, but crops the MATLAB export so that
-the three-dimensional recurrence fills the canvas more effectively while
-keeping the same \LaTeX{} figure width.}
+\includegraphics[width=\linewidth]{computations/one-mode-recurrence/paper_fig1_reproduction_bw_v6.png}
+\caption{Cropped v6 MATLAB export of the paper-style recurrence.}
 \label{fig:hw3-paper-style-v6}
+\end{minipage}
 \end{center}
 
 Figure~\ref{fig:hw3-paper-style-v6} shows the expected anomalous-wave
@@ -3179,6 +3181,1532 @@ This compact comparison separates the genuine one-mode recurrence in
 Figure~\ref{fig:hw3-paper-style-v6} from artifacts caused by insufficient
 numerical resolution.
 
+
+
+\notes{Linear Stage in the Grinevich--Santini Recurrence Paper}{2026-05-27}
+
+In this note we organize the part of the calculation in
+P. G. Grinevich and P. M. Santini,
+\emph{The finite gap method and the analytic description of the exact rogue
+wave recurrence in the periodic NLS Cauchy problem}, Nonlinearity
+\textbf{31} (2018), 5258--5308, which leads to formulas (15) and (16) of
+the paper.  The purpose here is only to understand the first linear stage
+of modulation instability.  The nonlinear Akhmediev-breather formula
+(18)--(19) will be used later, but we do not derive the full finite-gap in this note.
+
+\noteheading{Setting and unstable Fourier modes.}
+The equation is the focusing nonlinear Schr\"odinger equation
+\begin{equation}
+\mathrm{i}u_t+u_{xx}+2|u|^2u=0,
+\qquad
+u=u(x,t)\in\mathbb{C},
+\label{eq:note1-nls}
+\end{equation}
+on the periodic interval of length \(L\).  The background solution is
+\begin{equation}
+u_0(x,t)=\mathrm{e}^{2\mathrm{i}t}.
+\label{eq:note1-background}
+\end{equation}
+The initial condition is a small perturbation of this background:
+\begin{equation}
+u(x,0)
+=
+1+\epsilon v(x),
+\qquad
+0<\epsilon\ll1,
+\label{eq:note1-initial-small}
+\end{equation}
+where
+\begin{equation}
+v(x)
+=
+\sum_{j\ge1}
+\left(
+c_j\mathrm{e}^{\mathrm{i}k_jx}
++
+c_{-j}\mathrm{e}^{-\mathrm{i}k_jx}
+\right),
+\qquad
+k_j=\frac{2\pi j}{L}.
+\label{eq:note1-fourier-expansion}
+\end{equation}
+The \(j\)-th Fourier mode is the pair of waves
+\(\mathrm{e}^{\mathrm{i}k_jx}\) and
+\(\mathrm{e}^{-\mathrm{i}k_jx}\).  These two waves must be treated
+together, because the linearized NLS equation contains the complex
+conjugate of the perturbation.
+
+For one unstable mode \(n\), the paper assumes
+\begin{equation}
+v(x)
+=
+c_n\mathrm{e}^{\mathrm{i}k_nx}
++
+c_{-n}\mathrm{e}^{-\mathrm{i}k_nx}.
+\label{eq:note1-one-mode-data}
+\end{equation}
+The mode is unstable precisely when
+\begin{equation}
+0<k_n<2.
+\label{eq:note1-unstable-condition}
+\end{equation}
+It is useful to introduce the angle
+\begin{equation}
+\phi_n
+=
+\arccos\frac{k_n}{2}
+=
+\arccos\frac{\pi n}{L},
+\qquad
+0<\phi_n<\frac{\pi}{2}.
+\label{eq:note1-phi-definition}
+\end{equation}
+Then
+\begin{equation}
+k_n=2\cos\phi_n.
+\label{eq:note1-k-phi}
+\end{equation}
+
+\noteheading{Linearization about the background.}
+Write the solution near the background as
+\begin{equation}
+u(x,t)
+=
+\mathrm{e}^{2\mathrm{i}t}\bigl(1+w(x,t)\bigr),
+\qquad
+|w|\ll1.
+\label{eq:note1-linearization-ansatz}
+\end{equation}
+We compute the terms in \eqref{eq:note1-nls}.  First,
+\begin{equation}
+u_t
+=
+2\mathrm{i}\mathrm{e}^{2\mathrm{i}t}(1+w)
++
+\mathrm{e}^{2\mathrm{i}t}w_t,
+\qquad
+u_{xx}
+=
+\mathrm{e}^{2\mathrm{i}t}w_{xx}.
+\label{eq:note1-linear-derivatives}
+\end{equation}
+Next,
+\begin{align}
+|u|^2u
+&=
+\mathrm{e}^{2\mathrm{i}t}
+|1+w|^2(1+w)
+\nonumber\\
+&=
+\mathrm{e}^{2\mathrm{i}t}
+\left(1+2w+\overline{w}\right)
++
+O(|w|^2).
+\label{eq:note1-nonlinear-expansion}
+\end{align}
+Substituting these expressions into \eqref{eq:note1-nls} and keeping only
+the terms linear in \(w\), the constant background terms cancel and we
+obtain
+\begin{equation}
+\mathrm{i}w_t+w_{xx}+2(w+\overline{w})=0.
+\label{eq:note1-linearized-equation}
+\end{equation}
+
+\noteheading{Growth rate.}
+Because of the term \(\overline{w}\), a single wave
+\(\mathrm{e}^{\mathrm{i}kx}\) is coupled to
+\(\mathrm{e}^{-\mathrm{i}kx}\).  Therefore, for a fixed wave number \(k\),
+we set
+\begin{equation}
+w(x,t)
+=
+a\mathrm{e}^{\mathrm{i}kx+\sigma t}
++
+b\mathrm{e}^{-\mathrm{i}kx+\sigma t}.
+\label{eq:note1-mode-pair}
+\end{equation}
+Here \(\sigma\) is the growth or decay exponent.  Substituting
+\eqref{eq:note1-mode-pair} into \eqref{eq:note1-linearized-equation} and
+comparing the coefficients of
+\(\mathrm{e}^{\mathrm{i}kx+\sigma t}\) and
+\(\mathrm{e}^{-\mathrm{i}kx+\sigma t}\), we get
+\begin{equation}
+\begin{pmatrix}
+2-k^2+\mathrm{i}\sigma & 2
+\\
+2 & 2-k^2-\mathrm{i}\sigma
+\end{pmatrix}
+\begin{pmatrix}
+a\\
+\overline{b}
+\end{pmatrix}
+=0.
+\label{eq:note1-growth-system}
+\end{equation}
+For a nonzero solution, the determinant must vanish:
+\begin{equation}
+(2-k^2+\mathrm{i}\sigma)(2-k^2-\mathrm{i}\sigma)-4=0.
+\label{eq:note1-determinant-condition}
+\end{equation}
+Hence
+\begin{equation}
+\sigma^2
+=
+4-(2-k^2)^2
+=
+k^2(4-k^2).
+\label{eq:note1-dispersion-relation}
+\end{equation}
+Thus the unstable growth rate is
+\begin{equation}
+\sigma(k)=k\sqrt{4-k^2},
+\qquad
+0<k<2.
+\label{eq:note1-growth-rate}
+\end{equation}
+For the \(n\)-th unstable mode,
+\begin{equation}
+\sigma_n
+=
+k_n\sqrt{4-k_n^2}
+=
+2\sin(2\phi_n),
+\label{eq:note1-sigma-n}
+\end{equation}
+where we used \(k_n=2\cos\phi_n\).
+
+\noteheading{Growing and decaying coordinates.}
+The initial Fourier coefficients \(c_n,c_{-n}\) measure how much of the
+positive and negative wave numbers is present.  They are not themselves
+the growing and decaying amplitudes.  The linearized system diagonalizes
+into one direction proportional to \(\mathrm{e}^{\sigma_nt}\) and one
+direction proportional to \(\mathrm{e}^{-\sigma_nt}\).
+
+We now compute these two directions explicitly.  First consider a pure
+growing solution of \eqref{eq:note1-linearized-equation}:
+\begin{equation}
+w_{\mathrm{g}}(x,t)
+=
+\mathrm{e}^{\sigma_nt}
+\left(
+a\mathrm{e}^{\mathrm{i}k_nx}
++
+b\mathrm{e}^{-\mathrm{i}k_nx}
+\right).
+\label{eq:note1-pure-growing}
+\end{equation}
+The coefficient of
+\(\mathrm{e}^{\mathrm{i}k_nx+\sigma_nt}\) gives
+\begin{equation}
+\left(2-k_n^2+\mathrm{i}\sigma_n\right)a
++
+2\overline{b}
+=0.
+\label{eq:note1-growing-eigenvector-equation}
+\end{equation}
+Therefore
+\begin{equation}
+\overline{b}
+=
+-\frac{2-k_n^2+\mathrm{i}\sigma_n}{2}a.
+\label{eq:note1-bbar-ratio-pre}
+\end{equation}
+Using
+\begin{equation}
+k_n=2\cos\phi_n,
+\qquad
+\sigma_n=2\sin(2\phi_n),
+\label{eq:note1-k-sigma-trig}
+\end{equation}
+we have
+\begin{equation}
+2-k_n^2
+=
+-2\cos(2\phi_n).
+\label{eq:note1-two-minus-k-square}
+\end{equation}
+Thus
+\begin{equation}
+-\frac{2-k_n^2+\mathrm{i}\sigma_n}{2}
+=
+\cos(2\phi_n)-\mathrm{i}\sin(2\phi_n)
+=
+\mathrm{e}^{-2\mathrm{i}\phi_n}.
+\label{eq:note1-growing-ratio}
+\end{equation}
+Hence
+\begin{equation}
+\overline{b}=\mathrm{e}^{-2\mathrm{i}\phi_n}a,
+\qquad
+b=\mathrm{e}^{2\mathrm{i}\phi_n}\overline{a}.
+\label{eq:note1-growing-relation}
+\end{equation}
+This means that the two Fourier coefficients in a pure growing solution
+cannot be chosen independently.
+
+If we call the coefficient of
+\(\mathrm{e}^{-\mathrm{i}k_nx}\) in the growing part \(A\), then the
+corresponding coefficient of \(\mathrm{e}^{\mathrm{i}k_nx}\) is
+\(\mathrm{e}^{2\mathrm{i}\phi_n}\overline{A}\).  Therefore the growing
+part may be written as
+\begin{equation}
+w_{\mathrm{g}}(x,t)
+=
+\mathrm{e}^{\sigma_nt}
+\left(
+A\mathrm{e}^{-\mathrm{i}k_nx}
++
+\mathrm{e}^{2\mathrm{i}\phi_n}\overline{A}\,
+\mathrm{e}^{\mathrm{i}k_nx}
+\right).
+\label{eq:note1-growing-A-form}
+\end{equation}
+
+Similarly, a pure decaying solution has the form
+\begin{equation}
+w_{\mathrm{d}}(x,t)
+=
+\mathrm{e}^{-\sigma_nt}
+\left(
+c\mathrm{e}^{\mathrm{i}k_nx}
++
+d\mathrm{e}^{-\mathrm{i}k_nx}
+\right).
+\label{eq:note1-pure-decaying}
+\end{equation}
+Now the coefficient of
+\(\mathrm{e}^{\mathrm{i}k_nx-\sigma_nt}\) gives
+\begin{equation}
+\left(2-k_n^2-\mathrm{i}\sigma_n\right)c
++
+2\overline{d}
+=0.
+\label{eq:note1-decaying-eigenvector-equation}
+\end{equation}
+Using the same trigonometric identities,
+\begin{equation}
+\overline{d}
+=
+-\frac{2-k_n^2-\mathrm{i}\sigma_n}{2}c
+=
+\mathrm{e}^{2\mathrm{i}\phi_n}c,
+\qquad
+d=\mathrm{e}^{-2\mathrm{i}\phi_n}\overline{c}.
+\label{eq:note1-decaying-relation}
+\end{equation}
+If we call the coefficient of \(\mathrm{e}^{\mathrm{i}k_nx}\) in the
+decaying part \(D\), then
+\begin{equation}
+w_{\mathrm{d}}(x,t)
+=
+\mathrm{e}^{-\sigma_nt}
+\left(
+\mathrm{e}^{-2\mathrm{i}\phi_n}\overline{D}\,
+\mathrm{e}^{-\mathrm{i}k_nx}
++
+D\mathrm{e}^{\mathrm{i}k_nx}
+\right).
+\label{eq:note1-decaying-D-form}
+\end{equation}
+
+The general linear solution in this unstable mode is therefore
+\begin{align}
+w(x,t)
+={}&
+\mathrm{e}^{\sigma_nt}
+\left(
+A\mathrm{e}^{-\mathrm{i}k_nx}
++
+\mathrm{e}^{2\mathrm{i}\phi_n}\overline{A}\,
+\mathrm{e}^{\mathrm{i}k_nx}
+\right)
+\nonumber\\
+&+
+\mathrm{e}^{-\sigma_nt}
+\left(
+\mathrm{e}^{-2\mathrm{i}\phi_n}\overline{D}\,
+\mathrm{e}^{-\mathrm{i}k_nx}
++
+D\mathrm{e}^{\mathrm{i}k_nx}
+\right).
+\label{eq:note1-AD-linear-solution}
+\end{align}
+At \(t=0\), this must match the initial perturbation
+\begin{equation}
+w(x,0)
+=
+\epsilon
+\left(
+c_n\mathrm{e}^{\mathrm{i}k_nx}
++
+c_{-n}\mathrm{e}^{-\mathrm{i}k_nx}
+\right).
+\label{eq:note1-initial-w}
+\end{equation}
+Comparing the coefficients of
+\(\mathrm{e}^{-\mathrm{i}k_nx}\) and
+\(\mathrm{e}^{\mathrm{i}k_nx}\) gives
+\begin{align}
+A+\mathrm{e}^{-2\mathrm{i}\phi_n}\overline{D}
+&=
+\epsilon c_{-n},
+\label{eq:note1-AD-system-minus}
+\\
+\mathrm{e}^{2\mathrm{i}\phi_n}\overline{A}+D
+&=
+\epsilon c_n.
+\label{eq:note1-AD-system-plus}
+\end{align}
+
+Now solve these two equations.  Taking the complex conjugate of
+\eqref{eq:note1-AD-system-plus} gives
+\begin{equation}
+\mathrm{e}^{-2\mathrm{i}\phi_n}A+\overline{D}
+=
+\epsilon\overline{c_n}.
+\label{eq:note1-conjugate-plus}
+\end{equation}
+Subtracting \(\mathrm{e}^{-2\mathrm{i}\phi_n}\) times
+\eqref{eq:note1-conjugate-plus} from \eqref{eq:note1-AD-system-minus}, we
+obtain
+\begin{equation}
+\left(1-\mathrm{e}^{-4\mathrm{i}\phi_n}\right)A
+=
+\epsilon
+\left(
+c_{-n}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}\overline{c_n}
+\right).
+\label{eq:note1-solve-A-pre}
+\end{equation}
+Since
+\begin{equation}
+1-\mathrm{e}^{-4\mathrm{i}\phi_n}
+=
+\mathrm{e}^{-2\mathrm{i}\phi_n}
+\left(
+\mathrm{e}^{2\mathrm{i}\phi_n}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}
+\right)
+=
+\mathrm{i}\sigma_n\mathrm{e}^{-2\mathrm{i}\phi_n},
+\label{eq:note1-denominator-A}
+\end{equation}
+and
+\begin{equation}
+c_{-n}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}\overline{c_n}
+=
+-\mathrm{e}^{-2\mathrm{i}\phi_n}
+\left(
+\overline{c_n}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}c_{-n}
+\right),
+\label{eq:note1-numerator-A}
+\end{equation}
+we get
+\begin{equation}
+A
+=
+\frac{\mathrm{i}}{\sigma_n}
+\epsilon
+\left(
+\overline{c_n}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}c_{-n}
+\right).
+\label{eq:note1-A-alpha-pre}
+\end{equation}
+This is why the paper defines
+\begin{equation}
+\alpha_n
+=
+\epsilon
+\left(
+\overline{c_n}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}c_{-n}
+\right).
+\label{eq:note1-alpha-definition}
+\end{equation}
+Thus
+\begin{equation}
+A=\frac{\mathrm{i}\alpha_n}{\sigma_n}.
+\label{eq:note1-A-alpha}
+\end{equation}
+
+The decaying coefficient is found in the same way.  Taking the complex
+conjugate of \eqref{eq:note1-AD-system-minus} gives
+\begin{equation}
+\overline{A}+\mathrm{e}^{2\mathrm{i}\phi_n}D
+=
+\epsilon\overline{c_{-n}}.
+\label{eq:note1-conjugate-minus}
+\end{equation}
+Subtracting \(\mathrm{e}^{-2\mathrm{i}\phi_n}\) times
+\eqref{eq:note1-AD-system-plus} from \eqref{eq:note1-conjugate-minus}, we
+obtain
+\begin{equation}
+\left(
+\mathrm{e}^{2\mathrm{i}\phi_n}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}
+\right)D
+=
+\epsilon
+\left(
+\overline{c_{-n}}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}c_n
+\right).
+\label{eq:note1-solve-D-pre}
+\end{equation}
+Since
+\[
+\mathrm{e}^{2\mathrm{i}\phi_n}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}
+=
+\mathrm{i}\sigma_n,
+\]
+we get
+\begin{equation}
+D
+=
+\frac{1}{\mathrm{i}\sigma_n}
+\epsilon
+\left(
+\overline{c_{-n}}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}c_n
+\right).
+\label{eq:note1-D-beta-pre}
+\end{equation}
+This is why the paper defines
+\begin{equation}
+\beta_n
+=
+\epsilon
+\left(
+\overline{c_{-n}}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}c_n
+\right).
+\label{eq:note1-beta-definition}
+\end{equation}
+Thus
+\begin{equation}
+D=-\frac{\mathrm{i}\beta_n}{\sigma_n}.
+\label{eq:note1-D-beta}
+\end{equation}
+
+Combining \eqref{eq:note1-alpha-definition} and
+\eqref{eq:note1-beta-definition}, the paper's coefficients are
+\begin{equation}
+\alpha_n
+=
+\epsilon
+\left(
+\overline{c_n}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}c_{-n}
+\right),
+\qquad
+\beta_n
+=
+\epsilon
+\left(
+\overline{c_{-n}}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}c_n
+\right).
+\label{eq:note1-alpha-beta}
+\end{equation}
+They are \(O(\epsilon)\).  The coefficient \(\alpha_n\) is the growing
+coordinate of the initial perturbation, while \(\beta_n\) is the decaying
+coordinate.
+
+Substituting \(A=\mathrm{i}\alpha_n/\sigma_n\) and
+\(D=-\mathrm{i}\beta_n/\sigma_n\) into
+\eqref{eq:note1-AD-linear-solution}, we obtain
+\begin{align}
+w(x,t)
+={}&
+\frac{\mathrm{i}}{\sigma_n}
+\left(
+\alpha_n\mathrm{e}^{-\mathrm{i}k_nx}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}
+\overline{\alpha_n}\,
+\mathrm{e}^{\mathrm{i}k_nx}
+\right)
+\mathrm{e}^{\sigma_nt}
+\nonumber\\
+&-
+\frac{\mathrm{i}}{\sigma_n}
+\left(
+\beta_n\mathrm{e}^{\mathrm{i}k_nx}
+-
+\mathrm{e}^{-2\mathrm{i}\phi_n}
+\overline{\beta_n}\,
+\mathrm{e}^{-\mathrm{i}k_nx}
+\right)
+\mathrm{e}^{-\sigma_nt}.
+\label{eq:note1-linear-complex-form}
+\end{align}
+The first line is the growing \(\alpha_n\)-wave, and the second line is
+the decaying \(\beta_n\)-wave.
+
+\noteheading{The growing wave as a cosine.}
+Write
+\begin{equation}
+\alpha_n=|\alpha_n|\mathrm{e}^{\mathrm{i}\theta_\alpha},
+\qquad
+\theta_\alpha=\arg(\alpha_n).
+\label{eq:note1-alpha-phase}
+\end{equation}
+The growing part of \eqref{eq:note1-linear-complex-form} is
+\begin{equation}
+w_{\mathrm{grow}}
+=
+\frac{\mathrm{i}}{\sigma_n}
+\left(
+\alpha_n\mathrm{e}^{-\mathrm{i}k_nx}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}
+\overline{\alpha_n}\,
+\mathrm{e}^{\mathrm{i}k_nx}
+\right)
+\mathrm{e}^{\sigma_nt}.
+\label{eq:note1-growing-complex}
+\end{equation}
+We want to write it as a shifted cosine.  Define
+\begin{equation}
+X_n^+
+=
+\frac{\arg(\alpha_n)-\phi_n+\pi/2}{k_n}.
+\label{eq:note1-X-plus}
+\end{equation}
+Then
+\begin{equation}
+k_nX_n^+
+=
+\theta_\alpha-\phi_n+\frac{\pi}{2},
+\label{eq:note1-X-plus-phase}
+\end{equation}
+and
+\begin{align}
+\frac{2|\alpha_n|}{\sigma_n}
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}
+\cos\bigl(k_n(x-X_n^+)\bigr)
+&=
+\frac{|\alpha_n|}{\sigma_n}
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}
+\left[
+\mathrm{e}^{\mathrm{i}k_n(x-X_n^+)}
++
+\mathrm{e}^{-\mathrm{i}k_n(x-X_n^+)}
+\right]
+\nonumber\\
+&=
+\frac{\mathrm{i}}{\sigma_n}
+\left(
+\alpha_n\mathrm{e}^{-\mathrm{i}k_nx}
+-
+\mathrm{e}^{2\mathrm{i}\phi_n}
+\overline{\alpha_n}\,
+\mathrm{e}^{\mathrm{i}k_nx}
+\right)
+\mathrm{e}^{\sigma_nt}.
+\label{eq:note1-growing-cosine-check}
+\end{align}
+Therefore
+\begin{equation}
+w_{\mathrm{grow}}
+=
+\frac{2|\alpha_n|}{\sigma_n}
+\cos\bigl(k_n(x-X_n^+)\bigr)
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}.
+\label{eq:note1-growing-cosine}
+\end{equation}
+The point \(X_n^+\) is the position of the maximum of the growing
+sinusoidal wave.
+
+\noteheading{The decaying wave as a cosine.}
+Similarly, write
+\begin{equation}
+\beta_n=|\beta_n|\mathrm{e}^{\mathrm{i}\theta_\beta},
+\qquad
+\theta_\beta=\arg(\beta_n).
+\label{eq:note1-beta-phase}
+\end{equation}
+Define
+\begin{equation}
+X_n^-
+=
+\frac{-\arg(\beta_n)-\phi_n+\pi/2}{k_n}.
+\label{eq:note1-X-minus}
+\end{equation}
+Then the decaying part of \eqref{eq:note1-linear-complex-form} becomes
+\begin{equation}
+w_{\mathrm{decay}}
+=
+\frac{2|\beta_n|}{\sigma_n}
+\cos\bigl(k_n(x-X_n^-)\bigr)
+\mathrm{e}^{-\sigma_nt-\mathrm{i}\phi_n}.
+\label{eq:note1-decaying-cosine}
+\end{equation}
+The point \(X_n^-\) is the position of the maximum of the decaying
+sinusoidal wave.
+
+Equations \eqref{eq:note1-X-plus} and \eqref{eq:note1-X-minus} are precisely
+formula (16) in the paper:
+\begin{equation}
+X_n^+
+=
+\frac{\arg(\alpha_n)-\phi_n+\pi/2}{k_n},
+\qquad
+X_n^-
+=
+\frac{-\arg(\beta_n)-\phi_n+\pi/2}{k_n}.
+\label{eq:note1-paper-16}
+\end{equation}
+
+\noteheading{Formula (15).}
+Combining \eqref{eq:note1-growing-cosine} and
+\eqref{eq:note1-decaying-cosine}, we obtain
+\begin{equation}
+w(x,t)
+=
+\frac{2}{\sigma_n}
+\left[
+|\alpha_n|
+\cos\bigl(k_n(x-X_n^+)\bigr)
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}
++
+|\beta_n|
+\cos\bigl(k_n(x-X_n^-)\bigr)
+\mathrm{e}^{-\sigma_nt-\mathrm{i}\phi_n}
+\right].
+\label{eq:note1-w-formula-15}
+\end{equation}
+Since \(u=\mathrm{e}^{2\mathrm{i}t}(1+w)\), this gives
+\begin{align}
+u(x,t)
+=
+\mathrm{e}^{2\mathrm{i}t}
+\Bigg\{
+1
++
+\frac{2}{\sigma_n}
+\bigg[
+&|\alpha_n|
+\cos\bigl(k_n(x-X_n^+)\bigr)
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}
+\nonumber\\
+&+
+|\beta_n|
+\cos\bigl(k_n(x-X_n^-)\bigr)
+\mathrm{e}^{-\sigma_nt-\mathrm{i}\phi_n}
+\bigg]
+\Bigg\}
++
+O\!\left(\epsilon^2|\log\epsilon|\right).
+\label{eq:note1-paper-15}
+\end{align}
+This is formula (15) of the paper.  The interpretation is simple:
+the unstable part of the initial datum splits into a growing
+\(\alpha_n\)-wave and a decaying \(\beta_n\)-wave.
+
+The remainder in \eqref{eq:note1-paper-15} should not be confused with the
+ordinary error one would get by only linearizing the PDE.  The linearized
+calculation explains the main \(O(\epsilon)\) terms.  The stated
+\(O(\epsilon^2|\log\epsilon|)\) remainder comes from the finite-gap
+construction: the small gaps have size \(O(\epsilon)\), and the asymptotic
+expansion of the Riemann matrix and theta functions contains logarithmic
+error estimates of the form \(O(\epsilon^2|\log\epsilon|)\).  In the early
+time region \(0\le t\le O(1)\), the terms
+\(|\alpha_n|\mathrm{e}^{\sigma_nt}\) and
+\(|\beta_n|\mathrm{e}^{-\sigma_nt}\) are still \(O(\epsilon)\), so this
+linear-stage formula is valid.
+
+\noteheading{Bridge to the first nonlinear stage.}
+Formula \eqref{eq:note1-paper-15} is not intended to describe the moment
+when the growing wave has become \(O(1)\).  That happens on the logarithmic
+time scale
+\begin{equation}
+t=O\left(\frac{|\log\epsilon|}{\sigma_n}\right).
+\label{eq:note1-log-time-scale}
+\end{equation}
+At that scale the growing \(\alpha_n\)-wave triggers the first nonlinear
+stage.  We now show how the appearance time is obtained by matching the
+growing wave in \eqref{eq:note1-paper-15} with the left tail of the
+Akhmediev breather.
+
+For this matching calculation, abbreviate
+\[
+\sigma=\sigma_n,\qquad
+k=k_n,\qquad
+\phi=\phi_n,\qquad
+X=X_n^+.
+\]
+The Akhmediev breather used for the first nonlinear stage has the form
+\begin{equation}
+A(x,t;\phi,X,T,2\phi)
+=
+\mathrm{e}^{2\mathrm{i}t+2\mathrm{i}\phi}
+\frac{
+\cosh\!\left(\sigma(t-T)+2\mathrm{i}\phi\right)
++
+\sin\phi\cos\!\left(k(x-X)\right)
+}{
+\cosh\!\left(\sigma(t-T)\right)
+-
+\sin\phi\cos\!\left(k(x-X)\right)
+}.
+\label{eq:note1-akhmediev-special}
+\end{equation}
+Here \(T\) is still unknown.  The left tail means that the current time is
+well before the breather center time \(T\), on the time scale
+\(1/\sigma\):
+\begin{equation}
+\sigma(t-T)\ll -1,
+\qquad\text{equivalently}\qquad
+T-t\gg \frac{1}{\sigma}.
+\label{eq:note1-left-tail-condition}
+\end{equation}
+This condition does not require \(t<0\).  It only means that \(t\) is far
+to the left of the peak time \(T\).
+
+Set
+\begin{equation}
+y=\sigma(t-T),
+\qquad
+C=\cos\!\left(k(x-X)\right),
+\qquad
+s=\sin\phi,
+\qquad
+q=\mathrm{e}^y.
+\label{eq:note1-tail-variables}
+\end{equation}
+In the left tail, \(q\ll1\).  Formula \eqref{eq:note1-akhmediev-special}
+becomes
+\begin{equation}
+A
+=
+\mathrm{e}^{2\mathrm{i}t+2\mathrm{i}\phi}
+\frac{\cosh(y+2\mathrm{i}\phi)+sC}{\cosh y-sC}.
+\label{eq:note1-akhmediev-y-form}
+\end{equation}
+
+We expand the denominator first.  Since
+\begin{equation}
+\cosh y
+=
+\frac{\mathrm{e}^y+\mathrm{e}^{-y}}{2}
+=
+\frac{q+q^{-1}}{2}
+=
+\frac{1}{2q}\left(1+q^2\right),
+\label{eq:note1-cosh-y-expand}
+\end{equation}
+we have
+\begin{equation}
+\cosh y-sC
+=
+\frac{1}{2q}
+\left(
+1-2sCq+q^2
+\right).
+\label{eq:note1-denominator-tail}
+\end{equation}
+For the numerator,
+\begin{align}
+\cosh(y+2\mathrm{i}\phi)
+&=
+\frac{
+\mathrm{e}^{y+2\mathrm{i}\phi}
++
+\mathrm{e}^{-y-2\mathrm{i}\phi}
+}{2}
+\nonumber\\
+&=
+\frac{1}{2q}
+\left(
+\mathrm{e}^{-2\mathrm{i}\phi}
++
+q^2\mathrm{e}^{2\mathrm{i}\phi}
+\right).
+\label{eq:note1-cosh-shift-expand}
+\end{align}
+Therefore
+\begin{equation}
+\cosh(y+2\mathrm{i}\phi)+sC
+=
+\frac{1}{2q}
+\left(
+\mathrm{e}^{-2\mathrm{i}\phi}
++
+2sCq
++
+q^2\mathrm{e}^{2\mathrm{i}\phi}
+\right).
+\label{eq:note1-numerator-tail}
+\end{equation}
+Dividing \eqref{eq:note1-numerator-tail} by
+\eqref{eq:note1-denominator-tail}, the common factor \(1/(2q)\) cancels:
+\begin{equation}
+A
+=
+\mathrm{e}^{2\mathrm{i}t+2\mathrm{i}\phi}
+\frac{
+\mathrm{e}^{-2\mathrm{i}\phi}
++
+2sCq
++
+q^2\mathrm{e}^{2\mathrm{i}\phi}
+}{
+1-2sCq+q^2
+}.
+\label{eq:note1-tail-ratio-before}
+\end{equation}
+Keeping only terms up to first order in \(q\), we use
+\[
+\frac{1}{1-2sCq+O(q^2)}
+=
+1+2sCq+O(q^2).
+\]
+Thus
+\begin{align}
+A
+&=
+\mathrm{e}^{2\mathrm{i}t}
+\left[
+1
++
+2sC\left(1+\mathrm{e}^{2\mathrm{i}\phi}\right)q
++
+O(q^2)
+\right].
+\label{eq:note1-tail-pre-coefficient}
+\end{align}
+The coefficient simplifies because
+\begin{equation}
+1+\mathrm{e}^{2\mathrm{i}\phi}
+=
+2\cos\phi\,\mathrm{e}^{\mathrm{i}\phi},
+\qquad
+2s\left(1+\mathrm{e}^{2\mathrm{i}\phi}\right)
+=
+2\sin(2\phi)\mathrm{e}^{\mathrm{i}\phi}
+=
+\sigma\mathrm{e}^{\mathrm{i}\phi}.
+\label{eq:note1-tail-coefficient-simplify}
+\end{equation}
+Since \(q=\mathrm{e}^{\sigma(t-T)}\), the left-tail expansion is
+\begin{equation}
+A(x,t;\phi,X,T,2\phi)
+=
+\mathrm{e}^{2\mathrm{i}t}
+\left[
+1
++
+\sigma
+\mathrm{e}^{\sigma(t-T)+\mathrm{i}\phi}
+\cos\!\left(k(x-X)\right)
++
+O\!\left(\mathrm{e}^{2\sigma(t-T)}\right)
+\right].
+\label{eq:note1-akhmediev-left-tail}
+\end{equation}
+So, far before its center time, the Akhmediev breather looks like a small
+exponentially growing linear wave on top of the background.
+
+Now set \(\phi=\phi_n\), \(k=k_n\), \(X=X_n^+\), and
+\(\sigma=\sigma_n\).  The growing part of the linear formula
+\eqref{eq:note1-paper-15} is
+\begin{equation}
+u_{\mathrm{lin}}(x,t)
+\sim
+\mathrm{e}^{2\mathrm{i}t}
+\left[
+1
++
+\frac{2|\alpha_n|}{\sigma_n}
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}
+\cos\!\left(k_n(x-X_n^+)\right)
+\right].
+\label{eq:note1-linear-growing-for-match}
+\end{equation}
+The left tail \eqref{eq:note1-akhmediev-left-tail} gives
+\begin{equation}
+A(x,t;\phi_n,X_n^+,T,2\phi_n)
+\sim
+\mathrm{e}^{2\mathrm{i}t}
+\left[
+1
++
+\sigma_n
+\mathrm{e}^{\sigma_n(t-T)+\mathrm{i}\phi_n}
+\cos\!\left(k_n(x-X_n^+)\right)
+\right].
+\label{eq:note1-breather-tail-for-match}
+\end{equation}
+Rewrite the coefficient in \eqref{eq:note1-breather-tail-for-match} as
+\begin{equation}
+\sigma_n\mathrm{e}^{\sigma_n(t-T)+\mathrm{i}\phi_n}
+=
+\sigma_n\mathrm{e}^{-\sigma_nT}
+\mathrm{e}^{\sigma_nt+\mathrm{i}\phi_n}.
+\label{eq:note1-tail-coefficient-factor}
+\end{equation}
+Therefore the breather tail has growing-wave coefficient
+\(\sigma_n\mathrm{e}^{-\sigma_nT}\), while the linear solution has
+coefficient \(2|\alpha_n|/\sigma_n\).  Matching these coefficients gives
+\begin{equation}
+\frac{2|\alpha_n|}{\sigma_n}
+=
+\sigma_n\mathrm{e}^{-\sigma_nT}.
+\label{eq:note1-matching-equation}
+\end{equation}
+Solving this equation,
+\begin{equation}
+\mathrm{e}^{-\sigma_nT}
+=
+\frac{2|\alpha_n|}{\sigma_n^2},
+\qquad
+-\sigma_nT
+=
+\log\left(\frac{2|\alpha_n|}{\sigma_n^2}\right).
+\label{eq:note1-solve-matching}
+\end{equation}
+Hence
+\begin{equation}
+T_n(|\alpha_n|)
+=
+\frac{1}{\sigma_n}
+\log\left(\frac{\sigma_n^2}{2|\alpha_n|}\right),
+\label{eq:note1-first-appearance-time}
+\end{equation}
+which is formula (17) in the paper.  The spatial center is \(X_n^+\).
+Thus the modulus \(|\alpha_n|\) determines the first appearance time,
+while \(\arg(\alpha_n)\) determines the position of the first peak.
+
+
+\notes{Periodic Spectral Theory and the Monodromy Matrix}{2026-06-03}
+
+This note begins the part of Section 3 of Grinevich--Santini concerned
+with the periodic spectral problem.  The purpose is to make precise the
+objects that enter the finite-gap description of the periodic NLS Cauchy
+problem: the fundamental matrix, the monodromy matrix, Bloch multipliers,
+the main spectrum, and the auxiliary spectrum.
+
+\noteheading{The fixed-time spatial spectral problem.}
+The focusing NLS equation
+\begin{equation}
+\mathrm{i}u_t+u_{xx}+2|u|^2u=0
+\label{eq:note2-nls}
+\end{equation}
+is represented by the compatibility of the Lax pair
+\begin{equation}
+\Psi_x(\lambda,x,t)=U(\lambda,x,t)\Psi(\lambda,x,t),
+\qquad
+\Psi_t(\lambda,x,t)=V(\lambda,x,t)\Psi(\lambda,x,t),
+\label{eq:note2-lax-pair}
+\end{equation}
+where the spatial matrix is
+\begin{equation}
+U(\lambda,x,t)
+=
+\begin{pmatrix}
+-\mathrm{i}\lambda & \mathrm{i}u(x,t)
+\\
+\mathrm{i}\overline{u(x,t)} & \mathrm{i}\lambda
+\end{pmatrix}.
+\label{eq:note2-U}
+\end{equation}
+For the construction of the periodic spectrum, first fix a time
+\(t=t_0\).  Then \(\lambda\) is a spectral parameter and
+\eqref{eq:note2-lax-pair} becomes an ordinary differential equation in
+the spatial variable \(x\):
+\begin{equation}
+\Psi_x(\lambda,x,t_0)
+=
+U(\lambda,x,t_0)\Psi(\lambda,x,t_0).
+\label{eq:note2-spatial-ode}
+\end{equation}
+If the potential is \(L\)-periodic,
+\begin{equation}
+u(x+L,t_0)=u(x,t_0),
+\label{eq:note2-periodic-potential}
+\end{equation}
+then \(U(\lambda,x+L,t_0)=U(\lambda,x,t_0)\).  Thus, after fixing
+\(\lambda\) and \(t_0\), the spatial problem has the form
+\begin{equation}
+\Psi_x=A(x)\Psi,
+\qquad
+A(x+L)=A(x),
+\label{eq:note2-periodic-ode}
+\end{equation}
+with \(A(x)=U(\lambda,x,t_0)\).
+
+Equivalently, the spatial equation can be written as the spectral
+problem
+\begin{equation}
+L\Psi=\lambda\Psi,
+\qquad
+L=
+\begin{pmatrix}
+\mathrm{i}\partial_x & u
+\\
+-\overline{u} & -\mathrm{i}\partial_x
+\end{pmatrix}.
+\label{eq:note2-L-operator}
+\end{equation}
+This operator is not self-adjoint in the focusing case.  Consequently
+its spectrum is not restricted to the real axis, and the periodic theory
+is built from Floquet theory and analytic matrix functions rather than
+from the self-adjoint spectral theorem.
+
+\noteheading{Fundamental matrix and propagation.}
+For any reference point \(y\), define the fundamental matrix by the
+initial-value problem
+\begin{equation}
+\frac{\partial}{\partial x}\Phi(\lambda;x,y,t_0)
+=
+U(\lambda,x,t_0)\Phi(\lambda;x,y,t_0),
+\qquad
+\Phi(\lambda;y,y,t_0)=I.
+\label{eq:note2-fundamental-matrix}
+\end{equation}
+When \(\lambda\) and \(t_0\) are fixed, we write simply
+\(\Phi(x,y)\).  The matrix \(\Phi(x,y)\) propagates initial data from
+\(y\) to \(x\): if \(\Psi(y)=v\), then
+\begin{equation}
+\Psi(x)=\Phi(x,y)v.
+\label{eq:note2-propagator}
+\end{equation}
+The two columns of \(\Phi(x,y)\) are the two solutions whose initial
+data at \(x=y\) are the standard basis vectors.
+
+The fundamental matrix satisfies the composition law
+\begin{equation}
+\Phi(x,z)=\Phi(x,y)\Phi(y,z).
+\label{eq:note2-composition-law}
+\end{equation}
+Indeed, for fixed \(y\) and \(z\), both
+\(\Phi(x,z)\) and \(\Phi(x,y)\Phi(y,z)\) solve the same matrix ODE in
+\(x\), and at \(x=y\) both are equal to \(\Phi(y,z)\).  Uniqueness of
+the initial-value problem gives \eqref{eq:note2-composition-law}.
+
+Taking \(z=x\) in \eqref{eq:note2-composition-law} gives the inverse
+evolution identity
+\begin{equation}
+\Phi(x,y)^{-1}=\Phi(y,x).
+\label{eq:note2-inverse-evolution}
+\end{equation}
+The periodicity of \(U\) gives another basic identity:
+\begin{equation}
+\Phi(x+L,y+L)=\Phi(x,y).
+\label{eq:note2-periodic-fundamental-matrix}
+\end{equation}
+To see this, define \(F(x)=\Phi(x+L,y+L)\).  Then
+\[
+F_x(x)=U(\lambda,x+L,t_0)F(x)=U(\lambda,x,t_0)F(x),
+\]
+and \(F(y)=I\).  This is the same initial-value problem as the one for
+\(\Phi(x,y)\), hence \eqref{eq:note2-periodic-fundamental-matrix}
+follows.
+
+\noteheading{The monodromy matrix.}
+Fix a base point \(x_0\).  The monodromy matrix is the fundamental
+matrix over one spatial period:
+\begin{equation}
+T(\lambda;x_0,t_0)
+=
+\Phi(\lambda;x_0+L,x_0,t_0).
+\label{eq:note2-monodromy-definition}
+\end{equation}
+Equivalently, if \(\Psi(x_0)=v\), then
+\begin{equation}
+\Psi(x_0+L)=T(\lambda;x_0,t_0)v.
+\label{eq:note2-monodromy-action}
+\end{equation}
+Thus \(T\) records the total effect of the periodic spatial equation
+after going once around the period.
+
+The identity
+\begin{equation}
+\Phi(x+L,x_0)=\Phi(x,x_0)T
+\label{eq:note2-monodromy-identity}
+\end{equation}
+is a direct consequence of the composition law and periodicity.  Namely,
+\[
+\Phi(x+L,x_0)
+=
+\Phi(x+L,x_0+L)\Phi(x_0+L,x_0),
+\]
+and the two factors on the right are, respectively,
+\(\Phi(x,x_0)\) and \(T\).
+
+Changing the base point conjugates the monodromy matrix.  If
+\(x_1\) is another base point, then
+\begin{equation}
+T(\lambda;x_1,t_0)
+=
+\Phi(x_1,x_0)T(\lambda;x_0,t_0)\Phi(x_0,x_1).
+\label{eq:note2-basepoint-conjugation}
+\end{equation}
+Here is the computation.  Starting from the definition at the new base
+point,
+\[
+T(\lambda;x_1,t_0)
+=
+\Phi(x_1+L,x_1).
+\]
+Split the propagation from \(x_1\) to \(x_1+L\) through the intermediate
+points \(x_0\) and \(x_0+L\):
+\[
+\Phi(x_1+L,x_1)
+=
+\Phi(x_1+L,x_0+L)\Phi(x_0+L,x_0)\Phi(x_0,x_1).
+\]
+By periodicity,
+\(\Phi(x_1+L,x_0+L)=\Phi(x_1,x_0)\), and by definition
+\(\Phi(x_0+L,x_0)=T(\lambda;x_0,t_0)\).  This gives
+\eqref{eq:note2-basepoint-conjugation}.  Since
+\(\Phi(x_0,x_1)=\Phi(x_1,x_0)^{-1}\), the two monodromy matrices are
+conjugate.
+Therefore the eigenvalues of \(T\), and hence the spectral curve below,
+do not depend on the chosen base point.
+
+\noteheading{Bloch solutions and Floquet multipliers.}
+Let \(v\ne0\) be an eigenvector of the monodromy matrix:
+\begin{equation}
+Tv=\kappa v.
+\label{eq:note2-monodromy-eigenvalue}
+\end{equation}
+Define
+\begin{equation}
+\Psi(x)=\Phi(x,x_0)v.
+\label{eq:note2-bloch-from-eigenvector}
+\end{equation}
+Using \eqref{eq:note2-monodromy-identity}, we get
+\begin{align}
+\Psi(x+L)
+&=
+\Phi(x+L,x_0)v
+\nonumber\\
+&=
+\Phi(x,x_0)Tv
+=
+\kappa\Phi(x,x_0)v
+=
+\kappa\Psi(x).
+\label{eq:note2-bloch-relation}
+\end{align}
+Thus an eigenvector of the monodromy matrix at one base point produces a
+solution satisfying
+\begin{equation}
+\Psi(x+L)=\kappa\Psi(x).
+\label{eq:note2-bloch-condition}
+\end{equation}
+The number \(\kappa\) is a Floquet multiplier, or Bloch multiplier, and
+\(\Psi\) is a Bloch solution.  Repeating the same relation gives
+\begin{equation}
+\Psi(x+mL)=\kappa^m\Psi(x),
+\qquad
+m\in\mathbb{Z}.
+\label{eq:note2-bloch-iterate}
+\end{equation}
+Hence \(|\kappa|=1\) corresponds to bounded oscillation from period to
+period, while \(|\kappa|\ne1\) corresponds to exponential growth in one
+spatial direction and decay in the other.
+
+It is convenient to write
+\begin{equation}
+\kappa=\mathrm{e}^{\mathrm{i}Lp},
+\label{eq:note2-quasimomentum}
+\end{equation}
+where \(p\) is the quasimomentum.  If
+\(\Psi(x+L)=\mathrm{e}^{\mathrm{i}Lp}\Psi(x)\), then
+\begin{equation}
+q(x)=\mathrm{e}^{-\mathrm{i}px}\Psi(x)
+\label{eq:note2-periodic-factor}
+\end{equation}
+satisfies \(q(x+L)=q(x)\).  Indeed,
+\[
+q(x+L)
+=
+\mathrm{e}^{-\mathrm{i}p(x+L)}
+\mathrm{e}^{\mathrm{i}Lp}\Psi(x)
+=
+\mathrm{e}^{-\mathrm{i}px}\Psi(x)
+=
+q(x).
+\]
+Thus a Bloch solution has the Floquet form
+\begin{equation}
+\Psi(x)=\mathrm{e}^{\mathrm{i}px}q(x),
+\qquad
+q(x+L)=q(x).
+\label{eq:note2-floquet-form}
+\end{equation}
+Moreover,
+\begin{equation}
+|\kappa|
+=
+\left|\mathrm{e}^{\mathrm{i}Lp}\right|
+=
+\mathrm{e}^{-L\operatorname{Im}p},
+\label{eq:note2-kappa-modulus}
+\end{equation}
+so \(|\kappa|=1\) is equivalent to
+\begin{equation}
+\operatorname{Im}p=0.
+\label{eq:note2-real-quasimomentum}
+\end{equation}
+
+\noteheading{Determinant and reciprocal multipliers.}
+The spatial matrix \eqref{eq:note2-U} is traceless:
+\begin{equation}
+\operatorname{tr}U(\lambda,x,t_0)=0.
+\label{eq:note2-traceless-U}
+\end{equation}
+By Liouville's formula for matrix ODEs,
+\begin{equation}
+\frac{\partial}{\partial x}\det\Phi(x,y)
+=
+\operatorname{tr}U(\lambda,x,t_0)\det\Phi(x,y).
+\label{eq:note2-liouville}
+\end{equation}
+Therefore \(\det\Phi(x,y)\) is constant in \(x\).  Since
+\(\Phi(y,y)=I\), we obtain
+\begin{equation}
+\det\Phi(x,y)=1.
+\label{eq:note2-det-fundamental}
+\end{equation}
+In particular,
+\begin{equation}
+\det T(\lambda;x_0,t_0)=1.
+\label{eq:note2-det-monodromy}
+\end{equation}
+If the two Floquet multipliers are denoted by \(\kappa_+\) and
+\(\kappa_-\), then
+\begin{equation}
+\kappa_+(\lambda)\kappa_-(\lambda)=1.
+\label{eq:note2-reciprocal-multipliers}
+\end{equation}
+Thus the two sheets of the spectral curve correspond to reciprocal
+Floquet multipliers.
+
+\noteheading{Floquet discriminant and the spectral curve.}
+Define the Floquet discriminant by
+\begin{equation}
+\Delta(\lambda)=\operatorname{tr}T(\lambda;x_0,t_0).
+\label{eq:note2-floquet-discriminant}
+\end{equation}
+The Floquet multipliers are the eigenvalues of \(T\), so they are the
+roots of the characteristic polynomial.  For a \(2\times2\) matrix,
+\[
+\det(\kappa I-T)
+=
+\kappa^2-\operatorname{tr}T\,\kappa+\det T
+=
+\kappa^2-\Delta(\lambda)\kappa+1,
+\]
+where we used \(\operatorname{tr}T=\Delta(\lambda)\) and \(\det T=1\).
+Thus the characteristic equation is
+\begin{equation}
+\kappa^2-\Delta(\lambda)\kappa+1=0.
+\label{eq:note2-characteristic-equation}
+\end{equation}
+Therefore
+\begin{equation}
+\kappa_\pm(\lambda)
+=
+\frac{
+\Delta(\lambda)
+\pm
+\sqrt{\Delta(\lambda)^2-4}
+}{2}.
+\label{eq:note2-kappa-pm}
+\end{equation}
+The square root becomes single-valued after passing to the two-sheeted
+spectral curve
+\begin{equation}
+\nu^2=\Delta(\lambda)^2-4.
+\label{eq:note2-spectral-curve}
+\end{equation}
+A point on the spectral curve is written as
+\(\gamma=(\lambda,\nu)\), and the corresponding multiplier is
+\begin{equation}
+\kappa(\gamma)
+=
+\frac{\Delta(\lambda)+\nu}{2}.
+\label{eq:note2-kappa-on-curve}
+\end{equation}
+The two points above the same value of \(\lambda\) give the two
+reciprocal multipliers.
+
+\noteheading{Periodic and antiperiodic points.}
+A periodic eigenfunction satisfies
+\begin{equation}
+\Psi(x+L)=\Psi(x),
+\label{eq:note2-periodic-eigenfunction}
+\end{equation}
+so its multiplier is \(\kappa=1\).  An antiperiodic eigenfunction
+satisfies
+\begin{equation}
+\Psi(x+L)=-\Psi(x),
+\label{eq:note2-antiperiodic-eigenfunction}
+\end{equation}
+so its multiplier is \(\kappa=-1\).  Since
+\(\kappa+\kappa^{-1}=\Delta(\lambda)\), the periodic and antiperiodic
+points are characterized by
+\begin{equation}
+\Delta(\lambda)=2
+\qquad\text{and}\qquad
+\Delta(\lambda)=-2,
+\label{eq:note2-periodic-antiperiodic-discriminant}
+\end{equation}
+or, equivalently,
+\begin{equation}
+\Delta(\lambda)^2-4=0.
+\label{eq:note2-branch-double-condition}
+\end{equation}
+These are the points where the two Floquet multipliers coincide:
+\(\kappa_+=\kappa_-=\pm1\).  If the zero of
+\(\Delta^2-4\) is simple, the point is a branch point of the spectral
+curve.  Even-order zeros may instead be double or resonant points.
+
+\noteheading{Main spectrum.}
+The main spectrum is the spectrum of the spatial operator on the line.
+In Floquet terms, it is the projection to the \(\lambda\)-plane of the
+points on the spectral curve whose Bloch multiplier has unit modulus:
+\begin{equation}
+\lambda\in\sigma_{\mathrm{main}}
+\quad\Longleftrightarrow\quad
+|\kappa(\gamma)|=1
+\quad
+\text{for some }\gamma\text{ above }\lambda.
+\label{eq:note2-main-spectrum}
+\end{equation}
+Equivalently, using \(\kappa=\mathrm{e}^{\mathrm{i}Lp}\),
+\begin{equation}
+\operatorname{Im}p(\gamma)=0.
+\label{eq:note2-main-spectrum-quasimomentum}
+\end{equation}
+The corresponding Bloch functions are generalized eigenfunctions; they
+need not be in \(L^2(\mathbb{R})\), just as plane waves for a constant
+coefficient operator are not square integrable on the whole line.  Since
+the focusing NLS spectral operator is not self-adjoint, the main
+spectrum may contain complex arcs, not only real intervals.
+
+\noteheading{Auxiliary spectrum and divisor.}
+The main spectrum determines the spectral curve, but not the point of
+the solution inside the isospectral family.  For this additional data one
+uses the auxiliary spectrum, also called the divisor.  In the convention
+used in the paper, an auxiliary point is a point
+\(\gamma\in\Gamma\) such that the first component of the Bloch
+eigenfunction vanishes at the base point:
+\begin{equation}
+\Psi_1(\gamma,x_0,t)=0.
+\label{eq:note2-auxiliary-condition}
+\end{equation}
+Because the same eigenfunction satisfies the Bloch relation, this also
+implies
+\begin{equation}
+\Psi_1(\gamma,x_0+L,t)
+=
+\kappa(\gamma)\Psi_1(\gamma,x_0,t)
+=
+0.
+\label{eq:note2-auxiliary-endpoint}
+\end{equation}
+Thus the auxiliary spectrum is equivalently a Dirichlet-type spectrum on
+\([x_0,x_0+L]\):
+\begin{equation}
+\Psi_1(\lambda,x_0,t)=0,
+\qquad
+\Psi_1(\lambda,x_0+L,t)=0.
+\label{eq:note2-dirichlet-type}
+\end{equation}
+
+In terms of the monodromy matrix, write
+\begin{equation}
+T(\lambda)
+=
+\begin{pmatrix}
+T_{11}(\lambda) & T_{12}(\lambda)
+\\
+T_{21}(\lambda) & T_{22}(\lambda)
+\end{pmatrix}.
+\label{eq:note2-monodromy-entries}
+\end{equation}
+To see why the off-diagonal entry appears, choose the solution whose
+initial value at \(x_0\) is
+\begin{equation}
+\Psi(x_0)
+=
+e_2
+=
+\begin{pmatrix}
+0\\
+1
+\end{pmatrix}.
+\label{eq:note2-auxiliary-initial-vector}
+\end{equation}
+Then the first component at \(x_0\) is zero.  After one period,
+\begin{equation}
+\Psi(x_0+L)
+=
+T(\lambda)
+\begin{pmatrix}
+0\\
+1
+\end{pmatrix}.
+\label{eq:note2-auxiliary-after-period}
+\end{equation}
+Using \eqref{eq:note2-monodromy-entries}, this is
+\begin{equation}
+T(\lambda)e_2
+=
+\begin{pmatrix}
+T_{12}(\lambda)
+\\
+T_{22}(\lambda)
+\end{pmatrix}.
+\label{eq:note2-Te2}
+\end{equation}
+The endpoint Dirichlet condition is therefore
+\begin{equation}
+T_{12}(\lambda)=0.
+\label{eq:note2-T12-condition}
+\end{equation}
+When this holds, \(e_2\) is also an eigenvector of \(T\), with multiplier
+\(\kappa=T_{22}(\lambda)\).  Hence an auxiliary spectral point is not
+only a value of \(\lambda\); one must also specify which sheet of the
+spectral curve is chosen, or equivalently which multiplier is attached
+to the zero.  This is why the auxiliary spectrum is naturally a divisor
+on the spectral curve.
+
+\noteheading{Bridge to the finite-gap construction.}
+The periodic spectral theory gives two kinds of data.  The main spectrum
+determines the spectral curve through the Floquet discriminant and the
+branch or double points.  The auxiliary divisor determines the phase
+position on that curve.  In finite-gap theory, the \(x\)- and
+\(t\)-dependence of the divisor becomes linear after the Abel transform,
+and the potential is reconstructed by theta functions.  Those theta
+function formulas are not derived here; the goal of this note is only to
+set up the spectral objects used later in Section 3.
+
+
+\HW{Derivation of Formulas (18) and (19)}{2026-06-03}
 
 
 % \clearpage
