@@ -338,3 +338,6 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 
+# Third-party paper files; do not redistribute in the public notes repository.
+**/references/papers/**
+
