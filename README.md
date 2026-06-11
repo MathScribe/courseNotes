@@ -14,7 +14,7 @@ and nonlinear waves.
   [AG-sol-for-mKdv.pdf](2025-fall-intro-integrable-systems/AG-sol-for-mKdv.pdf).
 
 - [nonlinear-wave-seminar.tex](2026-spring-nonlinear-wave-theory/nonlinear-wave-seminar.tex)  
-  Seminar notes for *Nonlinear Wave Theory* in Spring 2025--2026. The file
+  Seminar notes for *Nonlinear Wave Theory* in Spring 2026. The file
   collects selected computations, homework writeups, numerical reproductions,
   and notes on the Grinevich--Santini finite-gap description of rogue-wave
   recurrence. A compiled PDF is also kept at
@@ -62,24 +62,18 @@ reproducibility.
 - P. G. Grinevich and P. M. Santini, *The finite gap method and the analytic
   description of the exact rogue wave recurrence in the periodic NLS Cauchy
   problem. 1*, Nonlinearity 31 (2018), 5258--5308.  
-  External: [arXiv:1707.05659](https://arxiv.org/abs/1707.05659).  
-  Local PDF:
-  [Grinevich_2018_Nonlinearity_31_5258.pdf](2026-spring-nonlinear-wave-theory/references/papers/Grinevich_2018_Nonlinearity_31_5258.pdf).
+  External: [arXiv:1707.05659](https://arxiv.org/abs/1707.05659).
 
 - P. G. Grinevich and P. M. Santini, *The finite-gap method and the periodic
   NLS Cauchy problem of anomalous waves for a finite number of unstable modes*,
   Russian Mathematical Surveys 74 (2019), 211--263.  
-  External: [arXiv:1810.09247](https://arxiv.org/abs/1810.09247).  
-  Local PDF:
-  [Grinevich_2019_Russ._Math._Surv._74_211.pdf](2026-spring-nonlinear-wave-theory/references/papers/Grinevich_2019_Russ._Math._Surv._74_211.pdf).
+  External: [arXiv:1810.09247](https://arxiv.org/abs/1810.09247).
 
 - Yaroslav V. Kartashov and Vladimir V. Konotop, *Solitons in Bose-Einstein
   Condensates with Helicoidal Spin-Orbit Coupling*, Physical Review Letters 118
   (2017), 190401.  
   External: [DOI:10.1103/PhysRevLett.118.190401](https://doi.org/10.1103/PhysRevLett.118.190401),
-  [arXiv:1709.07017](https://arxiv.org/abs/1709.07017).  
-  Local PDF:
-  [PhysRevLett.118.190401.pdf](2026-spring-nonlinear-wave-theory/references/papers/PhysRevLett.118.190401.pdf).
+  [arXiv:1709.07017](https://arxiv.org/abs/1709.07017).
 
 ## Build
 
